@@ -66,7 +66,7 @@ input,textarea,button{font-family:inherit;}
       <div style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;"><div>일상 속 소중한 순간을 사진과 영상, 그리고 글로 담아내는 크리에이티브 미디어팀입니다. 익숙함에 가려 쉽게 지나치는 풍경과 사소한 순간들에 시선을 머무르며, 그 안에 담긴 이야기와 감정을 기록합니다. 특별한 장면을 찾아 나서기보다 평범한 일상에서 저마다의 아름다움을 발견하고, 이를 다양한 시각적 언어로 표현하고자 합니다.</div><div><br></div><div>우리가 남긴 기록이 누군가에게는 새로운 발견이 되고, 또 다른 누군가에게는 오래도록 간직하고 싶은 기억으로 남기를 바랍니다.</div></div>
       <div style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:20px;background:#f3f3f3;">
         <sc-for list="{{ creditsA }}" as="c" hint-placeholder-count="4">
-          <div style="display:grid;grid-template-columns:44px 1px minmax(0,1fr);align-items:center;column-gap:14px;font-size:15px;line-height:1.5;">
+          <div style="display:grid;grid-template-columns:48px 1px minmax(0,1fr);align-items:center;column-gap:14px;font-size:15px;line-height:1.5;">
             <span style="font-weight:600;color:#707070;">{{ c.role }}</span>
             <span style="width:1px;height:12px;background:#d1d1d1;"></span>
             <span style="font-weight:500;word-spacing:6px;">{{ c.names }}</span>
@@ -79,10 +79,10 @@ input,textarea,button{font-family:inherit;}
         
         <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">가꾸가</h2>
       </div>
-      <p style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;">[가꾸가 팀 소개를 입력해 주세요.]</p>
+      <div style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;"><div>가구를 디자인하고 제작하는 데 관심있는 세 명의 건축학도가 모인 팀입니다. 일상 속 가구는 놓이는 위치와 사용 방식에 따라 공간의 기능을 바꾸고, 그곳에서 일어나는 행동과 경험에도 영향을 줍니다. 가꾸가는 이러한 가구의 가능성을 실내를 넘어 사람들이 머물고 스쳐 가는 공공 공간으로 확장하고자 합니다.</div><div><br></div><div>‘가꾸가’는 가구와 공간을 뜻하는 구가를 결합한 이름입니다. 가구를 만드는 데 그치지 않고, 가구를 통해 공간을 새롭게 구성하고 그 안의 일상까지 가꾸어 나가겠다는 의미를 담았습니다. 가구에서 시작해 공간과 사람을 잇고, 일상에 새로운 가능성을 더하는 것을 목표로 하고 있습니다.</div></div>
       <div style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:20px;background:#f3f3f3;">
         <sc-for list="{{ creditsB }}" as="c" hint-placeholder-count="1">
-          <div style="display:grid;grid-template-columns:44px 1px minmax(0,1fr);align-items:center;column-gap:14px;font-size:15px;line-height:1.5;">
+          <div style="display:grid;grid-template-columns:48px 1px minmax(0,1fr);align-items:center;column-gap:14px;font-size:15px;line-height:1.5;">
             <span style="font-weight:600;color:#707070;">{{ c.role }}</span>
             <span style="width:1px;height:12px;background:#d1d1d1;"></span>
             <span style="font-weight:500;word-spacing:6px;">{{ c.names }}</span>
@@ -110,12 +110,13 @@ input,textarea,button{font-family:inherit;}
   <section data-screen-label="04 관람 안내" style="padding:80px 24px;background:#f3f3f3;">
     <div data-reveal="" style="display:flex;flex-direction:column;gap:32px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:12px;font-weight:600;color:#707070;">관람 안내</div>
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">2026.11.01. – 11.08.</h2>
+        
+        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">관람 안내</h2>
       </div>
       <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
         <div style="font-size:16px;font-weight:600;">운영시간</div>
         <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
+          <span style="color:#707070;">전시기간</span><span>2026.11.01. – 11.08.</span>
           <span style="color:#707070;">평일</span><span>08:00 – 20:00</span>
           <span style="color:#707070;">주말</span><span>08:00 – 21:00</span>
           <span style="color:#707070;">무인운영</span><span>08:00 ~ 12:00, 19:00 ~ 20:00</span>
@@ -134,9 +135,16 @@ input,textarea,button{font-family:inherit;}
         <div style="font-size:16px;font-weight:600;">오시는 길</div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <span style="font-size: 18px; font-weight: 400">성북구 동소문로 186, 2층</span>
-          
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
+          <li>- 전시장 방문 시 전시장 인근에 배치된 배너 및 아래 사항을 참고해주시면 감사하겠습니다.</li>
+          <li>- 진입로 1 : 대로변 기준, 퍼센트 카페 좌측 입구로 들어오셔서 계단을 1층 올라오시면 됩니다.</li>
+          <li>- 진입로 2 : 하이오 커피 우측 교회 입구로 들어오셔서 계단을 1층 내려오시면 됩니다.</li>
+        </ul>
+        <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#f0f0f0;">
+          <iframe src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186&amp;z=17&amp;hl=ko&amp;output=embed" title="전시장 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
           <a href="https://map.naver.com/p/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#141414;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">네이버 지도</a>
           <a href="https://map.kakao.com/link/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#ffffff;box-shadow:inset 0 0 0 1px #e0e0e0;color:#141414;font-size:14px;font-weight:600;text-decoration:none;">카카오맵</a>
           <button onClick="{{ copyAddr }}" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;border:0;background:#f3f3f3;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ copyLabel }}</button>
@@ -173,12 +181,15 @@ input,textarea,button{font-family:inherit;}
   </section>
 
   <footer style="margin:0 8px;padding:48px 24px;border-radius:24px 24px 0 0;background:#141414;color:#ffffff;display:flex;flex-direction:column;gap:16px;">
-    <div style="font-size:24px;font-weight:650;letter-spacing:-0.02em;">낯선동네, 나의동네</div>
+    <div style="font-size:24px;font-weight:650;letter-spacing:-0.02em;">나의 동네, 낯선 동네</div>
     <div style="font-size:13px;line-height:1.6;color:#adadad;">Shootingmythings with 가꾸가<br>성북구 동소문로 186, 2층</div>
   </footer>
 
   <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:50;background:rgba(10,10,10,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;">
+      <button onClick="{{ close }}" aria-label="닫기" style="position:absolute;top:16px;right:16px;width:44px;height:44px;border:0;border-radius:9999px;background:#262626;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
       <div style="position:relative;width:100%;max-width:440px;height:min(70vh, 550px);border-radius:12px;overflow:hidden;background:#262626;display:flex;align-items:center;justify-content:center;">
         <span style="font-size:14px;font-weight:600;color:#707070;">{{ lb.num }}</span>
         <sc-if value="{{ lb.ok }}" hint-placeholder-val="{{ false }}"><img src="{{ lb.full }}" alt="{{ lb.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></sc-if>
@@ -186,7 +197,6 @@ input,textarea,button{font-family:inherit;}
       <div style="width:100%;max-width:440px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#ffffff;">
         <button onClick="{{ prev }}" aria-label="이전" style="width:44px;height:44px;border:0;border-radius:9999px;background:#262626;color:#ffffff;font-size:18px;cursor:pointer;">‹</button>
         <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-          <span style="font-size:15px;font-weight:600;">{{ lb.title }}</span>
           <span style="font-size:12px;color:#adadad;">{{ lb.num }} / 09</span>
         </div>
         <button onClick="{{ next }}" aria-label="다음" style="width:44px;height:44px;border:0;border-radius:9999px;background:#262626;color:#ffffff;font-size:18px;cursor:pointer;">›</button>
@@ -227,16 +237,16 @@ class Component extends DCLogic {
     const q = this.off() ? N : (p / 0.85) * N;
     const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3);
     const lerp = (a, b, t) => a + (b - a) * t;
-    const u = q - 3, CTR = 30.5, JOIN = 22.97;
+    const u = q - 3, CTR = -30.45, JOIN = 38.5;
     const join = eo(cl((u - 1) / 0.8)), apart = eo(cl((u - 2) / 1));
     hero.querySelectorAll('[data-role]').forEach(el => {
       const role = el.dataset.role;
-      if (role === 'tl') {
-        const x = lerp(lerp(CTR, JOIN, join), 0, apart);
+      if (role === 'tr') {
+        const x = lerp(lerp(CTR, -JOIN, join), 0, apart);
         el.style.opacity = eo(cl(u / 0.7));
         el.style.transform = `translateX(${x}%)`;
-      } else if (role === 'tr') {
-        const x = lerp(-JOIN, 0, apart);
+      } else if (role === 'tl') {
+        const x = lerp(JOIN, 0, apart);
         el.style.opacity = eo(cl((u - 1) / 0.8));
         el.style.transform = `translateX(${x}%)`;
       } else {
@@ -275,11 +285,16 @@ class Component extends DCLogic {
     const s = this.state;
     const works = Array.from({ length: 9 }, (_, i) => {
       const num = String(i + 1).padStart(2, '0');
-      return { num, ok: !!(s.loaded || {})[num], src: `assets/works/${num}-t.webp`, full: `assets/works/${num}.webp`, title: `[작품명 ${num}]`, open: () => this.setState({ lb: i }) };
+      return { num, ok: !!(s.loaded || {})[num], src: `assets/works/${num}-t.webp`, full: `assets/works/${num}.webp`, title: `대표 작품 ${num}`, open: () => this.setState({ lb: i }) };
     });
     return {
       heroRef: this.heroRef,
-      creditsB: [{ role: '가구', names: '서대원 연유빈 염우인' }],
+      creditsB: [
+        { role: '디자인', names: '서대원 연유빈 염우인' },
+        { role: '매니징', names: '서대원' },
+        { role: '마케팅', names: '연유빈' },
+        { role: '디렉팅', names: '염우인' },
+      ],
       creditsA: [
         { role: '총괄', names: '강태훈' },
         { role: '사진', names: '장인호 강태훈' },
