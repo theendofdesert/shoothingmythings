@@ -280,7 +280,7 @@ input,textarea,button{font-family:inherit;}
       <sc-if value="{{ pDone }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
           <span style="font-size:14px;font-weight:600;">신청이 접수되었습니다</span>
-          <button onClick="{{ pOpen }}" style="height:44px;padding:0 20px;border:0;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">입금 안내 다시 보기</button>
+          <button onClick="{{ pOpen }}" style="height:44px;padding:0 20px;border:0;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">접수 안내 보기</button>
         </div>
       </sc-if>
       <sc-if value="{{ pClosed }}" hint-placeholder-val="{{ false }}">
@@ -297,56 +297,104 @@ input,textarea,button{font-family:inherit;}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
             </button>
           </div>
+          <img src="assets/party.jpg" alt="나의동네, 낯선동네 네트워킹 세션 2026.11.07 19:00" style="display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;">
           <div style="padding:24px 24px 48px;display:flex;flex-direction:column;gap:20px;">
       <sc-if value="{{ pShowForm }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <span style="font-size:22px;font-weight:650;letter-spacing:-0.02em;">11.07. (토) 19:00 – 21:00</span>
-          <span style="font-size:13px;color:#707070;">{{ seatLabel }} · 보증금 10,000원</span>
-        </div>
-        <form onSubmit="{{ pSubmit }}" style="display:flex;flex-direction:column;gap:8px;">
-          <input value="{{ p.name }}" onChange="{{ pOn.name }}" maxlength="20" placeholder="이름" autocomplete="name" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
-          <input value="{{ p.phone }}" onChange="{{ pOn.phone }}" maxlength="13" inputmode="tel" placeholder="연락처 (010-0000-0000)" autocomplete="tel" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
-          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px;">
-            <input value="{{ p.age }}" onChange="{{ pOn.age }}" maxlength="3" inputmode="numeric" placeholder="나이" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
-            <input value="{{ p.job }}" onChange="{{ pOn.job }}" maxlength="30" placeholder="직업" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+            <span style="font-size:12px;font-weight:600;color:#707070;">{{ pStepLabel }}</span>
+            <span style="font-size:12px;color:#adadad;">{{ seatLabel }}</span>
           </div>
-          <input value="{{ p.area }}" onChange="{{ pOn.area }}" maxlength="40" placeholder="거주지 (예: 성북구 돈암동)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
-          <input value="{{ p.refund }}" onChange="{{ pOn.refund }}" maxlength="60" placeholder="환불 계좌 (은행 · 계좌번호 · 예금주)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
-          <input value="{{ p.payer }}" onChange="{{ pOn.payer }}" maxlength="20" placeholder="입금자명 (신청자와 다른 경우)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
-          <label style="display:flex;gap:10px;align-items:flex-start;padding:16px;border-radius:16px;box-shadow:inset 0 0 0 1px #e0e0e0;cursor:pointer;margin-top:4px;">
-            <input type="checkbox" checked="{{ p.agree }}" onChange="{{ pOn.agree }}" style="width:20px;height:20px;margin:0;flex:0 0 auto;accent-color:#141414;">
-            <span style="display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.5;color:#262626;">
-              <span style="font-weight:600;color:#141414;">[필수] 개인정보 수집·이용 동의</span>
-              <span>수집 항목: 이름, 연락처, 나이, 직업, 거주지, 환불 계좌, 입금자명</span>
-              <span>이용 목적: 네트워킹 파티 참가 확인, 안내 연락, 보증금 환불</span>
-              <span>보유 기간: 보증금 환불 완료 후 즉시 파기</span>
-              <span style="color:#707070;">동의를 거부할 수 있으며, 거부 시 참가 신청이 제한됩니다.</span>
-            </span>
-          </label>
+          <div style="height:3px;border-radius:9999px;background:#f0f0f0;overflow:hidden;">
+            <div style="height:100%;width:{{ pProg }};background:#141414;transition:width .4s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+        </div>
+        <form onSubmit="{{ pPrimary }}" style="display:flex;flex-direction:column;gap:20px;">
+
+          <sc-if value="{{ pS1 }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">개인정보 수집·이용 동의</h3>
+              <div style="display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.6;color:#262626;">
+                <span><b style="font-weight:600;">수집 항목</b> · 이름, 연락처, 생년월일, 직업, 거주지, 입금자명, 환불 계좌</span>
+                <span><b style="font-weight:600;">이용 목적</b> · 네트워킹 파티 참가 확인, 안내 연락, 보증금 환불</span>
+                <span><b style="font-weight:600;">보유 기간</b> · 보증금 환불 완료 후 즉시 파기</span>
+                <span style="color:#707070;">동의를 거부할 수 있으며, 거부 시 참가 신청이 제한됩니다.</span>
+              </div>
+              <label style="display:flex;gap:10px;align-items:center;padding:16px;border-radius:16px;box-shadow:inset 0 0 0 1px #e0e0e0;cursor:pointer;">
+                <input type="checkbox" checked="{{ p.agree }}" onChange="{{ pOn.agree }}" style="width:20px;height:20px;margin:0;flex:0 0 auto;accent-color:#141414;">
+                <span style="font-size:15px;font-weight:600;">[필수] 위 내용에 동의합니다</span>
+              </label>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ pS2 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">참가자 정보</h3>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <input value="{{ p.name }}" onChange="{{ pOn.name }}" maxlength="20" placeholder="이름" autocomplete="name" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+                <input value="{{ p.phone }}" onChange="{{ pOn.phone }}" maxlength="13" inputmode="tel" placeholder="연락처 (010-0000-0000)" autocomplete="tel" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;">
+                  <input value="{{ p.birth }}" onChange="{{ pOn.birth }}" maxlength="8" inputmode="numeric" placeholder="생년월일 8자리" autocomplete="bday" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
+                  <input value="{{ p.job }}" onChange="{{ pOn.job }}" maxlength="30" placeholder="직업" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
+                </div>
+                <input value="{{ p.area }}" onChange="{{ pOn.area }}" maxlength="40" placeholder="거주지 (예: 성북구 돈암동)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ pS3 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">보증금 입금</h3>
+              <div style="background:#141414;color:#ffffff;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+                <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
+                  <span style="color:#adadad;">입금 계좌</span><span>토스뱅크 1002-2068-4620<br>강태훈(Shootingmythings)</span>
+                  <span style="color:#adadad;">금액</span><span>10,000원</span>
+                  <span style="color:#adadad;">기한</span><span>11.05. (목) 23:59</span>
+                </div>
+                <div style="display:flex;justify-content:center;">
+                  <button type="button" onClick="{{ pCopyAcc }}" style="height:44px;padding:0 20px;border:0;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ pCopyLabel }}</button>
+                </div>
+              </div>
+              <div style="font-size:13px;line-height:1.6;color:#707070;">입금 순서대로 참가가 확정되며, 정원이 차면 입금이 반환될 수 있습니다. 보증금은 파티 당일 참석 확인 후 전액 환불됩니다.</div>
+              <input value="{{ p.payer }}" onChange="{{ pOn.payer }}" maxlength="20" placeholder="{{ pPayerPh }}" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+              <label style="display:flex;gap:10px;align-items:center;padding:16px;border-radius:16px;box-shadow:inset 0 0 0 1px #e0e0e0;cursor:pointer;">
+                <input type="checkbox" checked="{{ p.paid }}" onChange="{{ pOn.paid }}" style="width:20px;height:20px;margin:0;flex:0 0 auto;accent-color:#141414;">
+                <span style="font-size:15px;font-weight:600;">보증금 입금을 완료했습니다</span>
+              </label>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ pS4 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">환불 정보</h3>
+              <div style="font-size:14px;line-height:1.6;color:#262626;">파티 당일 참석이 확인되면 아래 계좌로 보증금 10,000원을 전액 환불해 드립니다.</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <input value="{{ p.bank }}" onChange="{{ pOn.bank }}" maxlength="20" placeholder="은행명" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+                <input value="{{ p.acct }}" onChange="{{ pOn.acct }}" maxlength="20" inputmode="numeric" placeholder="계좌번호 (숫자만)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+                <input value="{{ p.holder }}" onChange="{{ pOn.holder }}" maxlength="20" placeholder="예금주" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+              </div>
+            </div>
+          </sc-if>
+
           <sc-if value="{{ pErr }}" hint-placeholder-val="{{ false }}">
             <div style="font-size:13px;color:#c0392b;">{{ pErr }}</div>
           </sc-if>
-          <div style="display:flex;justify-content:center;padding-top:8px;">
+          <div style="display:flex;justify-content:center;gap:8px;padding-top:4px;">
+            <sc-if value="{{ pHasPrev }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ pPrev }}" style="height:48px;padding:0 24px;border:0;border-radius:9999px;background:#f3f3f3;color:#141414;font-size:15px;font-weight:600;cursor:pointer;">이전</button>
+            </sc-if>
             <button type="submit" style="height:48px;padding:0 28px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font-size:15px;font-weight:600;cursor:pointer;opacity:{{ pBtnOpacity }};">{{ pBtnLabel }}</button>
           </div>
         </form>
       </sc-if>
 
       <sc-if value="{{ pDone }}" hint-placeholder-val="{{ false }}">
-        <div style="background:#141414;color:#ffffff;border-radius:24px;padding:28px 24px;display:flex;flex-direction:column;gap:18px;">
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <span style="font-size:12px;font-weight:600;color:#adadad;">신청 접수 완료</span>
-            <span style="font-size:20px;font-weight:650;letter-spacing:-0.02em;">보증금을 입금해 주세요</span>
-          </div>
-          <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
-            <span style="color:#adadad;">입금 계좌</span><span>토스뱅크 1002-2068-4620<br>강태훈(Shootingmythings)</span>
-            <span style="color:#adadad;">금액</span><span>10,000원</span>
-            <span style="color:#adadad;">입금자명</span><span>{{ pPayerShown }}</span>
-            <span style="color:#adadad;">기한</span><span>11.05. (목) 23:59</span>
-          </div>
-          <div style="font-size:13px;line-height:1.6;color:#d1d1d1;">입금 순서대로 참가가 확정되며, 정원이 차면 입금이 반환될 수 있습니다. 보증금은 파티 당일 참석 확인 후 신청 시 입력한 계좌로 전액 환불됩니다.</div>
+        <div style="display:flex;flex-direction:column;gap:20px;padding-top:8px;">
+          <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">참가 확인중입니다.</h3>
+          <p style="margin:0;font-size:15px;line-height:1.7;color:#262626;">참가가 확정되면 개별 연락처를 통해 안내드릴 예정이오니 조금만 기다려주시면 감사하겠습니다.</p>
+          <div style="padding:16px 20px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.6;color:#262626;">관련 문의사항은 Shootingmythings 인스타그램 dm으로 부탁드립니다</div>
           <div style="display:flex;justify-content:center;">
-            <button onClick="{{ pCopyAcc }}" style="height:44px;padding:0 20px;border:0;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ pCopyLabel }}</button>
+            <button onClick="{{ pClose }}" style="height:48px;padding:0 28px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font-size:15px;font-weight:600;cursor:pointer;">확인</button>
           </div>
         </div>
       </sc-if>
@@ -356,7 +404,7 @@ input,textarea,button{font-family:inherit;}
     </sc-if>
   </section>
 
-  <section data-screen-label="05 방명록" style="padding:80px 24px;background:#ffffff;">
+  <section data-screen-label="05 방명록" style="padding:80px 24px;background:#ffffff;box-shadow:inset 0 1px 0 #e0e0e0;">
     <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="font-size:12px;font-weight:600;color:#707070;">방명록</div>
@@ -411,7 +459,7 @@ input,textarea,button{font-family:inherit;}
 <script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
   state = { name: '', msg: '', entries: [], copied: false, lb: -1,
-    p: { name: '', phone: '', age: '', job: '', area: '', refund: '', payer: '', agree: false },
+    p: { name: '', phone: '', birth: '', job: '', area: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
     pCount: null, pStatus: 'idle', pErr: '', pPayer: '', pCopied: false, pSheet: false };
   setSheet(v) { this.setState({ pSheet: v }); document.body.style.overflow = v ? 'hidden' : ''; }
   P_SHOW = 30; P_MAX = 35; P_END = Date.parse('2026-11-05T23:59:59+09:00');
@@ -492,50 +540,100 @@ class Component extends DCLogic {
     els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; this.io.observe(el); });
   }
   step(d) { this.setState(s => ({ lb: (s.lb + d + 9) % 9 })); }
+  copyText(text, done) {
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;font-size:16px;';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done(ok);
+    };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(() => done(true), fallback);
+    else fallback();
+  }
   partyVals(s) {
     const p = s.p, n = s.pCount;
     const expired = Date.now() > this.P_END;
     const full = n !== null && n >= this.P_MAX;
     const done = s.pStatus === 'done';
     const closed = !done && (expired || full);
-    const set = k => e => { const v = k === 'agree' ? e.target.checked : e.target.value; this.setState(st => ({ p: { ...st.p, [k]: v }, pErr: '' })); };
-    const pOn = {}; ['name', 'phone', 'age', 'job', 'area', 'refund', 'payer', 'agree'].forEach(k => pOn[k] = set(k));
-    const ready = p.name.trim() && p.phone.trim() && p.age.trim() && p.job.trim() && p.area.trim() && p.refund.trim() && p.agree;
+    const self = this;
+    const fmtPhone = raw => {
+      const d = String(raw).replace(/\D/g, '').slice(0, 11);
+      if (d.startsWith('02')) return d.length < 3 ? d : d.length < 6 ? `${d.slice(0, 2)}-${d.slice(2)}` : d.length < 10 ? `${d.slice(0, 2)}-${d.slice(2, 5)}-${d.slice(5)}` : `${d.slice(0, 2)}-${d.slice(2, 6)}-${d.slice(6, 10)}`;
+      if (d.length < 4) return d;
+      if (d.length < 8) return `${d.slice(0, 3)}-${d.slice(3)}`;
+      if (d.length < 11) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
+      return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`;
+    };
+    const set2 = k => e => { const v = (k === 'agree' || k === 'paid') ? e.target.checked : k === 'phone' ? fmtPhone(e.target.value) : k === 'birth' ? e.target.value.replace(/\D/g, '').slice(0, 8) : k === 'acct' ? e.target.value.replace(/\D/g, '').slice(0, 20) : e.target.value; this.setState(st => ({ p: { ...st.p, [k]: v }, pErr: '' })); };
+    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
+    const validBirth = b => {
+      if (!/^\d{8}$/.test(b)) return false;
+      const y = +b.slice(0, 4), m = +b.slice(4, 6), d = +b.slice(6, 8);
+      const dt = new Date(y, m - 1, d);
+      return y >= 1900 && dt <= new Date() && dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d;
+    };
+    const step = s.pStep;
+    const okStep = [null,
+      () => p.agree ? '' : '개인정보 수집·이용에 동의해 주세요.',
+      () => !(p.name.trim() && p.phone.trim() && p.birth.trim() && p.job.trim() && p.area.trim()) ? '모든 항목을 입력해 주세요.'
+        : !/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(p.phone.trim()) ? '연락처를 확인해 주세요.'
+        : !validBirth(p.birth) ? '생년월일 8자리를 확인해 주세요. (예: 19990101)' : '',
+      () => !p.payer.trim() ? '입금자명을 입력해 주세요.' : p.paid ? '' : '입금 후 입금 완료에 체크해 주세요.',
+      () => !p.bank.trim() ? '은행명을 입력해 주세요.' : p.acct.length < 8 ? '계좌번호를 확인해 주세요.' : !p.holder.trim() ? '예금주를 입력해 주세요.' : ''];
+    const stepReady = !okStep[step]();
     const left = n === null ? null : Math.max(0, this.P_SHOW - n);
     let seatLabel = '남은 자리 확인 중', seatSub = '';
     if (expired) { seatLabel = '신청 마감'; }
     else if (full) { seatLabel = '정원 마감'; }
     else if (left !== null) { seatLabel = left > 0 ? `남은 자리 ${left}석` : '마감 임박'; seatSub = `정원 ${this.P_SHOW}명`; }
-    return {
+    const vals = {
       p, pOn, pErr: s.pErr, seatLabel, seatSub,
       pShowForm: !done && !closed, pDone: done, pClosed: closed,
       pSheet: s.pSheet,
       pOpen: () => { if (!done) this.loadParty(); this.setSheet(true); },
       pClose: () => this.setSheet(false),
       pClosedMsg: expired ? '신청이 마감되었습니다. 관심 가져 주셔서 감사합니다.' : '정원이 모두 찼습니다. 관심 가져 주셔서 감사합니다.',
-      pBtnOpacity: ready && s.pStatus !== 'sending' ? 1 : 0.35,
-      pBtnLabel: s.pStatus === 'sending' ? '접수 중' : '참가 신청',
-      pPayerShown: s.pPayer,
-      pCopyLabel: s.pCopied ? '복사됨' : '계좌번호 복사',
-      pCopyAcc: () => { navigator.clipboard && navigator.clipboard.writeText('토스뱅크 1002-2068-4620'); this.setState({ pCopied: true }); setTimeout(() => this.setState({ pCopied: false }), 1600); },
-      pSubmit: e => {
+      pBtnOpacity: stepReady && s.pStatus !== 'sending' ? 1 : 0.35,
+      pBtnLabel: step < 4 ? '다음' : (s.pStatus === 'sending' ? '접수 중' : '참가 신청'),
+      pStepLabel: `${step} / 4 · ${['', '개인정보 동의', '참가자 정보', '보증금 입금', '환불 정보'][step]}`,
+      pProg: `${step * 25}%`,
+      pS1: step === 1, pS2: step === 2, pS3: step === 3, pS4: step === 4,
+      pHasPrev: step > 1,
+      pPrev: () => this.setState({ pStep: Math.max(1, step - 1), pErr: '' }),
+      pPayerPh: '입금자명',
+      pPrimary: e => {
         e.preventDefault();
-        if (s.pStatus === 'sending') return;
-        if (!ready) { this.setState({ pErr: p.agree ? '모든 항목을 입력해 주세요.' : '개인정보 수집·이용에 동의해 주세요.' }); return; }
-        if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(p.phone.trim())) { this.setState({ pErr: '연락처를 확인해 주세요.' }); return; }
-        if (!/^\d{1,3}$/.test(p.age.trim())) { this.setState({ pErr: '나이는 숫자로 입력해 주세요.' }); return; }
-        this.setState({ pStatus: 'sending', pErr: '' });
-        const body = { ...p, payer: p.payer.trim() || p.name.trim() };
-        fetch('/api/party', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-          .then(r => r.json().then(d => ({ ok: r.ok, d })))
-          .then(({ ok, d }) => {
-            if (ok && d.ok) { this.setState({ pStatus: 'done', pPayer: body.payer, pCount: d.count ?? s.pCount }); return; }
-            const msg = d.error === 'full' ? '정원이 모두 찼습니다.' : d.error === 'closed' ? '신청이 마감되었습니다.' : d.error === 'dup' ? '이미 같은 연락처로 신청되어 있습니다.' : '잠시 후 다시 시도해 주세요.';
-            this.setState({ pStatus: 'idle', pErr: msg, pCount: d.count ?? s.pCount });
-          })
-          .catch(() => this.setState({ pStatus: 'idle', pErr: '잠시 후 다시 시도해 주세요.' }));
+        const err = okStep[step]();
+        if (err) { this.setState({ pErr: err }); return; }
+        if (step < 4) { this.setState({ pStep: step + 1, pErr: '' }); return; }
+        submit(e);
       },
+      pPayerShown: s.pPayer,
+      pCopyLabel: s.pCopied === 'ok' ? '복사되었습니다' : s.pCopied === 'fail' ? '길게 눌러 직접 복사해 주세요' : '계좌번호 복사',
+      pCopyAcc: () => this.copyText('토스뱅크 100220684620', ok => { this.setState({ pCopied: ok ? 'ok' : 'fail' }); setTimeout(() => this.setState({ pCopied: false }), 2000); }),
     };
+    return vals;
+    function submit() {
+        if (s.pStatus === 'sending') return;
+        for (let i = 1; i <= 4; i++) { const er = okStep[i](); if (er) { self.setState({ pStep: i, pErr: er }); return; } }
+        self.setState({ pStatus: 'sending', pErr: '' });
+        const body = { ...p, payer: p.payer.trim() };
+        let r0 = 'network';
+        fetch('/api/party', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+          .then(r => { r0 = r.status; return r.json().then(d => ({ ok: r.ok, d }), () => ({ ok: false, d: {} })); })
+          .then(({ ok, d }) => {
+            if (ok && d.ok) { self.setState({ pStatus: 'done', pPayer: body.payer, pCount: d.count ?? s.pCount }); return; }
+            const msg = d.error === 'full' ? '정원이 모두 찼습니다.' : d.error === 'closed' ? '신청이 마감되었습니다.' : d.error === 'dup' ? '이미 같은 연락처로 신청되어 있습니다.' : `잠시 후 다시 시도해 주세요. (${d.error || r0})`;
+            self.setState({ pStatus: 'idle', pErr: msg, pCount: d.count ?? s.pCount });
+          })
+          .catch(() => self.setState({ pStatus: 'idle', pErr: '잠시 후 다시 시도해 주세요.' }));
+    }
   }
   renderVals() {
     const s = this.state;
@@ -587,7 +685,7 @@ class Component extends DCLogic {
       },
       ...this.partyVals(s),
       copyLabel: s.copied ? '복사됨' : '주소 복사',
-      copyAddr: () => { navigator.clipboard && navigator.clipboard.writeText('서울 성북구 동소문로 186, 2층'); this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1600); },
+      copyAddr: () => { this.copyText('서울 성북구 동소문로 186, 2층', () => {}); this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1600); },
     };
   }
 }
