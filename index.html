@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「나의 동네, 낯선 동네」성북도시문화사진전</title>
+<meta name="description" content="11/1 ~ 11/8 - 성북구 동소문로 186, 2층">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shoothingmythings.vercel.app/">
+<meta property="og:title" content="「나의 동네, 낯선 동네」성북도시문화사진전">
+<meta property="og:description" content="11/1 ~ 11/8 - 성북구 동소문로 186, 2층">
+<meta property="og:image" content="https://shoothingmythings.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -237,16 +247,16 @@ class Component extends DCLogic {
     const q = this.off() ? N : (p / 0.85) * N;
     const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3);
     const lerp = (a, b, t) => a + (b - a) * t;
-    const u = q - 3, CTR = -30.45, JOIN = 38.5;
+    const u = q - 3, CTR = -30.45, JOIN = 38.5, FIN = 61.01;
     const join = eo(cl((u - 1) / 0.8)), apart = eo(cl((u - 2) / 1));
     hero.querySelectorAll('[data-role]').forEach(el => {
       const role = el.dataset.role;
       if (role === 'tr') {
-        const x = lerp(lerp(CTR, -JOIN, join), 0, apart);
+        const x = lerp(lerp(CTR, -JOIN, join), -FIN, apart);
         el.style.opacity = eo(cl(u / 0.7));
         el.style.transform = `translateX(${x}%)`;
       } else if (role === 'tl') {
-        const x = lerp(JOIN, 0, apart);
+        const x = lerp(JOIN, FIN, apart);
         el.style.opacity = eo(cl((u - 1) / 0.8));
         el.style.transform = `translateX(${x}%)`;
       } else {
