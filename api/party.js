@@ -9,16 +9,28 @@ const scriptUrl = () => String(process.env.PARTY_SCRIPT_URL || '').trim();
 const secret = () => String(process.env.PARTY_SECRET || '').trim().replace(/^['"]|['"]$/g, '');
 
 async function rawCall(payload) {
-  const r = await fetch(scriptUrl(), {
+  const steps = [];
+  let r = await fetch(scriptUrl(), {
     method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: { 'Content-Type': 'text/plain;charset=utf-8', 'User-Agent': 'Mozilla/5.0 (compatible; invitation-party/1.0)' },
     body: JSON.stringify({ ...payload, secret: secret() }),
-    redirect: 'follow',
+    redirect: 'manual',
   });
+  steps.push(r.status);
+  for (let i = 0; i < 4 && r.status >= 300 && r.status < 400; i++) {
+    const loc = r.headers.get('location');
+    if (!loc) break;
+    r = await fetch(new URL(loc, scriptUrl()).toString(), {
+      method: 'GET',
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; invitation-party/1.0)' },
+      redirect: 'manual',
+    });
+    steps.push(r.status);
+  }
   const text = await r.text();
   let json = null;
   try { json = JSON.parse(text); } catch (e) {}
-  return { status: r.status, finalUrl: r.url, contentType: r.headers.get('content-type'), text, json };
+  return { status: r.status, steps, contentType: r.headers.get('content-type'), text, json };
 }
 
 async function callScript(payload) {
@@ -43,6 +55,7 @@ async function check() {
   try {
     const r = await rawCall({ action: 'count' });
     out.scriptStatus = r.status;
+    out.steps = r.steps;
     out.contentType = r.contentType;
     out.gotJson = !!r.json;
     if (r.json) {
