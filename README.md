@@ -1,45 +1,60 @@
-# 낯선동네 나의동네 — 온라인 초청장
+# 「나의 동네, 낯선 동네」 온라인 초청장
 
-정적 페이지(index.html) + 방명록 API(api/guestbook.js) 구성입니다. 빌드 과정 없이 그대로 배포됩니다.
+사이트: https://www.shootingmythings.studio
+저장소: theendofdesert/shoothingmythings (GitHub) → Vercel 자동 배포
 
 ## 폴더 구조
-- `index.html` — 초청장 페이지
+- `index.html` — 초청장 페이지 전체 (디자인·문구·동작 모두 이 파일 하나)
 - `support.js` — 페이지 실행 파일 (수정하지 않음)
-- `assets/` — 포스터 레이어, 대표 작품 이미지
-- `api/guestbook.js` — 방명록 저장 API
+- `assets/layers/` — 포스터 인트로 레이어 19장
+- `assets/works/` — 대표 작품 9장 (01–09, 소개말 장면 배경)
+- `assets/team/` — 팀 로고(logo-smt, logo-gd, with), 후원사 로고(logo-seongbuk-center, logo-lectus)
+- `assets/poster.jpg` — 공유 버튼의 '포스터 저장' 이미지
+- `og.jpg` — 카카오톡·SNS 미리보기 썸네일 (1200×630)
+- `api/guestbook.js` — 방명록 API (GitHub `guestbook` 브랜치에 저장)
+- `api/party.js` — 네트워킹 신청 API (구글 시트로 전달)
+- `robots.txt`, `sitemap.xml`, `llms.txt` — 검색엔진·AI 검색용
 - `vercel.json` — 배포 설정
 
-## 1. GitHub에 올리기
-1. GitHub에서 새 저장소 생성 (예: `invitation`, Private 권장)
-2. 이 폴더 안의 파일 전체를 업로드 (웹에서 드래그 앤 드롭 또는 GitHub Desktop)
+## 페이지 구성 (index.html)
+1. 포스터 인트로 (스크롤에 따라 레이어 적층)
+2. 전시소개 (id=intro) — 작품 사진 9장이 화면 가득 넘어가며 문단이 하나씩 등장, 흑백 → 컬러
+3. 팀소개 (id=team) — 두 로고가 만남 → 슈마띵 소개 → 왼쪽으로 넘어가며 가꾸가 소개
+4. 후원 — 지원 문구 + 서울청년센터 성북 · LECTUS 로고
+5. 네트워킹 (id=party) — 찢긴 초대장이 열림 → 소개글 → 세션 안내 → 일시·개요, 하단에 남은 자리 + 신청하기 고정 (4단계 신청 창은 그대로)
+6. 관람 안내 (id=visit)
+7. 방명록 (id=guestbook)
 
-## 2. 방명록용 토큰 만들기
-1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
-2. Repository access: **Only select repositories** → 위 저장소 선택
-3. Permissions → Repository permissions → **Contents: Read and write**
-4. 생성된 토큰을 복사해 둡니다 (다시 볼 수 없음)
+고정 요소
+- 상단 바: 포스터를 지나면 등장 (전시소개 · 팀소개 · 네트워킹 · 관람안내 · 방명록). 메뉴별 밑줄이 섹션 진행도를 표시, 네트워킹 위 '모집중' 표시(마감 시 자동 숨김)
+- 우측 하단 공유 버튼: '포스터 저장' · '공유하기'
 
-## 3. Vercel 배포
-1. vercel.com → Add New → Project → 위 저장소 Import
-2. Framework Preset: **Other**, Build/Output 설정은 비워 둠
-3. Environment Variables 에 추가
-   - `GITHUB_TOKEN` = 2번에서 만든 토큰
-   - `GITHUB_REPO` = `GitHub아이디/저장소이름` (예: `lectus/invitation`)
-4. Deploy
+인앱 브라우저 대응
+- 화면 높이를 처음 연 시점 기준으로 고정(--vh)해 카카오톡·인스타그램에서 스크롤 위치가 튀지 않음
+- 작은 화면에서는 팀소개·초대장 안내가 화면에 맞게 자동 축소
 
-## 4. 도메인 연결
-1. Vercel 프로젝트 → Settings → Domains → 구매한 도메인 입력
-2. 화면에 나오는 DNS 값을 도메인 구매처(가비아, 후이즈 등) DNS 설정에 입력
-   - 루트 도메인(example.com): A 레코드 `76.76.21.21`
-   - www: CNAME `cname.vercel-dns.com`
-3. 반영까지 수 분~수 시간
+## Vercel 환경변수 (값은 Vercel에만 저장, 여기에 적지 않음)
+- `GITHUB_TOKEN` — Fine-grained 토큰, 이 저장소만, Contents: Read and write
+- `GITHUB_REPO` — `theendofdesert/shoothingmythings`
+- `PARTY_SCRIPT_URL` — Apps Script 웹앱 주소 (`.../exec`)
+- `PARTY_SECRET` — Apps Script `SECRET` 과 같은 값
 
-## 방명록 저장 방식
-- 방문자가 글을 남기면 저장소의 `guestbook` 브랜치에 `data/guestbook.json` 으로 커밋됩니다.
-- 첫 글이 등록될 때 브랜치가 자동 생성됩니다.
-- `guestbook` 브랜치는 `vercel.json` 에서 배포 대상에서 제외되어 있어, 글이 올라와도 재배포되지 않습니다.
-- 글 삭제: GitHub에서 `guestbook` 브랜치 → `data/guestbook.json` 을 열어 해당 항목을 지우고 커밋합니다.
-- 이름 20자, 메시지 200자 제한, 최근 1,000개까지 보관합니다.
+환경변수를 바꾸면 Deployments → ⋯ → Redeploy 해야 적용됩니다.
 
-## 페이지 수정 후 반영
-프로젝트에서 수정한 `전시 초청장.dc.html` 을 `index.html` 로 이름을 바꿔 덮어쓰고 커밋하면 자동 재배포됩니다.
+## 점검 주소
+- 방명록: /api/guestbook?check=1  → `branchReady: true` 면 정상
+- 신청: /api/party?check=1  → `secretOk: true`, `count` 숫자 나오면 정상
+
+## 네트워킹 신청 설정
+- 정원 표시 30명, 실제 접수 35명까지 (`api/party.js` MAX, index.html P_SHOW / P_MAX)
+- 마감 2026-11-05 23:59 KST (`api/party.js` END, index.html P_END)
+- 입금 계좌: 토스뱅크 1002-2068-4620 강태훈(Shootingmythings)
+- 구글 시트 코드(google-apps-script.gs)는 비밀값이 들어가므로 저장소에 올리지 않습니다.
+  코드를 고치면 Apps Script에서 배포 → 배포 관리 → 연필 → 새 버전 → 배포 (주소 유지).
+
+## 수정 후 반영
+바뀐 파일만 저장소 같은 위치에 덮어쓰고 커밋하면 1분 안에 자동 배포됩니다.
+카카오톡 미리보기를 바꿨다면 developers.kakao.com → 도구 → 공유 디버거에서 캐시 초기화.
+
+## 다음에 수정 요청할 때
+이 폴더 전체(또는 index.html)와 이 README를 함께 보여주면 바로 이어서 수정할 수 있습니다.

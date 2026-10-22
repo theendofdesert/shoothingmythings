@@ -62,7 +62,7 @@
         {"@type": "Person", "name": "강태훈", "jobTitle": "총괄 · 사진 · 영상"},
         {"@type": "Person", "name": "장인호", "jobTitle": "사진"},
         {"@type": "Person", "name": "손근희", "jobTitle": "영상"},
-        {"@type": "Person", "name": "홍건희", "jobTitle": "홍보"},
+        {"@type": "Person", "name": "홍건희", "jobTitle": "기획 · 마케팅"},
         {"@type": "Person", "name": "서대원", "jobTitle": "디자인 · 매니징"},
         {"@type": "Person", "name": "연유빈", "jobTitle": "디자인 · 마케팅"},
         {"@type": "Person", "name": "염우인", "jobTitle": "디자인 · 디렉팅"}
@@ -94,7 +94,7 @@
 <p>2026.11.01. – 2026.11.08. · 서울 성북구 동소문로 186, 2층 · 무료 관람</p>
 <p>누군가에게는 익숙한 일상의 풍경이, 누군가에게는 처음 마주하는 낯선 풍경이 됩니다. 이번 전시는 성북을 고향으로 두지 않은 이들의 시선에서 시작되었습니다. 무심코 지나쳤던 골목과 오래된 건물, 계절에 따라 달라지는 거리의 표정까지 사진과 영상으로 담았습니다.</p>
 <h2>참여</h2>
-<p>Shootingmythings — 총괄 강태훈 · 사진 장인호 강태훈 · 영상 손근희 강태훈 · 홍보 홍건희</p>
+<p>Shootingmythings — 총괄 강태훈 · 사진 장인호 강태훈 · 영상 손근희 강태훈 · 기획 · 마케팅 홍건희</p>
 <p>가꾸가 — 디자인 서대원 연유빈 염우인 · 매니징 서대원 · 마케팅 연유빈 · 디렉팅 염우인</p>
 <h2>관람 안내</h2>
 <p>평일 08:00 – 20:00 · 주말 08:00 – 21:00 · 무인운영 08:00 ~ 12:00, 19:00 ~ 20:00</p>
@@ -106,25 +106,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
-html,body{margin:0;background:#f3f3f3;}
+html,body{margin:0;background:#f3f3f3;overflow-anchor:none;}
 body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Helvetica Neue",sans-serif;color:#141414;-webkit-font-smoothing:antialiased;}
 a{color:#141414;text-decoration:underline;text-underline-offset:3px;}
 a:hover{color:#707070;}
 input,textarea,button{font-family:inherit;}
+@keyframes recruitBlink{0%,100%{opacity:1}50%{opacity:0.25}}
+@media (prefers-reduced-motion: reduce){[data-badge]{animation:none !important;}}
 </style>
 </helmet>
 <main style="max-width:480px;margin:0 auto;background:#ffffff;min-height:100vh;word-break:break-all;line-break:anywhere;text-align:justify;">
   <nav data-topnav="" style="position:fixed;top:0;left:50%;transform:translate(-50%,-100%);width:100%;max-width:480px;z-index:40;background:rgba(255,255,255,0.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 -1px 0 #ececec;transition:transform .35s cubic-bezier(.22,1,.36,1);text-align:center;">
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:46px;">
-      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
-        <button onClick="{{ n.go }}" style="position:relative;border:0;background:none;padding:0;font-size:13px;font-weight:{{ n.weight }};color:{{ n.color }};cursor:pointer;word-break:keep-all;">{{ n.label }}<span style="position:absolute;left:50%;bottom:0;width:20px;height:2px;margin-left:-10px;border-radius:2px;background:#141414;opacity:{{ n.bar }};transition:opacity .25s;"></span></button>
+    <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:46px;">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" style="position:relative;border:0;background:none;padding:0;font-size:13px;font-weight:{{ n.weight }};color:{{ n.color }};cursor:pointer;word-break:keep-all;"><sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span data-badge="" style="position:absolute;left:50%;top:4px;transform:translateX(-50%);font-size:9px;font-weight:700;line-height:1;letter-spacing:0.02em;color:#e5484d;white-space:nowrap;animation:recruitBlink 1.2s ease-in-out infinite;">모집중</span></sc-if>{{ n.label }}<span data-navbar="{{ $index }}" style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#141414;transform-origin:left center;transform:scaleX(0);"></span></button>
       </sc-for>
     </div>
   </nav>
 
 
-  <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:520vh;background:#ffffff;">
-    <div style="position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 520);background:#ffffff;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;">
       <div style="position:relative;width:min(100%, calc(100svh * 0.7075));aspect-ratio:849/1200;">
         <img data-step="0" src="assets/layers/01-bg.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
         <img data-step="1" src="assets/layers/02-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:sepia(0.3) contrast(0.96);">
@@ -152,90 +154,186 @@ input,textarea,button{font-family:inherit;}
     </div>
   </section>
 
-  <section id="intro" data-screen-label="02 소개말" style="padding:80px 24px;background:#ffffff;">
-    <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;">
-      
-      
-      <div style="margin:0;font-size:17px;font-weight:300;line-height:1.7;color:#262626;"><h1 style="text-align: left; margin-bottom: 40px">나의 동네, 낯선 동네</h1><p>누군가에게는 익숙한 일상의 풍경이, 누군가에게는 처음 마주하는 낯선 풍경이 됩니다.</p><p>한양도성의 북쪽에 자리하여 이름 붙여진 성북. 오랜 세월 서울의 한편을 지켜온 이곳에는 서로 다른 시대의 풍경이 나란히 자리하고 있습니다. 굽이진 골목을 따라 이어지는 오래된 주택가와 세월의 흔적을 간직한 건축물, 그리고 새로운 삶의 터전으로 조성된 뉴타운까지. 성북은 서울이라는 도시가 지나온 시간과 오늘의 모습을 고스란히 품고 있는 동네입니다.</p><p>수많은 대학과 주거지가 모여 있는 성북에는 저마다 다른 이유로 이곳을 찾아온 사람들이 살아갑니다. 누군가는 이곳에서 태어나 평생을 살아왔고, 누군가는 학업과 일상을 위해 잠시 머물며, 또 누군가는 새로운 보금자리를 찾아 정착합니다. 그렇게 낯선 이들의 발걸음이 쌓이고, 서로 다른 삶이 교차하며 성북만의 풍경을 만들어갑니다.</p><p>이번 전시는 성북을 고향으로 두지 않은 이들의 시선에서 시작되었습니다. 이곳에 터를 잡은 지 10년, 5년, 3년. 저마다 성북에서 보낸 시간은 다르지만, 매일 오가는 길 위에서 마주한 소소한 풍경들이 어느새 익숙하고 정겨운 일상의 일부가 되었다는 점은 같습니다. 무심코 지나쳤던 골목과 오래된 건물, 계절에 따라 달라지는 거리의 표정까지. 우리의 시선이 머물렀던 순간들을 사진과 영상으로 담았습니다.</p><p>낯선 동네가 나의 동네가 되는 데에는 얼마나 많은 시간이 필요할까요.</p><p>어쩌면 그 변화는 특별한 사건이 아닌, 매일 같은 길을 걷고 익숙한 풍경에 눈길을 주는 작은 순간들에서 시작되는지도 모릅니다.</p><p><b>「나의 동네, 낯선 동네」</b>는 우리가 살아가는 성북의 일상을 다시 바라보는 사진전입니다. 오랫동안 이곳을 지켜온 이들에게는 익숙한 풍경 속 새로운 발견을, 이제 막 성북에 발을 디딘 이들에게는 낯선 골목을 조금 더 가까이 느낄 수 있는 계기를 전하고자 합니다.</p><p>이 사진들이 누군가에게는 오래된 기억이 되고, 또 다른 누군가에게는 앞으로 쌓아갈 추억의 시작이 되기를 바랍니다.</p></div>
+  <section id="intro" data-screen-label="02 소개말" ref="{{ storyRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 900);background:#141414;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);box-sizing:border-box;overflow:hidden;background:#141414;">
+      <div style="position:absolute;top:62px;left:24px;right:24px;z-index:2;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;color:#ffffff;font-variant-numeric:tabular-nums;">
+        <span data-story-num="">01</span>
+        <span style="position:relative;flex:1;height:1px;background:rgba(255,255,255,0.3);"><span data-story-bar="" style="position:absolute;inset:0;background:#ffffff;transform-origin:left;transform:scaleX(0);"></span></span>
+        <span>09</span>
+      </div>
+      <div style="position:absolute;inset:0;overflow:hidden;background:#141414;">
+      <img data-story-img="" src="assets/works/01.webp" alt="대표 작품 01" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/02.webp" alt="대표 작품 02" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/03.webp" alt="대표 작품 03" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/04.webp" alt="대표 작품 04" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/05.webp" alt="대표 작품 05" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/06.webp" alt="대표 작품 06" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/07.webp" alt="대표 작품 07" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/08.webp" alt="대표 작품 08" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+      <img data-story-img="" loading="lazy" decoding="async" src="assets/works/09.webp" alt="대표 작품 09" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;">
+        <div style="position:absolute;inset:0;background:rgba(20,20,20,0.5);"></div>
+      </div>
+      <div style="position:absolute;inset:0;z-index:1;display:grid;align-content:center;padding:96px 28px 72px;">
+      <h1 data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:34px;font-weight:650;line-height:1.25;letter-spacing:-0.03em;color:#ffffff;text-align:center;">나의 동네, 낯선 동네</h1>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">누군가에게는 익숙한 일상의 풍경이, 누군가에게는 처음 마주하는 낯선 풍경이 됩니다.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">한양도성의 북쪽에 자리하여 이름 붙여진 성북. 오랜 세월 서울의 한편을 지켜온 이곳에는 서로 다른 시대의 풍경이 나란히 자리하고 있습니다. 굽이진 골목을 따라 이어지는 오래된 주택가와 세월의 흔적을 간직한 건축물, 그리고 새로운 삶의 터전으로 조성된 뉴타운까지. 성북은 서울이라는 도시가 지나온 시간과 오늘의 모습을 고스란히 품고 있는 동네입니다.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">수많은 대학과 주거지가 모여 있는 성북에는 저마다 다른 이유로 이곳을 찾아온 사람들이 살아갑니다. 누군가는 이곳에서 태어나 평생을 살아왔고, 누군가는 학업과 일상을 위해 잠시 머물며, 또 누군가는 새로운 보금자리를 찾아 정착합니다. 그렇게 낯선 이들의 발걸음이 쌓이고, 서로 다른 삶이 교차하며 성북만의 풍경을 만들어갑니다.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">이번 전시는 성북을 고향으로 두지 않은 이들의 시선에서 시작되었습니다. 이곳에 터를 잡은 지 10년, 5년, 3년. 저마다 성북에서 보낸 시간은 다르지만, 매일 오가는 길 위에서 마주한 소소한 풍경들이 어느새 익숙하고 정겨운 일상의 일부가 되었다는 점은 같습니다. 무심코 지나쳤던 골목과 오래된 건물, 계절에 따라 달라지는 거리의 표정까지. 우리의 시선이 머물렀던 순간들을 사진과 영상으로 담았습니다.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">낯선 동네가 나의 동네가 되는 데에는 얼마나 많은 시간이 필요할까요.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">어쩌면 그 변화는 특별한 사건이 아닌, 매일 같은 길을 걷고 익숙한 풍경에 눈길을 주는 작은 순간들에서 시작되는지도 모릅니다.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;"><b>「나의 동네, 낯선 동네」</b>는 우리가 살아가는 성북의 일상을 다시 바라보는 사진전입니다. 오랫동안 이곳을 지켜온 이들에게는 익숙한 풍경 속 새로운 발견을, 이제 막 성북에 발을 디딘 이들에게는 낯선 골목을 조금 더 가까이 느낄 수 있는 계기를 전하고자 합니다.</p>
+      <p data-story-text="" style="grid-area:1/1;align-self:center;margin:0;pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,0.35);font-size:17px;font-weight:400;line-height:1.75;color:#ffffff;opacity:0;">이 사진들이 누군가에게는 오래된 기억이 되고, 또 다른 누군가에게는 앞으로 쌓아갈 추억의 시작이 되기를 바랍니다.</p>
+      </div>
     </div>
   </section>
 
-  <section data-screen-label="02-1 팀 소개" style="padding:0 24px 80px;background:#ffffff;display:flex;flex-direction:column;gap:56px;">
-    <div data-reveal="" style="padding-top:32px;box-shadow:inset 0 1px 0 #e0e0e0;display:flex;flex-direction:column;gap:20px;">
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">Shootingmythings</h2>
+  <section id="team" data-screen-label="02-1 팀 소개" ref="{{ teamRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 520);background:#ffffff;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);overflow:hidden;">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;pointer-events:none;">
+        <img data-team-logo="smt" src="assets/team/logo-smt.png" alt="Shootingmythings" style="height:29px;width:auto;opacity:0;transform-origin:left center;">
+        <img data-team-logo="with" src="assets/team/with.png" alt="with" style="height:15px;width:auto;opacity:0;">
+        <img data-team-logo="gd" src="assets/team/logo-gd.png" alt="가꾸가" style="height:45px;width:auto;opacity:0;">
       </div>
-      <div style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;"><div>일상 속 소중한 순간을 사진과 영상, 그리고 글로 담아내는 크리에이티브 미디어팀입니다. 익숙함에 가려 쉽게 지나치는 풍경과 사소한 순간들에 시선을 머무르며, 그 안에 담긴 이야기와 감정을 기록합니다. 특별한 장면을 찾아 나서기보다 평범한 일상에서 저마다의 아름다움을 발견하고, 이를 다양한 시각적 언어로 표현하고자 합니다.</div><div><br></div><div>우리가 남긴 기록이 누군가에게는 새로운 발견이 되고, 또 다른 누군가에게는 오래도록 간직하고 싶은 기억으로 남기를 바랍니다.</div></div>
-      <div style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:20px;background:#f3f3f3;">
-        <sc-for list="{{ creditsA }}" as="c" hint-placeholder-count="4">
-          <div style="display:grid;grid-template-columns:48px 1px minmax(0,1fr);align-items:center;column-gap:14px;font-size:15px;line-height:1.5;">
-            <span style="font-weight:600;color:#707070;">{{ c.role }}</span>
-            <span style="width:1px;height:12px;background:#d1d1d1;"></span>
-            <span style="font-weight:500;word-spacing:6px;">{{ c.names }}</span>
+      <div data-team-panel="a" style="position:absolute;inset:0;box-sizing:border-box;padding:66px 24px 28px;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:0;">
+        <img data-team-plogo="a" src="assets/team/logo-smt.png" alt="Shootingmythings" style="height:22px;width:auto;align-self:flex-start;">
+        <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">Shootingmythings</h2>
+        <div data-team-body="a" style="display:flex;flex-direction:column;gap:18px;">
+        <div style="margin:0;font-size:14px;font-weight:300;line-height:1.65;color:#262626;"><div>일상 속 소중한 순간을 사진과 영상, 그리고 글로 담아내는 크리에이티브 미디어팀입니다. 익숙함에 가려 쉽게 지나치는 풍경과 사소한 순간들에 시선을 머무르며, 그 안에 담긴 이야기와 감정을 기록합니다. 특별한 장면을 찾아 나서기보다 평범한 일상에서 저마다의 아름다움을 발견하고, 이를 다양한 시각적 언어로 표현하고자 합니다.</div><div><br></div><div>우리가 남긴 기록이 누군가에게는 새로운 발견이 되고, 또 다른 누군가에게는 오래도록 간직하고 싶은 기억으로 남기를 바랍니다.</div></div>
+        <p style="margin:0;font-size:15px;font-weight:700;line-height:1.6;color:#141414;word-break:keep-all;">이번 전시에서는 약 150점의 사진과 5편의 영상을 선보입니다.</p>
+        <sc-if value="{{ cvCredit }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px;padding-top:16px;box-shadow:inset 0 1px 0 #e4e4e4;">
+            <sc-for list="{{ creditsA }}" as="c" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:3px;">
+                <span style="font-size:11px;font-weight:600;letter-spacing:0.02em;color:#8a8a8a;">{{ c.role }}</span>
+                <span style="font-size:15px;font-weight:600;letter-spacing:-0.01em;word-spacing:4px;">{{ c.names }}</span>
+              </div>
+            </sc-for>
           </div>
-        </sc-for>
-      </div>
-    </div>
-    <div data-reveal="" style="padding-top:32px;box-shadow:inset 0 1px 0 #e0e0e0;display:flex;flex-direction:column;gap:20px;">
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">가꾸가</h2>
-      </div>
-      <div style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;"><div>가구를 디자인하고 제작하는 데 관심있는 세 명의 건축학도가 모인 팀입니다. 일상 속 가구는 놓이는 위치와 사용 방식에 따라 공간의 기능을 바꾸고, 그곳에서 일어나는 행동과 경험에도 영향을 줍니다. 가꾸가는 이러한 가구의 가능성을 실내를 넘어 사람들이 머물고 스쳐 가는 공공 공간으로 확장하고자 합니다.</div><div><br></div><div>‘가꾸가’는 가구와 공간을 뜻하는 구가를 결합한 이름입니다. 가구를 만드는 데 그치지 않고, 가구를 통해 공간을 새롭게 구성하고 그 안의 일상까지 가꾸어 나가겠다는 의미를 담았습니다. 가구에서 시작해 공간과 사람을 잇고, 일상에 새로운 가능성을 더하는 것을 목표로 하고 있습니다.</div></div>
-      <div style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:20px;background:#f3f3f3;">
-        <sc-for list="{{ creditsB }}" as="c" hint-placeholder-count="1">
-          <div style="display:grid;grid-template-columns:48px 1px minmax(0,1fr);align-items:center;column-gap:14px;font-size:15px;line-height:1.5;">
-            <span style="font-weight:600;color:#707070;">{{ c.role }}</span>
-            <span style="width:1px;height:12px;background:#d1d1d1;"></span>
-            <span style="font-weight:500;word-spacing:6px;">{{ c.names }}</span>
+        </sc-if>
+        <sc-if value="{{ cvInline }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;gap:10px 20px;padding-top:16px;box-shadow:inset 0 1px 0 #e4e4e4;">
+            <sc-for list="{{ peopleA }}" as="m" hint-placeholder-count="3">
+              <span style="display:flex;align-items:baseline;gap:7px;white-space:nowrap;">
+                <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em;">{{ m.name }}</span>
+                <span style="font-size:13px;color:#8a8a8a;">{{ m.roleText }}</span>
+              </span>
+            </sc-for>
           </div>
-        </sc-for>
+        </sc-if>
+        <sc-if value="{{ cvCard }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;">
+            <sc-for list="{{ peopleA }}" as="m" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:12px;background:#f3f3f3;">
+                <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em;">{{ m.name }}</span>
+                <span style="font-size:12px;color:#707070;">{{ m.roleText }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        </div>
+      </div>
+      <div data-team-panel="b" style="position:absolute;inset:0;box-sizing:border-box;padding:66px 24px 28px;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:0;">
+        <img data-team-plogo="b" src="assets/team/logo-gd.png" alt="가꾸가" style="height:68px;width:auto;align-self:flex-start;">
+        <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">가꾸가</h2>
+        <div data-team-body="b" style="display:flex;flex-direction:column;gap:18px;">
+        <div style="margin:0;font-size:14px;font-weight:300;line-height:1.65;color:#262626;"><div>가구를 디자인하고 제작하는 데 관심있는 세 명의 건축학도가 모인 팀입니다. 일상 속 가구는 놓이는 위치와 사용 방식에 따라 공간의 기능을 바꾸고, 그곳에서 일어나는 행동과 경험에도 영향을 줍니다. 가꾸가는 이러한 가구의 가능성을 실내를 넘어 사람들이 머물고 스쳐 가는 공공 공간으로 확장하고자 합니다.</div><div><br></div><div>‘가꾸가’는 가구와 공간을 뜻하는 구가를 결합한 이름입니다. 가구를 만드는 데 그치지 않고, 가구를 통해 공간을 새롭게 구성하고 그 안의 일상까지 가꾸어 나가겠다는 의미를 담았습니다. 가구에서 시작해 공간과 사람을 잇고, 일상에 새로운 가능성을 더하는 것을 목표로 하고 있습니다.</div></div>
+        <p style="margin:0;font-size:15px;font-weight:700;line-height:1.6;color:#141414;word-break:keep-all;">이번 전시에서는 소소평상 작품을 선보입니다.</p>
+        <sc-if value="{{ cvCredit }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px;padding-top:16px;box-shadow:inset 0 1px 0 #e4e4e4;">
+            <sc-for list="{{ creditsB }}" as="c" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:3px;">
+                <span style="font-size:11px;font-weight:600;letter-spacing:0.02em;color:#8a8a8a;">{{ c.role }}</span>
+                <span style="font-size:15px;font-weight:600;letter-spacing:-0.01em;word-spacing:4px;">{{ c.names }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ cvInline }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;gap:10px 20px;padding-top:16px;box-shadow:inset 0 1px 0 #e4e4e4;">
+            <sc-for list="{{ peopleB }}" as="m" hint-placeholder-count="3">
+              <span style="display:flex;align-items:baseline;gap:7px;white-space:nowrap;">
+                <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em;">{{ m.name }}</span>
+                <span style="font-size:13px;color:#8a8a8a;">{{ m.roleText }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ cvCard }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;">
+            <sc-for list="{{ peopleB }}" as="m" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:12px;background:#f3f3f3;">
+                <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em;">{{ m.name }}</span>
+                <span style="font-size:12px;color:#707070;">{{ m.roleText }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        </div>
       </div>
     </div>
   </section>
 
-  <section data-screen-label="03 대표 작품" style="padding:0 24px 80px;background:#ffffff;">
-    <div data-reveal="" style="padding-top:32px;box-shadow:inset 0 1px 0 #e0e0e0;padding-bottom:24px;display:flex;flex-direction:column;gap:8px;">
-      
-      <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">미리 만나보기</h2>
+  <section data-screen-label="03 후원" ref="{{ spRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 220);background:#ffffff;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);box-sizing:border-box;padding:46px 24px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;overflow:hidden;">
+      <p data-sp="text" style="opacity:0;margin:0;max-width:360px;font-size:15px;font-weight:400;line-height:1.7;color:#262626;text-align:center;word-break:keep-all;text-wrap:balance;">본 전시는 서울청년센터 성북의 커뮤니티 지원사업 ‘와글와글 성북마을'와 건축교육커뮤니티플랫폼 렉터스의 지원을 받아 운영됩니다.</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <span data-sp="label" style="opacity:0;font-size:11px;font-weight:600;letter-spacing:0.08em;color:#8a8a8a;">후원</span>
+        <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:28px;">
+          <img data-sp="l" src="assets/team/logo-seongbuk-center.png" alt="서울청년센터 성북" style="opacity:0;height:40px;width:auto;">
+          <span data-sp="bar" style="width:1px;height:16px;background:#d1d1d1;transform:scaleY(0);"></span>
+          <img data-sp="r" src="assets/team/logo-lectus.png" alt="LECTUS" style="opacity:0;height:22px;width:auto;">
+        </div>
+      </div>
     </div>
-    <div data-reveal="" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;">
-      <sc-for list="{{ works }}" as="w" hint-placeholder-count="9">
-        <button onClick="{{ w.open }}" style="position:relative;aspect-ratio:1/1;padding:0;border:0;border-radius:8px;overflow:hidden;background:#f0f0f0;cursor:zoom-in;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:12px;font-weight:600;color:#adadad;">{{ w.num }}</span>
-          <sc-if value="{{ w.ok }}" hint-placeholder-val="{{ false }}"><img src="{{ w.src }}" alt="{{ w.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></sc-if>
-        </button>
-      </sc-for>
-    </div>
-    <p data-reveal="" style="margin:16px 0 0;font-size:13px;line-height:1.6;color:#707070;word-break:keep-all;text-wrap:pretty;">이번 전시에서는 약 150점의 사진과 5편의 영상, 그리고 가꾸가 팀의 작품 [소소평상]을 함께 선보입니다.</p>
   </section>
 
-  <section id="party" data-screen-label="03-1 네트워킹 파티" style="margin:8px 8px 40px;padding:0 0 40px;border-radius:28px;overflow:hidden;background:#f3f3f3;">
-    <img src="assets/party.jpg" alt="나의동네, 낯선동네 네트워킹 세션 2026.11.07 19:00" style="display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;">
-    <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;padding:40px 16px 0;">
-      <div style="display:flex;flex-direction:column;gap:8px;">
+  <section id="party" data-screen-label="03-0 초대장" ref="{{ invRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 560);background:#ffffff;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:46px;box-sizing:border-box;">
+      <div data-inv="card" style="position:relative;width:min(100%, calc(var(--vh, 1vh) * 66));aspect-ratio:849/1200;overflow:hidden;background:#fefefe;opacity:0;">
+        <img data-inv="bw" src="assets/layers/02-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;filter:sepia(0.3) contrast(0.96);">
+        <img data-inv="color" src="assets/layers/03-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
+        <div data-inv="veil" style="position:absolute;inset:0;background:#fefefe;opacity:0;"></div>
+        <div data-inv="seal" style="position:absolute;inset:0;background:#fefefe;"></div>
+        <div data-inv="top" style="position:absolute;inset:0;z-index:2;transform:translateY(30%);">
+          <div style="position:absolute;left:0;right:0;top:calc(-100% + 3px);height:100%;background:#fefefe;"></div>
+          <img src="assets/layers/07-torn-bottom.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div style="position:absolute;left:0;right:0;top:6.5%;text-align:center;font-size:clamp(22px, 7.4vw, 32px);font-weight:300;letter-spacing:-0.03em;line-height:1.2;color:#141414;white-space:nowrap;">Networking Session</div>
+        </div>
+        <div data-inv="bot" style="position:absolute;inset:0;z-index:1;transform:translateY(-41%);">
+          <div style="position:absolute;left:0;right:0;top:calc(100% - 3px);height:100%;background:#fefefe;"></div>
+          <img src="assets/layers/11-torn-top.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div style="position:absolute;left:0;right:0;top:94.5%;text-align:center;font-size:clamp(11px, 3.2vw, 14px);font-weight:400;color:#141414;white-space:nowrap;font-variant-numeric:tabular-nums;">2026.11.07 19:00</div>
+        </div>
+        <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">네트워킹 세션 안내</h2>
         
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;text-align:left;">네트워킹 세션 안내<br></h2>
-      </div>
-      <p style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;">성북으로 새롭게 이사 온 분들을 초대합니다. 아직은 낯선 이 동네에서, 먼저 자리 잡은 이웃들이 아껴 둔 장소와 이야기를 나누며 서로를 알아가는 네트워킹 세션을 준비했습니다. 낯선 동네가 나의 동네가 되는 첫걸음을 함께해 주세요.</p>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
+        <div data-inv="info" style="position:absolute;left:7%;right:7%;top:19%;bottom:16%;z-index:3;display:flex;flex-direction:column;gap:14px;opacity:0;pointer-events:none;">
+          <div style="flex:1;min-height:0;display:grid;">
+          <div data-inv="introI" style="grid-area:1/1;align-self:center;"><p style="margin:0;font-size:16px;font-weight:400;line-height:1.75;color:#141414;text-align:center;word-break:keep-all;text-wrap:pretty;">성북으로 새롭게 이사 온 분들을 초대합니다. 아직은 낯선 이 동네에서, 먼저 자리 잡은 이웃들이 아껴 둔 장소와 이야기를 나누며 서로를 알아가는 네트워킹 세션을 준비했습니다. 낯선 동네가 나의 동네가 되는 첫걸음을 함께해 주세요.</p></div>
+          <div data-inv="infoA" style="grid-area:1/1;align-self:center;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:8px;font-size:13px;line-height:1.45;">
           <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 21:00</span>
           <span style="color:#707070;">장소</span><span>전시장 (성북구 동소문로 186, 2층)</span>
-          <span style="color:#707070;">대상</span><span>성북구에 관심이 있거나 거주중인 2·30대 청년</span>
+          <span style="color:#707070;">대상</span><span>성북구에 거주중이거나 관심이 있는 2·30대 청년</span>
           <span style="color:#707070;">정원</span><span>선착순 30명</span>
-          <span style="color:#707070;">보증금</span><span>10,000원 (참석 확인 후 전액 환불)</span>
+          <span style="color:#707070;">보증금</span><span>10,000원 <b style="font-weight:700;color:#e5484d;">(참석 확인 후 전액 환불)</b></span>
           <span style="color:#707070;">신청 마감</span><span>11.05. (목) 23:59 · 입금 기준 선착순</span>
           <span style="color:#707070;">참고사항</span><span>행사에서는 간단한 핑거푸드와 마실거리가 준비됩니다.</span>
         </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;box-shadow:inset 0 1px 0 #e0e0e0;">
+        
+      </div>
+
+      <div data-inv="infoB" style="grid-area:1/1;align-self:center;display:flex;flex-direction:column;gap:12px;opacity:0;pointer-events:none;">
+            <h3 style="margin:0;font-size:18px;font-weight:650;letter-spacing:-0.02em;color:#141414;">세션 안내</h3>
+            <p style="margin:0;font-size:14px;font-weight:400;line-height:1.7;color:#262626;">본 행사는 성북구에 관심 있는 청년들이 서로 생각하는 아름다운 성북구의 장소를 교류하며, 관심사나 취미를 함께 교류하고 더 나아가 커뮤니티를 만들어가는 것을 목표로 합니다.</p>
+            <p style="margin:0;font-size:14px;font-weight:400;line-height:1.7;color:#262626;">행사 당일 주최 측 팀원들이 주도하여 단체 관람을 진행한 후 참가자분들이 교류를 이어갈 수 있도록 다양한 행사와 이벤트를 진행할 예정입니다.</p>
+          </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:12px;box-shadow:inset 0 1px 0 #e0e0e0;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
           <span style="font-size:14px;font-weight:600;">{{ seatLabel }}</span>
           <span style="font-size:12px;color:#707070;">{{ seatSub }}</span>
         </div>
-      </div>
-
-      <sc-if value="{{ pShowForm }}" hint-placeholder-val="{{ true }}">
+          <sc-if value="{{ pShowForm }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;justify-content:center;">
           <button onClick="{{ pOpen }}" style="height:52px;padding:0 32px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font-size:16px;font-weight:600;cursor:pointer;">신청하기</button>
         </div>
@@ -249,8 +347,13 @@ input,textarea,button{font-family:inherit;}
       <sc-if value="{{ pClosed }}" hint-placeholder-val="{{ false }}">
         <div style="padding:20px;border-radius:16px;background:#ffffff;font-size:14px;line-height:1.6;color:#262626;text-align:center;">{{ pClosedMsg }}</div>
       </sc-if>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
+  <section data-screen-label="03-1 네트워킹 신청">
     <sc-if value="{{ pSheet }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:60;background:#ffffff;overflow-y:auto;-webkit-overflow-scrolling:touch;">
         <div style="max-width:480px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;">
@@ -260,8 +363,7 @@ input,textarea,button{font-family:inherit;}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
             </button>
           </div>
-          <img src="assets/party.jpg" alt="나의동네, 낯선동네 네트워킹 세션 2026.11.07 19:00" style="display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;">
-          <div style="padding:24px 24px 48px;display:flex;flex-direction:column;gap:20px;">
+                <div style="padding:24px 24px 48px;display:flex;flex-direction:column;gap:20px;">
       <sc-if value="{{ pShowForm }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -443,6 +545,7 @@ input,textarea,button{font-family:inherit;}
   <footer style="margin:0 8px;padding:48px 24px;border-radius:24px 24px 0 0;background:#141414;color:#ffffff;display:flex;flex-direction:column;gap:16px;">
     <div style="font-size:24px;font-weight:650;letter-spacing:-0.02em;">나의 동네, 낯선 동네</div>
     <div style="font-size:13px;line-height:1.6;color:#adadad;">Shootingmythings with 가꾸가<br>성북구 동소문로 186, 2층</div>
+    <div style="padding-top:16px;box-shadow:inset 0 1px 0 #2a2a2a;font-size:11px;letter-spacing:0.04em;color:#8a8a8a;">Designed &amp; Developed by KANG TAEHOON</div>
   </footer>
 
   <button onClick="{{ shOpen }}" aria-label="공유하기" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:max(16px, calc(50vw - 240px + 16px));z-index:45;width:48px;height:48px;border:0;border-radius:9999px;background:#141414;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);" style-active="transform:scale(0.95);">
@@ -500,7 +603,7 @@ input,textarea,button{font-family:inherit;}
   </sc-if>
 </main>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;credits&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;크레딧&quot;,&quot;한 줄&quot;,&quot;카드&quot;],&quot;default&quot;:&quot;크레딧&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { name: '', msg: '', entries: [], copied: false, lb: -1,
     p: { name: '', phone: '', birth: '', job: '', area: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
@@ -512,13 +615,119 @@ class Component extends DCLogic {
   }
   KEY = 'invite-guestbook-v1';
   heroRef = React.createRef();
+  storyRef = React.createRef();
+  teamRef = React.createRef();
+  spRef = React.createRef();
+  invRef = React.createRef();
+  paintInvite() {
+    const st = this.invRef.current; if (!st) return;
+    const r = st.getBoundingClientRect(), vh = this._vh || innerHeight, off = this.off();
+    const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3), io = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const p = cl(-r.top / Math.max(1, r.height - vh)), pin = cl((vh - r.top) / vh);
+    const g = k => st.querySelector(`[data-inv="${k}"]`);
+    const c = eo(cl((pin - 0.3) / 0.6)), o = io(cl((p - 0.03) / 0.2)), col = cl((p - 0.17) / 0.11);
+    const v = eo(cl((p - 0.3) / 0.08)), ti = eo(cl((p - 0.33) / 0.06)), to = cl((p - 0.47) / 0.05), ii = eo(cl((p - 0.52) / 0.08));
+    const ao = cl((p - 0.72) / 0.05), bi = eo(cl((p - 0.77) / 0.08));
+    const card = g('card'), top = g('top'), bot = g('bot'), bw = g('bw'), color = g('color');
+    if (!card) return;
+    card.style.opacity = c;
+    card.style.transform = off ? 'none' : `translateY(${(1 - c) * 40}px)`;
+    top.style.transform = `translateY(${30 * (1 - o) - 2 * o}%)`;
+    bot.style.transform = `translateY(${-41 * (1 - o) + 2 * o}%)`;
+    const sc = off ? 1 : 1.12 - 0.12 * o;
+    bw.style.transform = color.style.transform = `scale(${sc})`;
+    color.style.opacity = col;
+    const veil = g('veil'), info = g('info'), it = g('introI'), ia = g('infoA'), ib = g('infoB');
+    veil.style.opacity = v * 0.86;
+    info.style.opacity = ti;
+    const cta = info.lastElementChild, nat = Math.max(it ? it.offsetHeight : 0, ia ? ia.offsetHeight : 0, ib ? ib.offsetHeight : 0) + 14 + (cta ? cta.offsetHeight : 0);
+    const fs = Math.min(1, info.clientHeight / Math.max(1, nat));
+    info.style.transform = `translateY(${off ? 0 : (1 - ti) * 28}px) scale(${fs})`;
+    info.style.pointerEvents = ti > 0.6 ? 'auto' : 'none';
+    const S = (el, o, y) => { if (!el) return; el.style.opacity = o; el.style.transform = off ? 'none' : `translateY(${y}px)`; };
+    S(it, 1 - to, -to * 24);
+    S(ib, ii * (1 - ao), (1 - ii) * 24 - ao * 24);
+    S(ia, bi, (1 - bi) * 24);
+    const seal = g('seal'); if (seal) seal.style.opacity = 1 - cl(o / 0.15);
+  }
+  paintSponsor() {
+    const st = this.spRef.current; if (!st) return;
+    const r = st.getBoundingClientRect(), vh = this._vh || innerHeight, off = this.off();
+    const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3);
+    const p = cl(-r.top / Math.max(1, r.height - vh)), pin = cl((vh - r.top) / vh);
+    const g = k => st.querySelector(`[data-sp="${k}"]`);
+    const t = eo(cl((pin - 0.55) / 0.45)), m = eo(cl((p - 0.12) / 0.4)), lb = eo(cl((p - 0.05) / 0.2)), b = eo(cl((p - 0.4) / 0.15));
+    const T = (el, o, tr) => { if (!el) return; el.style.opacity = o; el.style.transform = off ? 'none' : tr; };
+    T(g('text'), t, `translateY(${(1 - t) * 28}px)`);
+    T(g('label'), lb, `translateY(${(1 - lb) * 10}px)`);
+    T(g('l'), m, `translateX(${(1 - m) * -90}px)`);
+    T(g('r'), m, `translateX(${(1 - m) * 90}px)`);
+    const bar = g('bar'); if (bar) bar.style.transform = `scaleY(${b})`;
+  }
+  paintTeam() {
+    const st = this.teamRef.current; if (!st) return;
+    const r = st.getBoundingClientRect(), vh = this._vh || innerHeight, off = this.off();
+    const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3), io = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const p = cl(-r.top / Math.max(1, r.height - vh));
+    const q = sel => st.querySelector(sel);
+    const smt = q('[data-team-logo="smt"]'), wth = q('[data-team-logo="with"]'), gd = q('[data-team-logo="gd"]');
+    const pa = q('[data-team-panel="a"]'), pb = q('[data-team-panel="b"]'), la = q('[data-team-plogo="a"]'), ba = q('[data-team-body="a"]'), bb = q('[data-team-body="b"]');
+    if (!smt || !pa) return;
+    const m = eo(cl((p - 0.02) / 0.14)), w = eo(cl((p - 0.12) / 0.07));
+    const fo = cl((p - 0.22) / 0.05), mv = io(cl((p - 0.27) / 0.09));
+    const a = eo(cl((p - 0.35) / 0.07)), sl = io(cl((p - 0.6) / 0.14)), b = eo(cl((p - 0.66) / 0.08));
+    const fit = el => { const lg = el.querySelector('[data-team-plogo]'), bd = el.querySelector('[data-team-body]'); const nat = lg.offsetHeight + bd.offsetHeight + 18 + 94; return Math.min(1, el.clientHeight / nat); };
+    const fa = fit(pa), fb = fit(pb);
+    const cx = pa.clientWidth / 2, cy = pa.clientHeight / 2;
+    const dx = (cx + (la.offsetLeft - cx) * fa) - smt.offsetLeft, dy = (cy + (la.offsetTop + la.offsetHeight / 2 - cy) * fa) - (smt.offsetTop + smt.offsetHeight / 2), sc = la.offsetHeight * fa / smt.offsetHeight;
+    const swap = mv >= 1;
+    smt.style.opacity = swap ? 0 : m;
+    smt.style.transform = `translate(${(1 - m) * -90 + dx * mv}px, ${dy * mv}px) scale(${1 + (sc - 1) * mv})`;
+    wth.style.opacity = w * (1 - fo); wth.style.transform = `scale(${0.7 + 0.3 * w})`;
+    gd.style.opacity = m * (1 - fo); gd.style.transform = `translateX(${(1 - m) * 90}px)`;
+    pa.style.opacity = swap ? 1 : 0;
+    pa.style.transform = `translateX(${-sl * 100}%) scale(${fa})`;
+    ba.style.opacity = a; ba.style.transform = off ? 'none' : `translateY(${(1 - a) * 24}px)`;
+    pb.style.opacity = sl > 0 ? 1 : 0;
+    pb.style.transform = `translateX(${(1 - sl) * 100}%) scale(${fb})`;
+    bb.style.opacity = b; bb.style.transform = off ? 'none' : `translateY(${(1 - b) * 24}px)`;
+  }
+
+  paintStory() {
+    const st = this.storyRef.current; if (!st) return;
+    const N = 9, r = st.getBoundingClientRect(), off = this.off();
+    const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3);
+    const q = Math.min(N - 0.001, cl(-r.top / Math.max(1, r.height - (this._vh || innerHeight))) * N);
+    st.querySelectorAll('[data-story-img]').forEach((el, i) => {
+      el.style.opacity = i === 0 ? 1 : eo(cl((q - i + 0.25) / 0.25));
+      el.style.transform = off ? 'none' : `scale(${1.08 - 0.08 * cl((q - i + 0.25) / 1.25)})`;
+      el.style.filter = `grayscale(${1 - eo(cl((q - i) / 0.6))})`;
+    });
+    st.querySelectorAll('[data-story-text]').forEach((el, i) => {
+      const a = i === 0 ? 1 : eo(cl((q - i) / 0.2)), b = i === N - 1 ? 0 : cl((q - i - 0.8) / 0.2);
+      el.style.opacity = a * (1 - b);
+      el.style.transform = off ? 'none' : `translateY(${(1 - a) * 24 - b * 16}px)`;
+    });
+    const num = st.querySelector('[data-story-num]'), bar = st.querySelector('[data-story-bar]');
+    if (num) num.textContent = String(Math.floor(q) + 1).padStart(2, '0');
+    if (bar) bar.style.transform = `scaleX(${(Math.floor(q) + 1) / N})`;
+  }
+  lockVh() {
+    const w = innerWidth;
+    if (this._vh && this._w === w) return;
+    this._w = w; this._vh = innerHeight;
+    document.documentElement.style.setProperty('--vh', (this._vh / 100) + 'px');
+  }
   componentDidMount() {
+    this.lockVh();
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     try { this.setState({ entries: JSON.parse(localStorage.getItem(this.KEY) || '[]') }); } catch (e) {}
     this.loadParty();
     fetch('/api/guestbook').then(r => r.ok ? r.json() : Promise.reject()).then(d => { if (Array.isArray(d.entries)) { this.api = true; this.setState({ entries: d.entries }); } }).catch(() => {});
     this.onScroll = () => { if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.paintHero(); }); };
     window.addEventListener('scroll', this.onScroll, { passive: true });
-    window.addEventListener('resize', this.onScroll);
+    this.onResize = () => { this.lockVh(); this.onScroll(); };
+    window.addEventListener('resize', this.onResize);
     this.onKey = e => { if (this.state.lb < 0) return; if (e.key === 'Escape') this.setState({ lb: -1 }); if (e.key === 'ArrowRight') this.step(1); if (e.key === 'ArrowLeft') this.step(-1); };
     window.addEventListener('keydown', this.onKey);
     this.setupReveal(); this.paintHero();
@@ -531,12 +740,13 @@ class Component extends DCLogic {
     }
   }
   componentDidUpdate(p) { if (p.motion !== this.props.motion) { this.setupReveal(); this.paintHero(); } }
-  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onScroll); window.removeEventListener('keydown', this.onKey); this.io && this.io.disconnect(); }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); this.io && this.io.disconnect(); }
   off() { return this.props.motion === false || matchMedia('(prefers-reduced-motion: reduce)').matches; }
   paintHero() {
+    this.paintStory(); this.paintTeam(); this.paintSponsor(); this.paintInvite();
     const hero = this.heroRef.current; if (!hero) return;
     const N = 10, r = hero.getBoundingClientRect();
-    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
+    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - (this._vh || innerHeight))));
     const q = this.off() ? N : (p / 0.85) * N;
     const cl = v => Math.min(1, Math.max(0, v)), eo = t => 1 - Math.pow(1 - t, 3);
     const lerp = (a, b, t) => a + (b - a) * t;
@@ -568,7 +778,17 @@ class Component extends DCLogic {
     });
     const nav = document.querySelector('[data-topnav]');
     if (nav) nav.style.transform = r.bottom <= 1 ? 'translate(-50%,0)' : 'translate(-50%,-100%)';
-    const ids = ['intro', 'party', 'visit', 'guestbook'];
+    const sids = ['intro', 'team', 'party', 'visit', 'guestbook'], de = document.documentElement;
+    const tops = sids.map(id => { const el = document.getElementById(id); return el ? el.getBoundingClientRect().top + scrollY - 46 : 0; });
+    const endAll = de.scrollHeight - innerHeight;
+    document.querySelectorAll('[data-navbar]').forEach(el => {
+      const i = +el.dataset.navbar, a = tops[i], b = i < tops.length - 1 ? tops[i + 1] : endAll;
+      const t = Math.min(1, Math.max(0, (scrollY - a) / Math.max(1, b - a)));
+      const done = scrollY >= b - 1 && i < tops.length - 1;
+      el.style.transform = `scaleX(${done ? 1 : t})`;
+      el.style.background = done ? '#d1d1d1' : '#141414';
+    });
+    const ids = ['intro', 'team', 'party', 'visit', 'guestbook'];
     let act = -1;
     ids.forEach((id, i) => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 120) act = i; });
     if (act !== this.state.navActive) this.setState({ navActive: act });
@@ -693,6 +913,13 @@ class Component extends DCLogic {
     });
     return {
       heroRef: this.heroRef,
+      storyRef: this.storyRef,
+      teamRef: this.teamRef,
+      spRef: this.spRef,
+      invRef: this.invRef,
+      cvCredit: (this.props.credits ?? '크레딧') === '크레딧', cvInline: this.props.credits === '한 줄', cvCard: this.props.credits === '카드',
+      peopleA: [['강태훈', ['총괄', '사진', '영상']], ['장인호', ['사진']], ['손근희', ['영상']], ['홍건희', ['기획', '마케팅']]].map(([name, roles], i) => ({ name, roles, roleText: roles.join(' · ') })),
+      peopleB: [['서대원', ['디자인', '매니징']], ['연유빈', ['디자인', '마케팅']], ['염우인', ['디자인', '디렉팅']]].map(([name, roles], i) => ({ name, roles, roleText: roles.join(' · ') })),
       creditsB: [
         { role: '디자인', names: '서대원 연유빈 염우인' },
         { role: '매니징', names: '서대원' },
@@ -704,6 +931,7 @@ class Component extends DCLogic {
         { role: '사진', names: '장인호 강태훈' },
         { role: '영상', names: '손근희 강태훈' },
         { role: '기획', names: '홍건희' },
+        { role: '마케팅', names: '홍건희' },
       ],
       works,
       lbOpen: s.lb >= 0, lb: works[Math.max(0, s.lb)],
@@ -761,11 +989,11 @@ class Component extends DCLogic {
         if (navigator.share) { navigator.share(data).catch(() => {}); return; }
         this.copyText(data.url, ok => this.setState({ shCopied: ok, shMsg: ok ? '링크를 복사했습니다. 원하는 곳에 붙여넣어 주세요.' : '주소창의 링크를 복사해 주세요.' }));
       },
-      navItems: [['intro', '전시소개'], ['party', '네트워킹'], ['visit', '관람안내'], ['guestbook', '방명록']].map(([id, label], i) => {
+      navItems: [['intro', '전시소개'], ['team', '팀소개'], ['party', '네트워킹'], ['visit', '관람안내'], ['guestbook', '방명록']].map(([id, label], i) => {
         const on = s.navActive === i;
         return {
-          label, weight: on ? 700 : 500, color: on ? '#141414' : '#8a8a8a', bar: on ? 1 : 0,
-          go: () => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 46, behavior: 'smooth' }); },
+          label, badge: id === 'party' && Date.now() <= this.P_END && !(s.pCount !== null && s.pCount >= this.P_MAX), weight: on ? 700 : 500, color: on ? '#141414' : '#8a8a8a', bar: on ? 1 : 0,
+          go: () => { const el = document.getElementById(id); if (!el) return; const top = el.getBoundingClientRect().top + window.scrollY; const vh = this._vh || innerHeight; window.scrollTo({ top: id === 'team' ? top + 0.2 * (el.offsetHeight - vh) : top - 46, behavior: 'smooth' }); },
         };
       }),
       copyLabel: s.copied ? '복사됨' : '주소 복사',
