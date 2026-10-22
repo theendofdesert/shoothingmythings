@@ -114,6 +114,14 @@ input,textarea,button{font-family:inherit;}
 </style>
 </helmet>
 <main style="max-width:480px;margin:0 auto;background:#ffffff;min-height:100vh;word-break:break-all;line-break:anywhere;text-align:justify;">
+  <nav data-topnav="" style="position:fixed;top:0;left:50%;transform:translate(-50%,-100%);width:100%;max-width:480px;z-index:40;background:rgba(255,255,255,0.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 -1px 0 #ececec;transition:transform .35s cubic-bezier(.22,1,.36,1);text-align:center;">
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:46px;">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+        <button onClick="{{ n.go }}" style="position:relative;border:0;background:none;padding:0;font-size:13px;font-weight:{{ n.weight }};color:{{ n.color }};cursor:pointer;word-break:keep-all;">{{ n.label }}<span style="position:absolute;left:50%;bottom:0;width:20px;height:2px;margin-left:-10px;border-radius:2px;background:#141414;opacity:{{ n.bar }};transition:opacity .25s;"></span></button>
+      </sc-for>
+    </div>
+  </nav>
+
 
   <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:520vh;background:#ffffff;">
     <div style="position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
@@ -144,7 +152,7 @@ input,textarea,button{font-family:inherit;}
     </div>
   </section>
 
-  <section data-screen-label="02 소개말" style="padding:80px 24px;background:#ffffff;">
+  <section id="intro" data-screen-label="02 소개말" style="padding:80px 24px;background:#ffffff;">
     <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;">
       
       
@@ -202,65 +210,19 @@ input,textarea,button{font-family:inherit;}
     </div>
   </section>
 
-  <section data-screen-label="04 관람 안내" style="padding:80px 24px;background:#f3f3f3;">
-    <div data-reveal="" style="display:flex;flex-direction:column;gap:32px;">
+  <section id="party" data-screen-label="03-1 네트워킹 파티" style="margin:8px 8px 40px;padding:0 0 40px;border-radius:28px;overflow:hidden;background:#f3f3f3;">
+    <img src="assets/party.jpg" alt="나의동네, 낯선동네 네트워킹 세션 2026.11.07 19:00" style="display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;padding:40px 16px 0;">
       <div style="display:flex;flex-direction:column;gap:8px;">
         
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">관람 안내</h2>
-      </div>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:16px;font-weight:600;">운영시간</div>
-        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
-          <span style="color:#707070;">전시기간</span><span>2026.11.01. – 11.08.</span>
-          <span style="color:#707070;">평일</span><span>08:00 – 20:00</span>
-          <span style="color:#707070;">주말</span><span>08:00 – 21:00</span>
-          <span style="color:#707070;">무인운영</span><span>08:00 ~ 12:00, 19:00 ~ 20:00</span>
-          <span style="color:#707070;">관람료</span><span>[무료]</span>
-        </div>
-      </div>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:16px;font-weight:600;">유의사항</div>
-        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
-          <li>– 작품 보호를 위해 손을 대지 말아 주세요.</li>
-          <li>– 사진전 내에서는 정해진 구역 외 사진 촬영이 불가합니다.</li>
-          <li>– 음식물 반입은 제한됩니다.</li><li>– 장소가 협소하여 화환 및 꽃 선물은 정중히 사양합니다.</li>
-        </ul>
-      </div>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:16px;font-weight:600;">오시는 길</div>
-        <div style="display:flex;flex-direction:column;gap:4px;">
-          <span style="font-size: 18px; font-weight: 400">성북구 동소문로 186, 2층</span>
-        </div>
-        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
-          <li>- 전시장 방문 시 전시장 인근에 배치된 배너 및 아래 사항을 참고해주시면 감사하겠습니다.</li>
-          <li>- 진입로 1 : 대로변 기준, 퍼센트 카페 좌측 입구로 들어오셔서 계단을 1층 올라오시면 됩니다.</li>
-          <li>- 진입로 2 : 하이오 커피 우측 교회 입구로 들어오셔서 계단을 1층 내려오시면 됩니다.</li>
-        </ul>
-        <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#f0f0f0;">
-          <iframe src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186&amp;z=17&amp;hl=ko&amp;output=embed" title="전시장 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
-          <a href="https://map.naver.com/p/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#141414;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">네이버 지도</a>
-          <a href="https://map.kakao.com/link/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#ffffff;box-shadow:inset 0 0 0 1px #e0e0e0;color:#141414;font-size:14px;font-weight:600;text-decoration:none;">카카오맵</a>
-          <button onClick="{{ copyAddr }}" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;border:0;background:#f3f3f3;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ copyLabel }}</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="party" data-screen-label="04-1 네트워킹 파티" style="padding:0 0 80px;background:#efede8 url(assets/layers/01-bg.webp) center/cover;">
-    <img src="assets/party.jpg" alt="나의동네, 낯선동네 네트워킹 세션 2026.11.07 19:00" style="display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;">
-    <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;padding:40px 24px 0;">
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:12px;font-weight:600;color:#707070;">네트워킹 파티</div>
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">성북에서 만나는 이웃들</h2>
+        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;text-align:left;">네트워킹 세션 안내<br></h2>
       </div>
       <p style="margin:0;font-size:15px;font-weight:300;line-height:1.7;color:#262626;">성북으로 새롭게 이사 온 분들을 초대합니다. 아직은 낯선 이 동네에서, 먼저 자리 잡은 이웃들이 아껴 둔 장소와 이야기를 나누며 서로를 알아가는 네트워킹 세션을 준비했습니다. 낯선 동네가 나의 동네가 되는 첫걸음을 함께해 주세요.</p>
       <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
         <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
           <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 21:00</span>
           <span style="color:#707070;">장소</span><span>전시장 (성북구 동소문로 186, 2층)</span>
-          <span style="color:#707070;">대상</span><span>성북구에 거주한지 5년 미만인 성북구민</span>
+          <span style="color:#707070;">대상</span><span>성북구에 거주중이거나 관심이 있는 2·30대 청년</span>
           <span style="color:#707070;">정원</span><span>선착순 30명</span>
           <span style="color:#707070;">보증금</span><span>10,000원 (참석 확인 후 전액 환불)</span>
           <span style="color:#707070;">신청 마감</span><span>11.05. (목) 23:59 · 입금 기준 선착순</span>
@@ -404,10 +366,56 @@ input,textarea,button{font-family:inherit;}
     </sc-if>
   </section>
 
-  <section data-screen-label="05 방명록" style="padding:80px 24px;background:#ffffff;box-shadow:inset 0 1px 0 #e0e0e0;">
+  <section id="visit" data-screen-label="04 관람 안내" style="margin:8px;padding:32px 16px 72px;border-radius:28px;background:#f3f3f3;">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        
+        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">관람 안내</h2>
+      </div>
+      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:16px;font-weight:600;">운영시간</div>
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
+          <span style="color:#707070;">전시기간</span><span>2026.11.01. – 11.08.</span>
+          <span style="color:#707070;">평일</span><span>08:00 – 20:00</span>
+          <span style="color:#707070;">주말</span><span>08:00 – 21:00</span>
+          <span style="color:#707070;">무인운영</span><span>08:00 ~ 12:00, 19:00 ~ 20:00</span>
+          <span style="color:#707070;">관람료</span><span>[무료]</span>
+        </div>
+      </div>
+      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:16px;font-weight:600;">유의사항</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
+          <li>– 작품 보호를 위해 손을 대지 말아 주세요.</li>
+          <li>– 사진전 내에서는 정해진 구역 외 사진 촬영이 불가합니다.</li>
+          <li>– 음식물 반입은 제한됩니다.</li><li>– 장소가 협소하여 화환 및 꽃 선물은 정중히 사양합니다.</li>
+        </ul>
+      </div>
+      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:16px;font-weight:600;">오시는 길</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <span style="font-size: 18px; font-weight: 400">성북구 동소문로 186, 2층</span>
+        </div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
+          <li>- 전시장 방문 시 전시장 인근에 배치된 배너 및 아래 사항을 참고해주시면 감사하겠습니다.</li>
+          <li>- 진입로 1 : 대로변 기준, 퍼센트 카페 좌측 입구로 들어오셔서 계단을 1층 올라오시면 됩니다.</li>
+          <li>- 진입로 2 : 하이오 커피 우측 교회 입구로 들어오셔서 계단을 1층 내려오시면 됩니다.</li>
+        </ul>
+        <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#f0f0f0;">
+          <iframe src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186&amp;z=17&amp;hl=ko&amp;output=embed" title="전시장 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
+          <a href="https://map.naver.com/p/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#141414;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">네이버 지도</a>
+          <a href="https://map.kakao.com/link/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#ffffff;box-shadow:inset 0 0 0 1px #e0e0e0;color:#141414;font-size:14px;font-weight:600;text-decoration:none;">카카오맵</a>
+          <button onClick="{{ copyAddr }}" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;border:0;background:#f3f3f3;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ copyLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guestbook" data-screen-label="05 방명록" style="padding:72px 24px 80px;background:#ffffff;">
     <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:12px;font-weight:600;color:#707070;">방명록</div>
+        
         <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">축하의 한마디를 남겨 주세요</h2>
       </div>
       <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:8px;">
@@ -435,6 +443,41 @@ input,textarea,button{font-family:inherit;}
     <div style="font-size:24px;font-weight:650;letter-spacing:-0.02em;">나의 동네, 낯선 동네</div>
     <div style="font-size:13px;line-height:1.6;color:#adadad;">Shootingmythings with 가꾸가<br>성북구 동소문로 186, 2층</div>
   </footer>
+
+  <button onClick="{{ shOpen }}" aria-label="공유하기" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:max(16px, calc(50vw - 240px + 16px));z-index:45;width:48px;height:48px;border:0;border-radius:9999px;background:#141414;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);" style-active="transform:scale(0.95);">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M7 8l5-5 5 5"></path><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"></path></svg>
+  </button>
+
+  <sc-if value="{{ shVisible }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ shClose }}" style="position:fixed;inset:0;z-index:55;background:rgba(10,10,10,0.45);display:flex;align-items:flex-end;justify-content:center;">
+      <div onClick="{{ stop }}" style="width:100%;max-width:480px;background:#ffffff;border-radius:24px 24px 0 0;padding:12px 20px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;justify-content:center;"><span style="width:36px;height:4px;border-radius:9999px;background:#e0e0e0;"></span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <span style="font-size:16px;font-weight:650;">초청장 공유</span>
+          <button onClick="{{ shClose }}" aria-label="닫기" style="width:40px;height:40px;border:0;border-radius:9999px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+          </button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;">
+          <button onClick="{{ shDownload }}" style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 12px;border:0;border-radius:20px;background:#f3f3f3;color:#141414;cursor:pointer;">
+            <span style="width:44px;height:44px;border-radius:9999px;background:#ffffff;display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M5 20h14"></path></svg>
+            </span>
+            <span style="font-size:14px;font-weight:600;">포스터 저장</span>
+          </button>
+          <button onClick="{{ shShare }}" style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 12px;border:0;border-radius:20px;background:#f3f3f3;color:#141414;cursor:pointer;">
+            <span style="width:44px;height:44px;border-radius:9999px;background:#ffffff;display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"></path></svg>
+            </span>
+            <span style="font-size:14px;font-weight:600;">{{ shShareLabel }}</span>
+          </button>
+        </div>
+        <sc-if value="{{ shMsg }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:13px;line-height:1.5;color:#707070;text-align:center;">{{ shMsg }}</div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
 
   <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:50;background:rgba(10,10,10,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;">
@@ -522,6 +565,12 @@ class Component extends DCLogic {
       el.style.opacity = t;
       el.style.transform = k > 3 ? `translateY(${(1 - t) * 12}px)` : `scale(${1 + (1 - t) * 0.03})`;
     });
+    const nav = document.querySelector('[data-topnav]');
+    if (nav) nav.style.transform = r.bottom <= 1 ? 'translate(-50%,0)' : 'translate(-50%,-100%)';
+    const ids = ['intro', 'party', 'visit', 'guestbook'];
+    let act = -1;
+    ids.forEach((id, i) => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 120) act = i; });
+    if (act !== this.state.navActive) this.setState({ navActive: act });
     const hint = hero.querySelector('[data-hint]');
     if (hint) hint.style.opacity = Math.max(0, 1 - q * 2);
   }
@@ -653,7 +702,7 @@ class Component extends DCLogic {
         { role: '총괄', names: '강태훈' },
         { role: '사진', names: '장인호 강태훈' },
         { role: '영상', names: '손근희 강태훈' },
-        { role: '기획 ·\n마케팅', names: '홍건희' },
+        { role: '기획', names: '홍건희' },
       ],
       works,
       lbOpen: s.lb >= 0, lb: works[Math.max(0, s.lb)],
@@ -684,6 +733,40 @@ class Component extends DCLogic {
         this.setState({ entries, name: '', msg: '' });
       },
       ...this.partyVals(s),
+      shVisible: !!s.shOpen,
+      shOpen: () => this.setState({ shOpen: true, shMsg: '', shCopied: false }),
+      shClose: () => this.setState({ shOpen: false }),
+      stop: e => e.stopPropagation(),
+      shMsg: s.shMsg || '',
+      shShareLabel: s.shCopied ? '링크 복사됨' : '공유하기',
+      shDownload: () => {
+        const url = 'assets/poster.jpg';
+        const inApp = /KAKAOTALK|Instagram|FBAN|FBAV|Line\//i.test(navigator.userAgent);
+        if (inApp) { window.open(url, '_blank'); this.setState({ shMsg: '열린 이미지를 길게 눌러 저장해 주세요.' }); return; }
+        fetch(url).then(r => r.blob()).then(b => {
+          const f = new File([b], '나의동네_낯선동네_포스터.jpg', { type: 'image/jpeg' });
+          if (/iPhone|iPad|Android/i.test(navigator.userAgent) && navigator.canShare && navigator.canShare({ files: [f] })) {
+            return navigator.share({ files: [f] }).catch(() => {});
+          }
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(b); a.download = f.name;
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+          this.setState({ shMsg: '포스터를 저장했습니다.' });
+        }).catch(() => { window.open(url, '_blank'); this.setState({ shMsg: '열린 이미지를 길게 눌러 저장해 주세요.' }); });
+      },
+      shShare: () => {
+        const data = { title: '「나의 동네, 낯선 동네」성북도시문화사진전', text: '11/1 ~ 11/8 - 성북구 동소문로 186, 2층', url: 'https://www.shootingmythings.studio/' };
+        if (navigator.share) { navigator.share(data).catch(() => {}); return; }
+        this.copyText(data.url, ok => this.setState({ shCopied: ok, shMsg: ok ? '링크를 복사했습니다. 원하는 곳에 붙여넣어 주세요.' : '주소창의 링크를 복사해 주세요.' }));
+      },
+      navItems: [['intro', '전시소개'], ['party', '네트워킹'], ['visit', '관람안내'], ['guestbook', '방명록']].map(([id, label], i) => {
+        const on = s.navActive === i;
+        return {
+          label, weight: on ? 700 : 500, color: on ? '#141414' : '#8a8a8a', bar: on ? 1 : 0,
+          go: () => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 46, behavior: 'smooth' }); },
+        };
+      }),
       copyLabel: s.copied ? '복사됨' : '주소 복사',
       copyAddr: () => { this.copyText('서울 성북구 동소문로 186, 2층', () => {}); this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1600); },
     };
