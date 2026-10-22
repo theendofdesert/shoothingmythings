@@ -26,4 +26,4 @@
 - 장소가 협소하여 화환 및 꽃 선물은 사양한다.
 
 ## 링크
-- 초청장: https://shoothingmythings.vercel.app/
+- 초청장: https://www.shootingmythings.studio/

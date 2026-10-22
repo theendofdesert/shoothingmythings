@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://shoothingmythings.vercel.app/</loc>
+    <loc>https://www.shootingmythings.studio/</loc>
     <lastmod>2026-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <image:image><image:loc>https://shoothingmythings.vercel.app/og.jpg</image:loc><image:title>「나의 동네, 낯선 동네」성북도시문화사진전 포스터</image:title></image:image>
+    <image:image><image:loc>https://www.shootingmythings.studio/og.jpg</image:loc><image:title>「나의 동네, 낯선 동네」성북도시문화사진전 포스터</image:title></image:image>
   </url>
 </urlset>

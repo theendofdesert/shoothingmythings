@@ -26,4 +26,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://shoothingmythings.vercel.app/sitemap.xml
+Sitemap: https://www.shootingmythings.studio/sitemap.xml
