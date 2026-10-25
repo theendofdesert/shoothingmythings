@@ -91,6 +91,7 @@ module.exports = async (req, res) => {
         area: clean(b.area, 40), bank: clean(b.bank, 20), acct: clean(b.acct, 20).replace(/\D/g, ''), holder: clean(b.holder, 20), payer: clean(b.payer, 20),
       };
       const missing = Object.keys(row).filter(k => !row[k]);
+      row.interest = clean(b.interest, 40); row.mbti = clean(b.mbti, 4).toUpperCase();
       if (!b.agree || missing.length) return res.status(400).json({ error: 'invalid', missing });
       const d = await callScript({ action: 'apply', max: MAX, row });
       if (d.ok) return res.status(200).json({ ok: true, count: d.count });

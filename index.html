@@ -124,15 +124,10 @@ input,textarea,button{font-family:inherit;}
     </div>
   </nav>
 
-  <div data-scrollcue="" style="position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:480px;z-index:39;pointer-events:none;opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s ease;">
-    <div style="padding:11px 24px calc(13px + env(safe-area-inset-bottom));background:rgba(20,20,20,0.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <div style="width:100%;height:2px;background:rgba(255,255,255,0.22);"><div data-cuebar="" style="height:100%;width:0%;background:#ffffff;"></div></div>
-      <div style="display:flex;align-items:center;gap:8px;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;">
-        <span>계속 내려보세요</span>
-        <svg data-cuechev="" width="14" height="9" viewBox="0 0 20 12" fill="none" style="display:block;"><path d="M2 2l8 8 8-8" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-  </div>
+  <button data-scrollcue="" onClick="{{ cueDown }}" aria-label="아래로 계속 보기" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:max(70px, calc(50vw - 240px + 70px));z-index:45;height:44px;padding:0 16px 0 18px;border:0;border-radius:9999px;background:#141414;color:#ffffff;display:flex;align-items:center;gap:8px;font:inherit;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s ease,transform .35s cubic-bezier(.22,1,.36,1);" style-active="scale:0.96;">
+    <span>계속 내려보세요</span>
+    <svg data-cuechev="" width="14" height="9" viewBox="0 0 20 12" fill="none" style="display:block;"><path d="M2 2l8 8 8-8" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </button>
 
   <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 520);background:#ffffff;">
     <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;">
@@ -389,8 +384,8 @@ input,textarea,button{font-family:inherit;}
             <div style="display:flex;flex-direction:column;gap:16px;">
               <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">개인정보 수집·이용 동의</h3>
               <div style="display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.6;color:#262626;">
-                <span><b style="font-weight:600;">수집 항목</b> · 이름, 연락처, 생년월일, 직업, 거주지, 입금자명, 환불 계좌</span>
-                <span><b style="font-weight:600;">이용 목적</b> · 네트워킹 파티 참가 확인, 안내 연락, 보증금 환불</span>
+                <span><b style="font-weight:600;">수집 항목</b> · 이름, 연락처, 생년월일, 직업, 거주지, 관심사·MBTI(선택), 입금자명, 환불 계좌</span>
+                <span><b style="font-weight:600;">이용 목적</b> · 네트워킹 파티 참가 확인, 안내 연락, 보증금 환불, 네트워킹 진행 참고</span>
                 <span><b style="font-weight:600;">보유 기간</b> · 보증금 환불 완료 후 즉시 파기</span>
                 <span style="color:#707070;">동의를 거부할 수 있으며, 거부 시 참가 신청이 제한됩니다.</span>
               </div>
@@ -412,6 +407,11 @@ input,textarea,button{font-family:inherit;}
                   <input value="{{ p.job }}" onChange="{{ pOn.job }}" maxlength="30" placeholder="직업" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
                 </div>
                 <input value="{{ p.area }}" onChange="{{ pOn.area }}" maxlength="40" placeholder="거주지 (예: 성북구 돈암동)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;">
+                <p style="margin:6px 2px 0;font-size:12px;line-height:1.5;color:#707070;word-break:keep-all;">아래는 원활한 네트워킹 진행을 위한 추가 수집 정보입니다. (선택)</p>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <input value="{{ p.interest }}" onChange="{{ pOn.interest }}" maxlength="40" placeholder="관심사" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
+                  <input value="{{ p.mbti }}" onChange="{{ pOn.mbti }}" maxlength="4" placeholder="MBTI" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;text-transform:uppercase;">
+                </div>
               </div>
             </div>
           </sc-if>
@@ -557,8 +557,8 @@ input,textarea,button{font-family:inherit;}
     <div style="padding-top:16px;box-shadow:inset 0 1px 0 #2a2a2a;font-size:11px;letter-spacing:0.04em;color:#8a8a8a;">Designed &amp; Developed by KANG TAEHOON</div>
   </footer>
 
-  <button onClick="{{ shOpen }}" aria-label="공유하기" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:max(16px, calc(50vw - 240px + 16px));z-index:45;width:48px;height:48px;border:0;border-radius:9999px;background:#141414;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);" style-active="transform:scale(0.95);">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M7 8l5-5 5 5"></path><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"></path></svg>
+  <button onClick="{{ shOpen }}" aria-label="공유하기" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:max(16px, calc(50vw - 240px + 16px));z-index:45;width:44px;height:44px;border:0;border-radius:9999px;background:#141414;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);" style-active="transform:scale(0.95);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M7 8l5-5 5 5"></path><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"></path></svg>
   </button>
 
   <sc-if value="{{ shVisible }}" hint-placeholder-val="{{ false }}">
@@ -615,7 +615,7 @@ input,textarea,button{font-family:inherit;}
 <script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;credits&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;크레딧&quot;,&quot;한 줄&quot;,&quot;카드&quot;],&quot;default&quot;:&quot;크레딧&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { name: '', msg: '', entries: [], copied: false, lb: -1,
-    p: { name: '', phone: '', birth: '', job: '', area: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
+    p: { name: '', phone: '', birth: '', job: '', area: '', interest: '', mbti: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
     pCount: null, pStatus: 'idle', pErr: '', pPayer: '', pCopied: false, pSheet: false };
   setSheet(v) { this.setState({ pSheet: v }); document.body.style.overflow = v ? 'hidden' : ''; }
   P_SHOW = 30; P_MAX = 35; P_END = Date.parse('2026-11-05T23:59:59+09:00');
@@ -792,14 +792,10 @@ class Component extends DCLogic {
     const cue = document.querySelector('[data-scrollcue]'), visit = document.getElementById('visit');
     if (cue) {
       const vt = visit ? visit.getBoundingClientRect().top : Infinity;
-      const show = r.bottom <= 1 && vt > innerHeight * 0.8;
-      cue.style.transform = show ? 'translate(-50%,0)' : 'translate(-50%,100%)';
+      const show = q >= 0.5 && vt > innerHeight * 0.8;
       cue.style.opacity = show ? '1' : '0';
-      const cbar = cue.querySelector('[data-cuebar]');
-      if (cbar && visit) {
-        const goal = Math.max(1, vt + scrollY - 46);
-        cbar.style.width = Math.min(100, Math.max(0, (scrollY / goal) * 100)).toFixed(2) + '%';
-      }
+      cue.style.transform = show ? 'translateY(0)' : 'translateY(10px)';
+      cue.style.pointerEvents = show ? 'auto' : 'none';
     }
     const sids = ['intro', 'team', 'party', 'visit', 'guestbook'], de = document.documentElement;
     const tops = sids.map(id => { const el = document.getElementById(id); return el ? el.getBoundingClientRect().top + scrollY - 46 : 0; });
@@ -864,7 +860,7 @@ class Component extends DCLogic {
       return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`;
     };
     const set2 = k => e => { const v = (k === 'agree' || k === 'paid') ? e.target.checked : k === 'phone' ? fmtPhone(e.target.value) : k === 'birth' ? e.target.value.replace(/\D/g, '').slice(0, 8) : k === 'acct' ? e.target.value.replace(/\D/g, '').slice(0, 20) : e.target.value; this.setState(st => ({ p: { ...st.p, [k]: v }, pErr: '' })); };
-    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
+    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'interest', 'mbti', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
     const validBirth = b => {
       if (!/^\d{8}$/.test(b)) return false;
       const y = +b.slice(0, 4), m = +b.slice(4, 6), d = +b.slice(6, 8);
@@ -916,7 +912,7 @@ class Component extends DCLogic {
         if (s.pStatus === 'sending') return;
         for (let i = 1; i <= 4; i++) { const er = okStep[i](); if (er) { self.setState({ pStep: i, pErr: er }); return; } }
         self.setState({ pStatus: 'sending', pErr: '' });
-        const body = { ...p, payer: p.payer.trim() };
+        const body = { ...p, payer: p.payer.trim(), interest: p.interest.trim(), mbti: p.mbti.trim().toUpperCase() };
         let r0 = 'network';
         fetch('/api/party', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
           .then(r => { r0 = r.status; return r.json().then(d => ({ ok: r.ok, d }), () => ({ ok: false, d: {} })); })
@@ -988,6 +984,17 @@ class Component extends DCLogic {
       shVisible: !!s.shOpen,
       shOpen: () => this.setState({ shOpen: true, shMsg: '', shCopied: false }),
       shClose: () => this.setState({ shOpen: false }),
+      cueDown: () => {
+        const vh = this._vh || innerHeight, A = [], y0 = scrollY;
+        const add = (ref, ps, first) => { const el = ref.current; if (!el) return; const t = el.getBoundingClientRect().top + scrollY, len = Math.max(1, el.offsetHeight - vh); ps.forEach(p => A.push(t + p * len)); };
+        add(this.storyRef, [0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => i === 0 ? 0 : (i + 0.35) / 9));
+        add(this.teamRef, [0.2, 0.45, 0.78]);
+        add(this.spRef, [0.6]);
+        add(this.invRef, [0.42, 0.62, 0.88]);
+        const v = document.getElementById('visit'); if (v) A.push(v.getBoundingClientRect().top + scrollY - 46);
+        const next = A.sort((a, b) => a - b).find(y => y > y0 + 40);
+        if (next != null) window.scrollTo({ top: next, behavior: this.off() ? 'auto' : 'smooth' });
+      },
       stop: e => e.stopPropagation(),
       shMsg: s.shMsg || '',
       shShareLabel: s.shCopied ? '링크 복사됨' : '공유하기',
