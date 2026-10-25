@@ -478,6 +478,20 @@ input,textarea,button{font-family:inherit;}
     </sc-if>
   </section>
 
+  <section id="preview" data-screen-label="03-2 미리 만나보기" style="padding:72px 16px 64px;background:#ffffff;">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:8px;padding:0 8px 28px;">
+      <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">미리 만나보기</h2>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#707070;word-break:keep-all;">전시에서 만나보실 수 있는 작품들을 미리 확인해보실 수 있습니다. 전시장에는 약 150점 이상의 사진과 영상, 그리고 소소평상 작품을 만나보실 수 있습니다.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
+      <sc-for list="{{ works }}" as="w" hint-placeholder-count="15">
+        <button onClick="{{ w.open }}" data-reveal="" data-delay="{{ w.delay }}" aria-label="{{ w.title }} 크게 보기" style="position:relative;display:block;padding:0;border:0;border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:#f0f0f0;cursor:pointer;-webkit-tap-highlight-color:transparent;" style-active="transform:scale(0.96);">
+          <img src="{{ w.src }}" alt="{{ w.title }}" loading="lazy" decoding="async" draggable="false" onContextMenu="{{ noCtx }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;">
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
   <section id="visit" data-screen-label="04 관람 안내" style="margin:8px;padding:32px 16px 72px;border-radius:28px;background:#f3f3f3;">
     <div data-reveal="" style="display:flex;flex-direction:column;gap:32px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
@@ -599,12 +613,13 @@ input,textarea,button{font-family:inherit;}
       </button>
       <div style="position:relative;width:100%;max-width:440px;height:min(70vh, 550px);border-radius:12px;overflow:hidden;background:#262626;display:flex;align-items:center;justify-content:center;">
         <span style="font-size:14px;font-weight:600;color:#707070;">{{ lb.num }}</span>
-        <sc-if value="{{ lb.ok }}" hint-placeholder-val="{{ false }}"><img src="{{ lb.full }}" alt="{{ lb.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></sc-if>
+        <sc-if value="{{ lb.ok }}" hint-placeholder-val="{{ false }}"><img src="{{ lb.full }}" alt="{{ lb.title }}" draggable="false" onContextMenu="{{ noCtx }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none;user-select:none;"></sc-if>
+        <div aria-hidden="true" onContextMenu="{{ noCtx }}" style="position:absolute;inset:0;overflow:hidden;z-index:2;"><div style="position:absolute;left:-40%;top:-40%;width:180%;height:180%;transform:rotate(-28deg);background-image:url(assets/wm-smt.png);background-size:170px 85px;background-repeat:repeat;pointer-events:none;"></div></div>
       </div>
       <div style="width:100%;max-width:440px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#ffffff;">
         <button onClick="{{ prev }}" aria-label="이전" style="width:44px;height:44px;border:0;border-radius:9999px;background:#262626;color:#ffffff;font-size:18px;cursor:pointer;">‹</button>
         <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-          <span style="font-size:12px;color:#adadad;">{{ lb.num }} / 09</span>
+          <span style="font-size:12px;color:#adadad;">{{ lb.num }} / {{ total }}</span>
         </div>
         <button onClick="{{ next }}" aria-label="다음" style="width:44px;height:44px;border:0;border-radius:9999px;background:#262626;color:#ffffff;font-size:18px;cursor:pointer;">›</button>
       </div>
@@ -744,10 +759,10 @@ class Component extends DCLogic {
     const cchev = document.querySelector('[data-cuechev]');
     if (cchev && !this.off()) cchev.animate([{ transform: 'translateY(-1px)' }, { transform: 'translateY(3px)' }], { duration: 900, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
     if (chev && !this.off()) chev.animate([{ transform: 'translateY(-2px)' }, { transform: 'translateY(5px)' }], { duration: 900, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 1; i <= this.TOTAL; i++) {
       const n = String(i).padStart(2, '0'), im = new Image();
       im.onload = () => this.setState(s => ({ loaded: { ...(s.loaded || {}), [n]: true } }));
-      im.src = `assets/works/${n}-t.webp`;
+      im.src = `assets/works/${n}-t.${i <= 9 ? 'webp' : 'png'}`;
     }
   }
   componentDidUpdate(p) { if (p.motion !== this.props.motion) { this.setupReveal(); this.paintHero(); } }
@@ -822,13 +837,15 @@ class Component extends DCLogic {
     this.io = new IntersectionObserver(list => list.forEach(en => {
       if (!en.isIntersecting) return;
       const el = en.target;
-      el.style.transition = `opacity .9s ${ease}, transform .9s ${ease}`;
+      const dl = +el.dataset.delay || 0;
+      el.style.transition = `opacity .9s ${ease} ${dl}ms, transform .9s ${ease} ${dl}ms`;
       el.style.opacity = '1'; el.style.transform = 'none';
       this.io.unobserve(el);
     }), { threshold: 0.12 });
     els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; this.io.observe(el); });
   }
-  step(d) { this.setState(s => ({ lb: (s.lb + d + 9) % 9 })); }
+  TOTAL = 15;
+  step(d) { const n = this.TOTAL; this.setState(s => ({ lb: (s.lb + d + n) % n })); }
   copyText(text, done) {
     const fallback = () => {
       const ta = document.createElement('textarea');
@@ -926,9 +943,9 @@ class Component extends DCLogic {
   }
   renderVals() {
     const s = this.state;
-    const works = Array.from({ length: 9 }, (_, i) => {
-      const num = String(i + 1).padStart(2, '0');
-      return { num, ok: !!(s.loaded || {})[num], src: `assets/works/${num}-t.webp`, full: `assets/works/${num}.webp`, title: `대표 작품 ${num}`, open: () => this.setState({ lb: i }) };
+    const works = Array.from({ length: this.TOTAL }, (_, i) => {
+      const num = String(i + 1).padStart(2, '0'), ext = i < 9 ? 'webp' : 'png';
+      return { num, ok: !!(s.loaded || {})[num], src: `assets/works/${num}-t.${ext}`, full: `assets/works/${num}.${ext}`, title: `작품 ${num}`, delay: (i % 3) * 90, open: () => this.setState({ lb: i }) };
     });
     return {
       heroRef: this.heroRef,
@@ -953,7 +970,7 @@ class Component extends DCLogic {
         { role: '마케팅', names: '홍건희' },
       ],
       works,
-      lbOpen: s.lb >= 0, lb: works[Math.max(0, s.lb)],
+      total: this.TOTAL, noCtx: e => e.preventDefault(), lbOpen: s.lb >= 0, lb: works[Math.max(0, s.lb)],
       close: () => this.setState({ lb: -1 }),
       prev: e => { e.stopPropagation(); this.step(-1); },
       next: e => { e.stopPropagation(); this.step(1); },
@@ -991,6 +1008,7 @@ class Component extends DCLogic {
         add(this.teamRef, [0.2, 0.45, 0.78]);
         add(this.spRef, [0.6]);
         add(this.invRef, [0.42, 0.62, 0.88]);
+        const pv = document.getElementById('preview'); if (pv) A.push(pv.getBoundingClientRect().top + scrollY - 46);
         const v = document.getElementById('visit'); if (v) A.push(v.getBoundingClientRect().top + scrollY - 46);
         const next = A.sort((a, b) => a - b).find(y => y > y0 + 40);
         if (next != null) window.scrollTo({ top: next, behavior: this.off() ? 'auto' : 'smooth' });
