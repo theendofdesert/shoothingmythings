@@ -124,6 +124,15 @@ input,textarea,button{font-family:inherit;}
     </div>
   </nav>
 
+  <div data-scrollcue="" style="position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:480px;z-index:39;pointer-events:none;opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s ease;">
+    <div style="padding:11px 24px calc(13px + env(safe-area-inset-bottom));background:rgba(20,20,20,0.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:100%;height:2px;background:rgba(255,255,255,0.22);"><div data-cuebar="" style="height:100%;width:0%;background:#ffffff;"></div></div>
+      <div style="display:flex;align-items:center;gap:8px;color:#ffffff;font-size:12px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;">
+        <span>계속 내려보세요</span>
+        <svg data-cuechev="" width="14" height="9" viewBox="0 0 20 12" fill="none" style="display:block;"><path d="M2 2l8 8 8-8" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+  </div>
 
   <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 520);background:#ffffff;">
     <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;">
@@ -198,8 +207,8 @@ input,textarea,button{font-family:inherit;}
         <img data-team-plogo="a" src="assets/team/logo-smt.png" alt="Shootingmythings" style="height:22px;width:auto;align-self:flex-start;">
         <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">Shootingmythings</h2>
         <div data-team-body="a" style="display:flex;flex-direction:column;gap:18px;">
-        <div style="margin:0;font-size:14px;font-weight:300;line-height:1.65;color:#262626;"><div>일상 속 소중한 순간을 사진과 영상, 그리고 글로 담아내는 크리에이티브 미디어팀입니다. 익숙함에 가려 무심코 지나쳤던 풍경과 순간들에 시선을 머무르며, 그 안에 담긴 이야기와 감정을 기록합니다. 특별한 장면을 찾아 나서기보다 평범한 일상 속에서 저마다의 아름다움을 발견하고, 이를 다양한 시각적 언어로 표현하고자 합니다.</div><div><br></div><div>건축을 공부한 사진작가와 건축가, 카페를 운영하는 사진작가, 그리고 영상 PD. 서로 다른 배경과 시선으로 담아낸 우리의 기록이 누군가에게는 새로운 발견이 되고, 또 다른 누군가에게는 오래도록 간직하고 싶은 기억으로 남기를 바랍니다.</div></div>
-          <p style="margin:0;font-size:15px;font-weight:700;line-height:1.6;color:#141414;word-break:keep-all;">이번 전시에서는 약 150점의 사진과 5편의 영상을 선보입니다.</p>
+        <div style="margin:0;font-size:14px;font-weight:300;line-height:1.65;color:#262626;"><div>일상 속 소중한 순간을 사진과 영상, 그리고 글로 담아내는 크리에이티브 미디어팀입니다. 익숙함에 가려 쉽게 지나치는 풍경과 사소한 순간들에 시선을 머무르며, 그 안에 담긴 이야기와 감정을 기록합니다. 특별한 장면을 찾아 나서기보다 평범한 일상에서 저마다의 아름다움을 발견하고, 이를 다양한 시각적 언어로 표현하고자 합니다.</div><div><br></div><div>우리가 남긴 기록이 누군가에게는 새로운 발견이 되고, 또 다른 누군가에게는 오래도록 간직하고 싶은 기억으로 남기를 바랍니다.</div></div>
+        <p style="margin:0;font-size:15px;font-weight:700;line-height:1.6;color:#141414;word-break:keep-all;">이번 전시에서는 약 150점의 사진과 5편의 영상을 선보입니다.</p>
         <sc-if value="{{ cvCredit }}" hint-placeholder-val="{{ true }}">
           <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px;padding-top:16px;box-shadow:inset 0 1px 0 #e4e4e4;">
             <sc-for list="{{ creditsA }}" as="c" hint-placeholder-count="2">
@@ -732,6 +741,8 @@ class Component extends DCLogic {
     window.addEventListener('keydown', this.onKey);
     this.setupReveal(); this.paintHero();
     const chev = document.querySelector('[data-chev]');
+    const cchev = document.querySelector('[data-cuechev]');
+    if (cchev && !this.off()) cchev.animate([{ transform: 'translateY(-1px)' }, { transform: 'translateY(3px)' }], { duration: 900, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
     if (chev && !this.off()) chev.animate([{ transform: 'translateY(-2px)' }, { transform: 'translateY(5px)' }], { duration: 900, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
     for (let i = 1; i <= 9; i++) {
       const n = String(i).padStart(2, '0'), im = new Image();
@@ -778,6 +789,18 @@ class Component extends DCLogic {
     });
     const nav = document.querySelector('[data-topnav]');
     if (nav) nav.style.transform = r.bottom <= 1 ? 'translate(-50%,0)' : 'translate(-50%,-100%)';
+    const cue = document.querySelector('[data-scrollcue]'), visit = document.getElementById('visit');
+    if (cue) {
+      const vt = visit ? visit.getBoundingClientRect().top : Infinity;
+      const show = r.bottom <= 1 && vt > innerHeight * 0.8;
+      cue.style.transform = show ? 'translate(-50%,0)' : 'translate(-50%,100%)';
+      cue.style.opacity = show ? '1' : '0';
+      const cbar = cue.querySelector('[data-cuebar]');
+      if (cbar && visit) {
+        const goal = Math.max(1, vt + scrollY - 46);
+        cbar.style.width = Math.min(100, Math.max(0, (scrollY / goal) * 100)).toFixed(2) + '%';
+      }
+    }
     const sids = ['intro', 'team', 'party', 'visit', 'guestbook'], de = document.documentElement;
     const tops = sids.map(id => { const el = document.getElementById(id); return el ? el.getBoundingClientRect().top + scrollY - 46 : 0; });
     const endAll = de.scrollHeight - innerHeight;
