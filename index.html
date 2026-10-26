@@ -131,12 +131,19 @@ input,textarea,button{font-family:inherit;}
 
   <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 520);background:#ffffff;">
     <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-      <div style="position:relative;width:min(100%, calc(100svh * 0.7075));aspect-ratio:849/1200;">
+      <div style="position:relative;width:min(100%, calc(100svh * 0.7075));aspect-ratio:849/1200;overflow:hidden;">
         <img data-step="0" src="assets/layers/01-bg.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
-        <img data-step="1" src="assets/layers/02-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:sepia(0.3) contrast(0.96);">
-        <img data-step="2" src="assets/layers/03-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
-        <img data-step="3" src="assets/layers/07-torn-bottom.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;">
-        <img data-step="3" src="assets/layers/11-torn-top.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;">
+        <img data-hp="bw" src="assets/layers/02-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;transform:scale(1.12);filter:sepia(0.3) contrast(0.96);">
+        <img data-hp="color" src="assets/layers/03-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;transform:scale(1.12);filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
+        <div data-hp="seal" style="position:absolute;inset:0;background:#fefefe;"></div>
+        <div data-hp="bot" style="position:absolute;inset:0;transform:translateY(-41%);">
+          <div style="position:absolute;left:0;right:0;top:calc(100% - 3px);height:100%;background:#fefefe;"></div>
+          <img src="assets/layers/11-torn-top.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
+        </div>
+        <div data-hp="top" style="position:absolute;inset:0;transform:translateY(30%);">
+          <div style="position:absolute;left:0;right:0;top:calc(-100% + 3px);height:100%;background:#fefefe;"></div>
+          <img src="assets/layers/07-torn-bottom.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
+        </div>
         <img data-role="tl" src="assets/layers/12-title-left.webp" alt="낯선동네" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;">
         <img data-role="tr" src="assets/layers/13-title-right.webp" alt="나의동네" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;">
         <img data-role="mid" src="assets/layers/15-line-b.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;">
@@ -291,11 +298,71 @@ input,textarea,button{font-family:inherit;}
     </div>
   </section>
 
+  <section id="preview" data-screen-label="03-2 미리 만나보기" style="padding:72px 16px 64px;background:#ffffff;">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:8px;padding:0 8px 28px;">
+      <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">미리 만나보기</h2>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#707070;word-break:keep-all;">전시에서 만나보실 수 있는 작품들을 미리 확인해보실 수 있습니다. 전시장에는 약 150점 이상의 사진과 영상, 그리고 소소평상 작품을 만나보실 수 있습니다.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
+      <sc-for list="{{ works }}" as="w" hint-placeholder-count="15">
+        <button onClick="{{ w.open }}" data-reveal="" data-delay="{{ w.delay }}" aria-label="{{ w.title }} 크게 보기" style="position:relative;display:block;padding:0;border:0;border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:#f0f0f0;cursor:pointer;-webkit-tap-highlight-color:transparent;" style-active="transform:scale(0.96);">
+          <img src="{{ w.src }}" alt="{{ w.title }}" loading="lazy" decoding="async" draggable="false" onContextMenu="{{ noCtx }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;">
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="visit" data-screen-label="04 관람 안내" style="margin:8px;padding:32px 16px 72px;border-radius:28px;background:#f3f3f3;">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        
+        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">관람 안내</h2>
+      </div>
+      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:16px;font-weight:600;">운영시간</div>
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
+          <span style="color:#707070;">전시기간</span><span>2026.11.01. – 11.08.</span>
+          <span style="color:#707070;">평일</span><span>08:00 – 20:00</span>
+          <span style="color:#707070;">주말</span><span>08:00 – 21:00</span>
+          <span style="color:#707070;">무인운영</span><span>08:00 ~ 12:00, 19:00 ~ 20:00</span>
+          <span style="color:#707070;">관람료</span><span>[무료]</span>
+        </div>
+      </div>
+      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:16px;font-weight:600;">유의사항</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
+          <li>– 작품 보호를 위해 손을 대지 말아 주세요.</li>
+          <li>– 사진전 내에서는 정해진 구역 외 사진 촬영이 불가합니다.</li>
+          <li>– 음식물 반입은 제한됩니다.</li><li>– 장소가 협소하여 화환 및 꽃 선물은 정중히 사양합니다.</li>
+        </ul>
+      </div>
+      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:16px;font-weight:600;">오시는 길</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <span style="font-size: 18px; font-weight: 400">성북구 동소문로 186, 2층</span>
+        </div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
+          <li>- 전시장 방문 시 전시장 인근에 배치된 배너 및 아래 사항을 참고해주시면 감사하겠습니다.</li>
+          <li>- 진입로 1 : 대로변 기준, 퍼센트 카페 좌측 입구로 들어오셔서 계단을 1층 올라오시면 됩니다.</li>
+          <li>- 진입로 2 : 하이오 커피 우측 교회 입구로 들어오셔서 계단을 1층 내려오시면 됩니다.</li>
+        </ul>
+        <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#f0f0f0;">
+          <iframe src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186&amp;z=17&amp;hl=ko&amp;output=embed" title="전시장 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
+          <a href="https://map.naver.com/p/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#141414;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">네이버 지도</a>
+          <a href="https://map.kakao.com/link/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#ffffff;box-shadow:inset 0 0 0 1px #e0e0e0;color:#141414;font-size:14px;font-weight:600;text-decoration:none;">카카오맵</a>
+          <button onClick="{{ copyAddr }}" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;border:0;background:#f3f3f3;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ copyLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="party" data-screen-label="03-0 초대장" ref="{{ invRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 560);background:#ffffff;">
     <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:46px;box-sizing:border-box;">
       <div data-inv="card" style="position:relative;width:min(100%, calc(var(--vh, 1vh) * 66));aspect-ratio:849/1200;overflow:hidden;background:#fefefe;opacity:0;">
-        <img data-inv="bw" src="assets/layers/02-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;filter:sepia(0.3) contrast(0.96);">
-        <img data-inv="color" src="assets/layers/03-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
+        <img data-inv="bw" src="assets/layers/20-net-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;filter:sepia(0.3) contrast(0.96);">
+        <img data-inv="color" src="assets/layers/21-net-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
         <div data-inv="veil" style="position:absolute;inset:0;background:#fefefe;opacity:0;"></div>
         <div data-inv="seal" style="position:absolute;inset:0;background:#fefefe;"></div>
         <div data-inv="top" style="position:absolute;inset:0;z-index:2;transform:translateY(30%);">
@@ -317,12 +384,16 @@ input,textarea,button{font-family:inherit;}
         <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:8px;font-size:13px;line-height:1.45;">
           <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 21:00</span>
           <span style="color:#707070;">장소</span><span>전시장 (성북구 동소문로 186, 2층)</span>
-          <span style="color:#707070;">대상</span><span>성북구에 거주중이거나 관심이 있는 2·30대 청년</span>
+          <span style="color:#707070;">대상</span><span>성북구에 관심이 있는 2·30대 청년</span>
           <span style="color:#707070;">정원</span><span>선착순 30명</span>
           <span style="color:#707070;">보증금</span><span>10,000원 <b style="font-weight:700;color:#e5484d;">(참석 확인 후 전액 환불)</b></span>
           <span style="color:#707070;">신청 마감</span><span>11.05. (목) 23:59 · 입금 기준 선착순</span>
           <span style="color:#707070;">참고사항</span><span>행사에서는 간단한 핑거푸드와 마실거리가 준비됩니다.</span>
         </div>
+        <ul style="margin:0;padding:10px 0 0 14px;display:flex;flex-direction:column;gap:4px;font-size:11.5px;line-height:1.5;color:#707070;word-break:keep-all;box-shadow:inset 0 1px 0 #e0e0e0;">
+          <li>네트워킹 세션은 전시와 별개로 운영되며, 네트워킹 세션 진행 간 전시 관람은 제한됩니다.</li>
+          <li>네트워킹 세션 참여를 원하지 않으신 분들은 해당 시간 외의 시간에 관람 부탁드립니다.</li>
+        </ul>
         
       </div>
 
@@ -476,66 +547,6 @@ input,textarea,button{font-family:inherit;}
         </div>
       </div>
     </sc-if>
-  </section>
-
-  <section id="preview" data-screen-label="03-2 미리 만나보기" style="padding:72px 16px 64px;background:#ffffff;">
-    <div data-reveal="" style="display:flex;flex-direction:column;gap:8px;padding:0 8px 28px;">
-      <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">미리 만나보기</h2>
-      <p style="margin:0;font-size:14px;line-height:1.6;color:#707070;word-break:keep-all;">전시에서 만나보실 수 있는 작품들을 미리 확인해보실 수 있습니다. 전시장에는 약 150점 이상의 사진과 영상, 그리고 소소평상 작품을 만나보실 수 있습니다.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
-      <sc-for list="{{ works }}" as="w" hint-placeholder-count="15">
-        <button onClick="{{ w.open }}" data-reveal="" data-delay="{{ w.delay }}" aria-label="{{ w.title }} 크게 보기" style="position:relative;display:block;padding:0;border:0;border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:#f0f0f0;cursor:pointer;-webkit-tap-highlight-color:transparent;" style-active="transform:scale(0.96);">
-          <img src="{{ w.src }}" alt="{{ w.title }}" loading="lazy" decoding="async" draggable="false" onContextMenu="{{ noCtx }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;">
-        </button>
-      </sc-for>
-    </div>
-  </section>
-
-  <section id="visit" data-screen-label="04 관람 안내" style="margin:8px;padding:32px 16px 72px;border-radius:28px;background:#f3f3f3;">
-    <div data-reveal="" style="display:flex;flex-direction:column;gap:32px;">
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        
-        <h2 style="margin:0;font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-0.02em;">관람 안내</h2>
-      </div>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:16px;font-weight:600;">운영시간</div>
-        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.43;">
-          <span style="color:#707070;">전시기간</span><span>2026.11.01. – 11.08.</span>
-          <span style="color:#707070;">평일</span><span>08:00 – 20:00</span>
-          <span style="color:#707070;">주말</span><span>08:00 – 21:00</span>
-          <span style="color:#707070;">무인운영</span><span>08:00 ~ 12:00, 19:00 ~ 20:00</span>
-          <span style="color:#707070;">관람료</span><span>[무료]</span>
-        </div>
-      </div>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:16px;font-weight:600;">유의사항</div>
-        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
-          <li>– 작품 보호를 위해 손을 대지 말아 주세요.</li>
-          <li>– 사진전 내에서는 정해진 구역 외 사진 촬영이 불가합니다.</li>
-          <li>– 음식물 반입은 제한됩니다.</li><li>– 장소가 협소하여 화환 및 꽃 선물은 정중히 사양합니다.</li>
-        </ul>
-      </div>
-      <div style="background:#ffffff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-        <div style="font-size:16px;font-weight:600;">오시는 길</div>
-        <div style="display:flex;flex-direction:column;gap:4px;">
-          <span style="font-size: 18px; font-weight: 400">성북구 동소문로 186, 2층</span>
-        </div>
-        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5;color:#262626;">
-          <li>- 전시장 방문 시 전시장 인근에 배치된 배너 및 아래 사항을 참고해주시면 감사하겠습니다.</li>
-          <li>- 진입로 1 : 대로변 기준, 퍼센트 카페 좌측 입구로 들어오셔서 계단을 1층 올라오시면 됩니다.</li>
-          <li>- 진입로 2 : 하이오 커피 우측 교회 입구로 들어오셔서 계단을 1층 내려오시면 됩니다.</li>
-        </ul>
-        <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#f0f0f0;">
-          <iframe src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186&amp;z=17&amp;hl=ko&amp;output=embed" title="전시장 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
-          <a href="https://map.naver.com/p/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#141414;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">네이버 지도</a>
-          <a href="https://map.kakao.com/link/search/%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%8F%99%EC%86%8C%EB%AC%B8%EB%A1%9C%20186" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;background:#ffffff;box-shadow:inset 0 0 0 1px #e0e0e0;color:#141414;font-size:14px;font-weight:600;text-decoration:none;">카카오맵</a>
-          <button onClick="{{ copyAddr }}" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:9999px;border:0;background:#f3f3f3;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">{{ copyLabel }}</button>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section id="guestbook" data-screen-label="05 방명록" style="padding:72px 24px 80px;background:#ffffff;">
@@ -778,6 +789,12 @@ class Component extends DCLogic {
     const lerp = (a, b, t) => a + (b - a) * t;
     const u = q - 3, CTR = -30.45, JOIN = 38.5, FIN = 61.01;
     const join = eo(cl((u - 1) / 0.8)), apart = eo(cl((u - 2) / 1));
+    const io3 = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, ho = io3(cl(q / 2.2));
+    const hg = k => hero.querySelector(`[data-hp="${k}"]`), hT = hg('top'), hB = hg('bot'), hBw = hg('bw'), hC = hg('color'), hS = hg('seal');
+    if (hT) hT.style.transform = `translateY(${30 * (1 - ho)}%)`;
+    if (hB) hB.style.transform = `translateY(${-41 * (1 - ho)}%)`;
+    if (hS) hS.style.opacity = 1 - cl(ho / 0.15);
+    if (hBw && hC) { hBw.style.transform = hC.style.transform = `scale(${this.off() ? 1 : 1.12 - 0.12 * ho})`; hC.style.opacity = cl((q - 1.6) / 1); }
     hero.querySelectorAll('[data-role]').forEach(el => {
       const role = el.dataset.role;
       if (role === 'tr') {
@@ -804,7 +821,7 @@ class Component extends DCLogic {
     });
     const nav = document.querySelector('[data-topnav]');
     if (nav) nav.style.transform = r.bottom <= 1 ? 'translate(-50%,0)' : 'translate(-50%,-100%)';
-    const cue = document.querySelector('[data-scrollcue]'), visit = document.getElementById('visit');
+    const cue = document.querySelector('[data-scrollcue]'), visit = document.getElementById('guestbook');
     if (cue) {
       const vt = visit ? visit.getBoundingClientRect().top : Infinity;
       const show = q >= 0.5 && vt > innerHeight * 0.8;
@@ -812,7 +829,7 @@ class Component extends DCLogic {
       cue.style.transform = show ? 'translateY(0)' : 'translateY(10px)';
       cue.style.pointerEvents = show ? 'auto' : 'none';
     }
-    const sids = ['intro', 'team', 'party', 'visit', 'guestbook'], de = document.documentElement;
+    const sids = ['intro', 'team', 'visit', 'party', 'guestbook'], de = document.documentElement;
     const tops = sids.map(id => { const el = document.getElementById(id); return el ? el.getBoundingClientRect().top + scrollY - 46 : 0; });
     const endAll = de.scrollHeight - innerHeight;
     document.querySelectorAll('[data-navbar]').forEach(el => {
@@ -822,7 +839,7 @@ class Component extends DCLogic {
       el.style.transform = `scaleX(${done ? 1 : t})`;
       el.style.background = done ? '#d1d1d1' : '#141414';
     });
-    const ids = ['intro', 'team', 'party', 'visit', 'guestbook'];
+    const ids = ['intro', 'team', 'visit', 'party', 'guestbook'];
     let act = -1;
     ids.forEach((id, i) => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 120) act = i; });
     if (act !== this.state.navActive) this.setState({ navActive: act });
@@ -1010,6 +1027,7 @@ class Component extends DCLogic {
         add(this.invRef, [0.42, 0.62, 0.88]);
         const pv = document.getElementById('preview'); if (pv) A.push(pv.getBoundingClientRect().top + scrollY - 46);
         const v = document.getElementById('visit'); if (v) A.push(v.getBoundingClientRect().top + scrollY - 46);
+        const gb = document.getElementById('guestbook'); if (gb) A.push(gb.getBoundingClientRect().top + scrollY - 46);
         const next = A.sort((a, b) => a - b).find(y => y > y0 + 40);
         if (next != null) window.scrollTo({ top: next, behavior: this.off() ? 'auto' : 'smooth' });
       },
@@ -1037,7 +1055,7 @@ class Component extends DCLogic {
         if (navigator.share) { navigator.share(data).catch(() => {}); return; }
         this.copyText(data.url, ok => this.setState({ shCopied: ok, shMsg: ok ? '링크를 복사했습니다. 원하는 곳에 붙여넣어 주세요.' : '주소창의 링크를 복사해 주세요.' }));
       },
-      navItems: [['intro', '전시소개'], ['team', '팀소개'], ['party', '네트워킹'], ['visit', '관람안내'], ['guestbook', '방명록']].map(([id, label], i) => {
+      navItems: [['intro', '전시소개'], ['team', '팀소개'], ['visit', '관람안내'], ['party', '네트워킹'], ['guestbook', '방명록']].map(([id, label], i) => {
         const on = s.navActive === i;
         return {
           label, badge: id === 'party' && Date.now() <= this.P_END && !(s.pCount !== null && s.pCount >= this.P_MAX), weight: on ? 700 : 500, color: on ? '#141414' : '#8a8a8a', bar: on ? 1 : 0,
