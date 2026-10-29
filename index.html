@@ -125,11 +125,11 @@ input,textarea,button{font-family:inherit;}
         <button onClick="{{ n.go }}" style="position:relative;border:0;background:none;padding:0;font-size:13px;font-weight:{{ n.weight }};color:{{ n.color }};cursor:pointer;word-break:keep-all;"><sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span data-badge="" style="position:absolute;left:50%;top:4px;transform:translateX(-50%);font-size:9px;font-weight:700;line-height:1;letter-spacing:0.02em;color:#e5484d;white-space:nowrap;animation:recruitBlink 1.2s ease-in-out infinite;">모집중</span></sc-if>{{ n.label }}<span data-navbar="{{ $index }}" style="position:absolute;left:0;right:0;bottom:0;height:3px;background:#ff6b70;transform-origin:left center;transform:scaleX(0);"></span></button>
       </sc-for>
     </div>
-    <sc-if value="{{ bannerOn }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ true }}" hint-placeholder-val="{{ true }}">
       <div style="position:relative;overflow:hidden;display:flex;align-items:center;height:38px;background:#141414;">
         <span data-shine="" style="position:absolute;top:0;bottom:0;left:0;width:24%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.28),rgba(255,255,255,0));pointer-events:none;animation:bannerShine 2.6s ease-in-out infinite;"></span>
-        <button onClick="{{ dOpen }}" style="position:relative;flex:1;min-width:0;height:38px;border:0;background:none;padding:0 0 0 16px;display:flex;align-items:center;gap:8px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;word-break:keep-all;white-space:nowrap;overflow:hidden;"><span style="color:#ff8a8d;">11.07 (토)</span><span>네트워킹 세션 참가자 모집</span><span data-more="" style="margin-left:auto;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:9999px;background:#e5484d;color:#ffffff;font-size:12px;font-weight:700;animation:moreGlow 1.6s ease-out infinite;">자세히 ›</span></button>
-        <button onClick="{{ bannerClose }}" aria-label="안내 닫기" style="flex:none;width:44px;height:38px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        <button onClick="{{ dOpen }}" style="position:relative;flex:1;min-width:0;height:38px;border:0;background:none;padding:0 16px;display:flex;align-items:center;gap:8px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;word-break:keep-all;white-space:nowrap;overflow:hidden;"><span style="color:#ff8a8d;">11.07 (토)</span><span>네트워킹 세션 참가자 모집</span><span data-more="" style="margin-left:auto;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:9999px;background:#e5484d;color:#ffffff;font-size:12px;font-weight:700;animation:moreGlow 1.6s ease-out infinite;">자세히 ›</span></button>
+        
       </div>
     </sc-if>
   </nav>
@@ -141,7 +141,7 @@ input,textarea,button{font-family:inherit;}
 
   <section data-screen-label="01 포스터" ref="{{ heroRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 520);background:#ffffff;">
     <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-      <div style="position:relative;width:min(100%, calc(100svh * 0.7075));aspect-ratio:849/1200;overflow:hidden;">
+      <div style="position:relative;width:min(100%, calc(var(--vh, 1vh) * 70.75));aspect-ratio:849/1200;overflow:hidden;">
         <img data-step="0" src="assets/layers/01-bg.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
         <img data-hp="bw" src="assets/layers/02-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;transform:scale(1.12);filter:sepia(0.3) contrast(0.96);">
         <img data-hp="color" src="assets/layers/03-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;transform:scale(1.12);filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
@@ -177,7 +177,7 @@ input,textarea,button{font-family:inherit;}
 
   <section id="intro" data-screen-label="02 소개말" ref="{{ storyRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 900);background:#141414;">
     <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);box-sizing:border-box;overflow:hidden;background:#141414;">
-      <div style="position:absolute;top:62px;left:24px;right:24px;z-index:2;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;color:#ffffff;font-variant-numeric:tabular-nums;">
+      <div style="position:absolute;top:100px;left:24px;right:24px;z-index:2;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;color:#ffffff;font-variant-numeric:tabular-nums;">
         <span data-story-num="">01</span>
         <span style="position:relative;flex:1;height:1px;background:rgba(255,255,255,0.3);"><span data-story-bar="" style="position:absolute;inset:0;background:#ffffff;transform-origin:left;transform:scaleX(0);"></span></span>
         <span>09</span>
@@ -215,7 +215,7 @@ input,textarea,button{font-family:inherit;}
         <img data-team-logo="with" src="assets/team/with.png" alt="with" style="height:15px;width:auto;opacity:0;">
         <img data-team-logo="gd" src="assets/team/logo-gd.png" alt="가꾸가" style="height:45px;width:auto;opacity:0;">
       </div>
-      <div data-team-panel="a" style="position:absolute;inset:0;box-sizing:border-box;padding:66px 24px 28px;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:0;">
+      <div data-team-panel="a" style="position:absolute;inset:0;box-sizing:border-box;padding:104px 24px 28px;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:0;">
         <img data-team-plogo="a" src="assets/team/logo-smt.png" alt="Shootingmythings" style="height:22px;width:auto;align-self:flex-start;">
         <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">Shootingmythings</h2>
         <div data-team-body="a" style="display:flex;flex-direction:column;gap:18px;">
@@ -253,7 +253,7 @@ input,textarea,button{font-family:inherit;}
         </sc-if>
         </div>
       </div>
-      <div data-team-panel="b" style="position:absolute;inset:0;box-sizing:border-box;padding:66px 24px 28px;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:0;">
+      <div data-team-panel="b" style="position:absolute;inset:0;box-sizing:border-box;padding:104px 24px 28px;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:0;">
         <img data-team-plogo="b" src="assets/team/logo-gd.png" alt="가꾸가" style="height:68px;width:auto;align-self:flex-start;">
         <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">가꾸가</h2>
         <div data-team-body="b" style="display:flex;flex-direction:column;gap:18px;">
@@ -295,7 +295,7 @@ input,textarea,button{font-family:inherit;}
   </section>
 
   <section data-screen-label="03 후원" ref="{{ spRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 220);background:#ffffff;">
-    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);box-sizing:border-box;padding:46px 24px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;overflow:hidden;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);box-sizing:border-box;padding:84px 24px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;overflow:hidden;">
       <p data-sp="text" style="opacity:0;margin:0;max-width:360px;font-size:15px;font-weight:400;line-height:1.7;color:#262626;text-align:center;word-break:keep-all;text-wrap:balance;">본 전시는 서울청년센터 성북의 커뮤니티 지원사업 ‘와글와글 성북마을'와 건축교육커뮤니티플랫폼 렉터스의 지원을 받아 운영됩니다.</p>
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
         <span data-sp="label" style="opacity:0;font-size:11px;font-weight:600;letter-spacing:0.08em;color:#8a8a8a;">후원</span>
@@ -374,7 +374,7 @@ input,textarea,button{font-family:inherit;}
   </section>
 
   <section id="party" data-screen-label="03-0 초대장" ref="{{ invRef }}" style="position:relative;height:calc(var(--vh, 1vh) * 560);background:#ffffff;">
-    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:46px;box-sizing:border-box;">
+    <div style="position:sticky;top:0;height:calc(var(--vh, 1vh) * 100);display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:84px;box-sizing:border-box;">
       <div data-inv="card" style="position:relative;width:min(100%, calc(var(--vh, 1vh) * 66));aspect-ratio:849/1200;overflow:hidden;background:#fefefe;opacity:0;">
         <img data-inv="bw" src="assets/layers/20-net-photo-bw.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;filter:sepia(0.3) contrast(0.96);">
         <img data-inv="color" src="assets/layers/21-net-photo-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:saturate(0.78) sepia(0.14) hue-rotate(-6deg) brightness(0.98);">
@@ -882,6 +882,7 @@ class Component extends DCLogic {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     try { this.setState({ entries: JSON.parse(localStorage.getItem(this.KEY) || '[]') }); } catch (e) {}
     this.loadParty();
+    try { const q = new URLSearchParams(location.search); if (q.has('apply')) this.setSheet(true); else if (q.has('detail')) { this.setState({ dSheet: true }); document.body.style.overflow = 'hidden'; } if (q.has('apply') || q.has('detail')) history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
     fetch('/api/guestbook').then(r => r.ok ? r.json() : Promise.reject()).then(d => { if (Array.isArray(d.entries)) { this.api = true; this.setState({ entries: d.entries }); } }).catch(() => {});
     this.onScroll = () => { if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.paintHero(); }); };
     window.addEventListener('scroll', this.onScroll, { passive: true });

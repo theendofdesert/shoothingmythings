@@ -1,0 +1,18 @@
+깃허브 업로드 — 이 폴더 내용을 저장소 "최상위"에 그대로 덮어쓰기
+
+변경 / 추가
+  index.html                         ← 메인 (모집 띠 상시 노출 · 인앱 브라우저 잘림 수정 · 상단 여백 보정)
+  networking/index.html              ← 네트워킹 단독 페이지 (새로 추가)
+  assets/works/og-networking.jpg     ← 네트워킹 링크 미리보기 이미지
+  assets/works/n-*.webp              ← 네트워킹 페이지 사진 (이미 있는 파일은 덮어써도 무방)
+
+순서
+  1) 깃허브에 업로드 → Commit
+  2) Vercel 자동 배포 (1~2분)
+  3) 확인
+     https://www.shootingmythings.studio/
+     https://www.shootingmythings.studio/networking
+
+참고
+  - 네트워킹 페이지 "신청하기" → 메인 신청서(/?apply) 바로 열림
+  - 링크 미리보기는 카카오·인스타가 캐시하므로 배포 후 처음 공유할 때 확인
