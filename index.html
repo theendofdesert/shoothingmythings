@@ -509,6 +509,9 @@ input,textarea,button{font-family:inherit;}
                   <sc-if value="{{ pSrcEtc }}" hint-placeholder-val="{{ false }}">
                     <input value="{{ p.sourceEtc }}" onChange="{{ pOn.sourceEtc }}" maxlength="30" placeholder="어디서 알게 되셨는지 적어 주세요" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
                   </sc-if>
+                  <sc-if value="{{ pSrcFriend }}" hint-placeholder-val="{{ false }}">
+                    <input value="{{ p.sourceFriend }}" onChange="{{ pOn.sourceFriend }}" maxlength="20" placeholder="지인 분 성함을 적어주세요 (선택)" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
+                  </sc-if>
                 </div>
               </div>
             </div>
@@ -776,7 +779,7 @@ input,textarea,button{font-family:inherit;}
 <script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;credits&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;크레딧&quot;,&quot;한 줄&quot;,&quot;카드&quot;],&quot;default&quot;:&quot;크레딧&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { name: '', msg: '', entries: [], copied: false, lb: -1,
-    p: { name: '', phone: '', birth: '', job: '', area: '', interest: '', mbti: '', source: '', sourceEtc: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
+    p: { name: '', phone: '', birth: '', job: '', area: '', interest: '', mbti: '', source: '', sourceEtc: '', sourceFriend: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
     pCount: null, pStatus: 'idle', pErr: '', pPayer: '', pCopied: false, pSheet: false, dSheet: false };
   setSheet(v) { this.setState({ pSheet: v }); document.body.style.overflow = v ? 'hidden' : ''; }
   P_SHOW = 30; P_MAX = 35; P_END = Date.parse('2026-11-05T23:59:59+09:00');
@@ -1030,8 +1033,8 @@ class Component extends DCLogic {
       return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`;
     };
     const set2 = k => e => { const v = (k === 'agree' || k === 'paid') ? e.target.checked : k === 'phone' ? fmtPhone(e.target.value) : k === 'birth' ? e.target.value.replace(/\D/g, '').slice(0, 8) : k === 'acct' ? e.target.value.replace(/\D/g, '').slice(0, 20) : e.target.value; this.setState(st => ({ p: { ...st.p, [k]: v }, pErr: '' })); };
-    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'interest', 'mbti', 'sourceEtc', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
-    const pSrcList = ['전시장', '인스타그램', '당근', '지인', '성북 커뮤니티', '기타'].map(label => { const on = p.source === label; return { label, on, bg: on ? '#141414' : '#f0f0f0', fg: on ? '#ffffff' : '#141414', pick: () => this.setState(st => ({ p: { ...st.p, source: label }, pErr: '' })) }; });
+    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'interest', 'mbti', 'sourceEtc', 'sourceFriend', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
+    const pSrcList = ['전시장', '인스타그램', '당근마켓', '지인', '성북 커뮤니티', '기타'].map(label => { const on = p.source === label; return { label, on, bg: on ? '#141414' : '#f0f0f0', fg: on ? '#ffffff' : '#141414', pick: () => this.setState(st => ({ p: { ...st.p, source: label }, pErr: '' })) }; });
     const validBirth = b => {
       if (!/^\d{8}$/.test(b)) return false;
       const y = +b.slice(0, 4), m = +b.slice(4, 6), d = +b.slice(6, 8);
@@ -1074,6 +1077,7 @@ class Component extends DCLogic {
       pS1: step === 1, pS2: step === 2, pS3: step === 3, pS4: step === 4,
       pSrcList,
       pSrcEtc: p.source === '기타',
+      pSrcFriend: p.source === '지인',
       pHasPrev: step > 1,
       pPrev: () => this.setState({ pStep: Math.max(1, step - 1), pErr: '' }),
       pPayerPh: '입금자명',
@@ -1093,7 +1097,7 @@ class Component extends DCLogic {
         if (s.pStatus === 'sending') return;
         for (let i = 1; i <= 4; i++) { const er = okStep[i](); if (er) { self.setState({ pStep: i, pErr: er }); return; } }
         self.setState({ pStatus: 'sending', pErr: '' });
-        const body = { ...p, payer: p.payer.trim(), interest: p.interest.trim(), source: p.source === '기타' ? '기타: ' + p.sourceEtc.trim() : p.source, mbti: p.mbti.trim().toUpperCase() };
+        const body = { ...p, payer: p.payer.trim(), interest: p.interest.trim(), source: p.source === '기타' ? '기타: ' + p.sourceEtc.trim() : p.source === '지인' && p.sourceFriend.trim() ? '지인 - ' + p.sourceFriend.trim() : p.source, mbti: p.mbti.trim().toUpperCase() };
         let r0 = 'network';
         fetch('/api/party', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
           .then(r => { r0 = r.status; return r.json().then(d => ({ ok: r.ok, d }), () => ({ ok: false, d: {} })); })
