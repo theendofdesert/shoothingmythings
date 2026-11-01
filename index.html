@@ -471,7 +471,7 @@ input,textarea,button{font-family:inherit;}
             <div style="display:flex;flex-direction:column;gap:16px;">
               <h3 style="margin:0;font-size:22px;font-weight:650;letter-spacing:-0.02em;">개인정보 수집·이용 동의</h3>
               <div style="display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.6;color:#262626;">
-                <span><b style="font-weight:600;">수집 항목</b> · 이름, 연락처, 생년월일, 직업, 거주지, 관심사·MBTI(선택), 입금자명, 환불 계좌</span>
+                <span><b style="font-weight:600;">수집 항목</b> · 이름, 연락처, 생년월일, 직업, 거주지, 유입 경로, 관심사·MBTI(선택), 입금자명, 환불 계좌</span>
                 <span><b style="font-weight:600;">이용 목적</b> · 네트워킹 파티 참가 확인, 안내 연락, 보증금 환불, 네트워킹 진행 참고</span>
                 <span><b style="font-weight:600;">보유 기간</b> · 보증금 환불 완료 후 즉시 파기</span>
                 <span style="color:#707070;">동의를 거부할 수 있으며, 거부 시 참가 신청이 제한됩니다.</span>
@@ -498,6 +498,17 @@ input,textarea,button{font-family:inherit;}
                 <div style="display:flex;flex-direction:column;gap:8px;">
                   <input value="{{ p.interest }}" onChange="{{ pOn.interest }}" maxlength="40" placeholder="관심사" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
                   <input value="{{ p.mbti }}" onChange="{{ pOn.mbti }}" maxlength="4" placeholder="MBTI" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;text-transform:uppercase;">
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+                  <span style="font-size:14px;font-weight:600;color:#141414;padding:0 2px;">네트워킹 세션을 어떻게 알게 되셨나요?</span>
+                  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
+                    <sc-for list="{{ pSrcList }}" as="it" hint-placeholder-count="6">
+                      <button type="button" onClick="{{ it.pick }}" aria-pressed="{{ it.on }}" style="height:44px;padding:0 6px;border:0;border-radius:12px;background:{{ it.bg }};color:{{ it.fg }};font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;letter-spacing:-0.02em;">{{ it.label }}</button>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ pSrcEtc }}" hint-placeholder-val="{{ false }}">
+                    <input value="{{ p.sourceEtc }}" onChange="{{ pOn.sourceEtc }}" maxlength="30" placeholder="어디서 알게 되셨는지 적어 주세요" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font-size:16px;color:#141414;outline-color:#141414;min-width:0;">
+                  </sc-if>
                 </div>
               </div>
             </div>
@@ -765,7 +776,7 @@ input,textarea,button{font-family:inherit;}
 <script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;credits&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;크레딧&quot;,&quot;한 줄&quot;,&quot;카드&quot;],&quot;default&quot;:&quot;크레딧&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { name: '', msg: '', entries: [], copied: false, lb: -1,
-    p: { name: '', phone: '', birth: '', job: '', area: '', interest: '', mbti: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
+    p: { name: '', phone: '', birth: '', job: '', area: '', interest: '', mbti: '', source: '', sourceEtc: '', bank: '', acct: '', holder: '', payer: '', agree: false, paid: false }, pStep: 1,
     pCount: null, pStatus: 'idle', pErr: '', pPayer: '', pCopied: false, pSheet: false, dSheet: false };
   setSheet(v) { this.setState({ pSheet: v }); document.body.style.overflow = v ? 'hidden' : ''; }
   P_SHOW = 30; P_MAX = 35; P_END = Date.parse('2026-11-05T23:59:59+09:00');
@@ -1019,7 +1030,8 @@ class Component extends DCLogic {
       return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`;
     };
     const set2 = k => e => { const v = (k === 'agree' || k === 'paid') ? e.target.checked : k === 'phone' ? fmtPhone(e.target.value) : k === 'birth' ? e.target.value.replace(/\D/g, '').slice(0, 8) : k === 'acct' ? e.target.value.replace(/\D/g, '').slice(0, 20) : e.target.value; this.setState(st => ({ p: { ...st.p, [k]: v }, pErr: '' })); };
-    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'interest', 'mbti', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
+    const pOn = {}; ['name', 'phone', 'birth', 'job', 'area', 'interest', 'mbti', 'sourceEtc', 'bank', 'acct', 'holder', 'payer', 'agree', 'paid'].forEach(k => pOn[k] = set2(k));
+    const pSrcList = ['전시장', '인스타그램', '당근', '지인', '성북 커뮤니티', '기타'].map(label => { const on = p.source === label; return { label, on, bg: on ? '#141414' : '#f0f0f0', fg: on ? '#ffffff' : '#141414', pick: () => this.setState(st => ({ p: { ...st.p, source: label }, pErr: '' })) }; });
     const validBirth = b => {
       if (!/^\d{8}$/.test(b)) return false;
       const y = +b.slice(0, 4), m = +b.slice(4, 6), d = +b.slice(6, 8);
@@ -1031,7 +1043,9 @@ class Component extends DCLogic {
       () => p.agree ? '' : '개인정보 수집·이용에 동의해 주세요.',
       () => !(p.name.trim() && p.phone.trim() && p.birth.trim() && p.job.trim() && p.area.trim()) ? '모든 항목을 입력해 주세요.'
         : !/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(p.phone.trim()) ? '연락처를 확인해 주세요.'
-        : !validBirth(p.birth) ? '생년월일 8자리를 확인해 주세요. (예: 19990101)' : '',
+        : !validBirth(p.birth) ? '생년월일 8자리를 확인해 주세요. (예: 19990101)'
+        : !p.source ? '어떻게 알게 되셨는지 선택해 주세요.'
+        : p.source === '기타' && !p.sourceEtc.trim() ? '기타 내용을 적어 주세요.' : '',
       () => !p.payer.trim() ? '입금자명을 입력해 주세요.' : p.paid ? '' : '입금 후 입금 완료에 체크해 주세요.',
       () => !p.bank.trim() ? '은행명을 입력해 주세요.' : p.acct.length < 8 ? '계좌번호를 확인해 주세요.' : !p.holder.trim() ? '예금주를 입력해 주세요.' : ''];
     const stepReady = !okStep[step]();
@@ -1058,6 +1072,8 @@ class Component extends DCLogic {
       pStepLabel: `${step} / 4 · ${['', '개인정보 동의', '참가자 정보', '보증금 입금', '환불 정보'][step]}`,
       pProg: `${step * 25}%`,
       pS1: step === 1, pS2: step === 2, pS3: step === 3, pS4: step === 4,
+      pSrcList,
+      pSrcEtc: p.source === '기타',
       pHasPrev: step > 1,
       pPrev: () => this.setState({ pStep: Math.max(1, step - 1), pErr: '' }),
       pPayerPh: '입금자명',
@@ -1077,7 +1093,7 @@ class Component extends DCLogic {
         if (s.pStatus === 'sending') return;
         for (let i = 1; i <= 4; i++) { const er = okStep[i](); if (er) { self.setState({ pStep: i, pErr: er }); return; } }
         self.setState({ pStatus: 'sending', pErr: '' });
-        const body = { ...p, payer: p.payer.trim(), interest: p.interest.trim(), mbti: p.mbti.trim().toUpperCase() };
+        const body = { ...p, payer: p.payer.trim(), interest: p.interest.trim(), source: p.source === '기타' ? '기타: ' + p.sourceEtc.trim() : p.source, mbti: p.mbti.trim().toUpperCase() };
         let r0 = 'network';
         fetch('/api/party', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
           .then(r => { r0 = r.status; return r.json().then(d => ({ ok: r.ok, d }), () => ({ ok: false, d: {} })); })
