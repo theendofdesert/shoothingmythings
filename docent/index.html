@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+<title>도슨트 · 「나의 동네, 낯선 동네」</title>
+<meta property="og:title" content="도슨트 · 「나의 동네, 낯선 동네」">
+<meta property="og:description" content="성북구 도시 문화 사진전 「나의 동네, 낯선 동네」 공간별 음성 안내">
+<meta property="og:url" content="https://www.shootingmythings.studio/docent">
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>도슨트 · 「나의 동네, 낯선 동네」</title>
+<meta property="og:title" content="도슨트 · 「나의 동네, 낯선 동네」">
+<meta property="og:description" content="성북구 도시 문화 사진전 「나의 동네, 낯선 동네」 공간별 음성 안내">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+html,body{margin:0;background:#ffffff;}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;color:#141414;-webkit-font-smoothing:antialiased;}
+a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
+</style>
+</helmet>
+<div style="max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;">
+  <audio ref="{{ audioRef }}" onEnded="{{ onEnded }}" onTimeUpdate="{{ onTime }}" onPlay="{{ onPlayEv }}" onPause="{{ onPauseEv }}" preload="auto"></audio>
+
+  <div style="position:sticky;top:0;z-index:5;background:rgba(244,244,244,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 -1px 0 #efefef;">
+    <div style="padding:8px 20px 4px;">
+      <div style="position:relative;height:24px;margin:0 calc((100% / 12));">
+        <div style="position:absolute;left:0;right:0;top:11px;height:2px;border-radius:9999px;background:#e6e6e6;"></div>
+        <div style="position:absolute;left:0;width:{{ lineW }};top:11px;height:2px;border-radius:9999px;background:#141414;transition:width .55s cubic-bezier(.4,0,.2,1);"></div>
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+          <span style="position:absolute;top:9px;left:{{ t.x }};width:6px;height:6px;margin-left:-3px;border-radius:9999px;background:{{ t.dot }};transition:background .3s;"></span>
+        </sc-for>
+        <div style="position:absolute;top:0;left:{{ lineW }};transform:translateX(-50%);width:26px;height:24px;display:flex;align-items:center;justify-content:center;background:#f4f4f4;border-radius:9999px;transition:left .55s cubic-bezier(.4,0,.2,1);">
+          <sc-if value="{{ mk.walk }}" hint-placeholder-val="{{ true }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b70"><circle cx="13.5" cy="3.6" r="2.1"></circle><path d="M10.6 7.3c.5-.4 1.2-.6 1.9-.5l1.4.2c.8.1 1.4.7 1.6 1.4l.8 2.6 2.4 1.2a1 1 0 0 1-.9 1.8l-2.8-1.4a1 1 0 0 1-.5-.6l-.4-1.3-1 3.6 2.5 2.4c.2.2.3.4.3.7l.5 4.3a1 1 0 0 1-2 .2l-.4-3.9-2.6-2.4-1 3.1a1 1 0 0 1-.3.5l-2.8 2.9a1 1 0 0 1-1.4-1.4l2.6-2.7 1.9-6.7-1.1.6-1 2.6a1 1 0 0 1-1.9-.7l1.2-2.9c.1-.2.3-.4.5-.5z"></path></svg>
+          </sc-if>
+          <sc-if value="{{ mk.camera }}" hint-placeholder-val="{{ false }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b70"><path d="M9 4.5a1 1 0 0 0-.8.4L7 6.5H4.5A2.5 2.5 0 0 0 2 9v8.5A2.5 2.5 0 0 0 4.5 20h15a2.5 2.5 0 0 0 2.5-2.5V9a2.5 2.5 0 0 0-2.5-2.5H17l-1.2-1.6a1 1 0 0 0-.8-.4zM12 9.2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path></svg>
+          </sc-if>
+          <sc-if value="{{ mk.pin }}" hint-placeholder-val="{{ false }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b70"><path d="M12 2a7 7 0 0 0-7 7c0 5.1 6.1 12.3 6.3 12.6a.9.9 0 0 0 1.4 0C12.9 21.3 19 14.1 19 9a7 7 0 0 0-7-7zm0 4.3a2.7 2.7 0 1 1 0 5.4 2.7 2.7 0 0 1 0-5.4z"></path></svg>
+          </sc-if>
+          <sc-if value="{{ mk.house }}" hint-placeholder-val="{{ false }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6b70"><path d="M11.3 3.3a1 1 0 0 1 1.4 0l8 7.4a1 1 0 0 1-.7 1.8h-1v7a1.5 1.5 0 0 1-1.5 1.5h-3a1 1 0 0 1-1-1v-4.5h-3V20a1 1 0 0 1-1 1h-3A1.5 1.5 0 0 1 5 19.5v-7H4a1 1 0 0 1-.7-1.8z"></path></svg>
+          </sc-if>
+          <sc-if value="{{ mk.dot }}" hint-placeholder-val="{{ false }}">
+            <span style="width:12px;height:12px;border-radius:9999px;background:#ff6b70;box-shadow:0 0 0 4px #ffe1e3;"></span>
+          </sc-if>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+          <button onClick="{{ t.go }}" aria-label="{{ t.n }}번 {{ t.zl }}" style="height:22px;border:0;background:none;padding:0;font:inherit;font-size:11px;font-weight:{{ t.zw }};color:{{ t.fg }};letter-spacing:-0.01em;cursor:pointer;transition:color .3s;">{{ t.zl }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:18px 20px 0;display:flex;flex-direction:column;gap:22px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <span style="font-size:12px;font-weight:600;color:#8a8a8a;letter-spacing:-0.01em;">「나의 동네, 낯선 동네」</span>
+      <a href="/" style="display:flex;align-items:center;gap:2px;font-size:12px;font-weight:600;color:#707070;">전시 소개 <span style="font-size:14px;">›</span></a>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:22px;box-shadow:inset 0 -1px 0 #ececec;">
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:0;">
+        <h1 style="margin:0;font-size:28px;font-weight:700;line-height:1.25;letter-spacing:-0.04em;word-break:keep-all;text-wrap:balance;">{{ sec.title }}</h1>
+      </div>
+      <span style="flex:none;width:58px;height:58px;border-radius:9999px;background:#141414;color:#ffffff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.65);letter-spacing:0.02em;">{{ sec.tab }}</span><span style="font-size:22px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;">{{ sec.n }}</span></span>
+    </div>
+
+    <sc-if value="{{ noAudio }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:16px 18px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.55;color:#4a4a4a;">음성 안내를 준비하고 있습니다. 아래 글을 천천히 읽어 주세요.</div>
+    </sc-if>
+
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <sc-for list="{{ paras }}" as="p" hint-placeholder-count="4">
+        <p onClick="{{ p.play }}" style="margin:0;font-size:17px;line-height:1.8;letter-spacing:-0.015em;color:{{ p.color }};text-align:justify;word-break:keep-all;cursor:{{ p.cursor }};transition:color .3s;">{{ p.t }}</p>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+      <sc-for list="{{ extras }}" as="x" hint-placeholder-count="1">
+        <div style="padding:18px 18px 20px;border-radius:16px;background:#f5f5f5;display:flex;flex-direction:column;gap:10px;">
+          <span style="font-size:13px;font-weight:700;letter-spacing:-0.01em;">{{ x.h }}</span>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <sc-for list="{{ x.lines }}" as="l" hint-placeholder-count="1">
+              <span style="font-size:14.5px;line-height:1.65;color:#3a3a3a;word-break:keep-all;">{{ l }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ coach }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCoach }}" style="position:fixed;inset:0;z-index:30;background:rgba(10,10,10,0.78);cursor:pointer;color:#ffffff;">
+      <div style="position:relative;max-width:480px;height:100%;margin:0 auto;">
+        <div style="position:absolute;left:20px;right:20px;top:100px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+          <svg width="18" height="26" viewBox="0 0 18 26" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 25V2M2 9l7-7 7 7"></path></svg>
+          <span style="font-size:16px;font-weight:700;letter-spacing:-0.02em;">지금 있는 공간</span>
+          <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.8);word-break:keep-all;">입구부터 출구까지 관람 순서입니다.<br>이름을 누르면 그 공간으로 바로 넘어가요.</span>
+        </div>
+        <div style="position:absolute;left:20px;right:20px;top:44%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+          <span style="width:44px;height:44px;border-radius:9999px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;border-radius:9999px;background:#ffffff;"></span></span>
+          <span style="font-size:16px;font-weight:700;letter-spacing:-0.02em;">문단을 누르면</span>
+          <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.8);word-break:keep-all;">그 문단부터 다시 들려드려요.<br>지금 읽는 문단은 진하게 표시됩니다.</span>
+        </div>
+
+        <div style="position:absolute;left:0;right:0;top:58%;display:flex;justify-content:center;">
+          <span style="height:40px;padding:0 20px;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:700;display:flex;align-items:center;">화면을 누르면 시작합니다</span>
+        </div>
+      </div>
+      <sc-for list="{{ coachTips }}" as="c" hint-placeholder-count="0">
+        <span style="position:absolute;left:{{ c.rl }};top:{{ c.rt }};width:{{ c.rw }};height:{{ c.rh }};border-radius:9999px;box-shadow:0 0 0 2px #ffffff, 0 0 0 6px rgba(255,255,255,0.18);pointer-events:none;"></span>
+        <div style="position:absolute;left:{{ c.lx }};top:{{ c.ly }};transform:{{ c.tf }};display:flex;flex-direction:{{ c.fd }};align-items:{{ c.al }};gap:6px;pointer-events:none;white-space:nowrap;">
+          <span style="font-size:13px;font-weight:700;padding:{{ c.pd }};border-radius:9999px;background:{{ c.bg }};color:{{ c.fc }};">{{ c.t }}</span>
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:{{ c.sa }};margin:{{ c.am }};transform:rotate({{ c.rot }});"><path d="M6 1v17M1 13l5 5 5-5"></path></svg>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <div style="height:64px;flex:none;"></div>
+  <div ref="{{ barRef }}" style="position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -1px 0 #ececec;">
+    <div style="height:2px;background:#f0f0f0;"><div style="height:100%;width:{{ progress }};background:#ff6b70;transition:width .3s linear;"></div></div>
+    <div style="max-width:440px;margin:0 auto;padding:0 12px env(safe-area-inset-bottom);">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;height:40px;">
+        <div style="justify-self:start;display:flex;align-items:center;"><button ref="{{ prevRef }}" onClick="{{ goPrev }}" disabled="{{ noPrev }}" style="height:36px;padding:0 12px 0 8px;font-size:12px;border:0;border-radius:0;background:transparent;color:#141414;font:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ prevOpacity }};display:flex;align-items:center;gap:4px;white-space:nowrap;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span>이전</span></button></div>
+        <div style="margin:-14px 0 -2px;height:48px;border-radius:9999px;background:{{ playBg }};color:#ffffff;display:flex;align-items:center;box-shadow:0 4px 12px rgba(20,20,20,0.16);">
+          <button ref="{{ playRef }}" onClick="{{ toggle }}" disabled="{{ noAudio }}" aria-label="{{ playLabel }}" style="width:58px;height:48px;border:0;background:none;padding:0 0 0 4px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <sc-if value="{{ playing }}" hint-placeholder-val="{{ false }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><rect x="6" y="5" width="4" height="14" rx="1.2"></rect><rect x="14" y="5" width="4" height="14" rx="1.2"></rect></svg>
+          </sc-if>
+          <sc-if value="{{ paused }}" hint-placeholder-val="{{ true }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" style="margin-left:2px;"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"></path></svg>
+          </sc-if>
+          </button>
+          <span style="width:1px;height:20px;background:rgba(255,255,255,0.28);"></span>
+          <button ref="{{ rateRef }}" onClick="{{ cycleRate }}" aria-label="재생 속도 바꾸기" style="height:48px;padding:0 18px 0 14px;border:0;background:none;color:#ffffff;font:inherit;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;">{{ rateShort }}</button>
+        </div>
+        <div style="justify-self:end;display:flex;align-items:center;"><button ref="{{ nextRef }}" onClick="{{ goNext }}" style="opacity:{{ nextOpacity }};height:36px;padding:0 8px 0 12px;font-size:12px;border:0;border-radius:0;background:transparent;color:#141414;font:inherit;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;flex:none;"><span>{{ nextLabel }}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button></div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;marker&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;걷는 사람&quot;,&quot;카메라&quot;,&quot;지도 핀&quot;,&quot;집&quot;,&quot;점&quot;],&quot;default&quot;:&quot;카메라&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;진행 표시&quot;}}">
+const A = '/docent/audio/';
+const SECTIONS = [
+  { title: '전시에 오신 것을 환영합니다', paras: [
+    ['성북구 도시 문화 사진전 「나의 동네, 낯선 동네」에 오신 것을 환영합니다. 공간마다 놓인 이 안내문을 따라 편하신 속도로 천천히 둘러봐 주세요.', A + '1-1.mp3'],
+    ['한양도성의 북쪽에 자리해 이름 붙여진 성북에는 굽이진 골목의 오래된 주택가와 세월을 간직한 건축물, 새로 조성된 뉴타운이 나란히 놓여 있습니다. 이곳에서 나고 자란 사람, 학업과 일 때문에 잠시 머무는 사람, 새 보금자리를 찾아 정착한 사람. 서로 다른 삶이 교차하며 성북만의 풍경을 만들어 갑니다.', A + '1-2.mp3'],
+    ['이번 전시는 성북을 고향으로 두지 않은 이들의 시선에서 시작되었습니다. 전시를 준비한 저희도 부산, 광주, 의정부 등 저마다 다른 곳에서 학교와 일을 이유로 올라와 성북에 자리를 잡았습니다. 처음 만난 성북은 분명 낯선 동네였습니다.', A + '1-3.mp3'],
+    ['그런데 이곳에 머문 지 10년, 5년, 3년이 지나는 동안 무심코 지나치던 골목과 거리의 풍경이 조금씩 눈에 익었고, 어느새 성북은 ‘나의 동네’가 되어 있었습니다. 매일 오가는 길 위에서 마주한 그 소소한 풍경들을 사진과 영상으로 담았습니다.', A + '1-4.mp3'],
+    ['그래서 이번 전시에는 두 가지 바람을 담았습니다. 성북에 이제 막 오신 분들께는 낯선 동네가 나의 동네가 되는 작은 계기가, 오래 살아오신 분들께는 늘 다니던 길 바깥에 숨어 있던 성북의 풍경을 새로 발견하는 시간이 되기를 바랍니다.', A + '1-5.mp3'],
+    ['낯선 동네가 나의 동네가 되는 데에는 얼마나 많은 시간이 필요 할까요.', A + '1-6.mp3']],
+    extras: [{ h: '관람 순서', lines: ['1 · 한눈에 담는 성북 — 영상 · 도시의 전경', '2 · 풍경에 담긴 사람들의 이야기 — 사진 · 주민 인터뷰', '3 · 일상의 풍경에 머무는 시간 — 사진 · 소소평상', '벽에 붙은 화살표와 리플렛의 공간 안내도를 따라 화살표 순서로 관람해 주세요.'] }] },
+  { title: '한눈에 담는 성북', paras: [
+    ['첫 번째 공간에서는 성북을 하늘에서 내려다봅니다. 입구의 사진 네 장에는 성북에서만 볼 수 있는 풍경을 담았습니다. 위에서부터 차례로 재개발을 기다리는 정릉골, 국내 유일의 오각형 아파트인 대광아파트, 산자락을 따라 아파트가 빼곡히 들어선 서경대 일대, 그리고 재개발이 한창인 가운데에도 제자리를 지키는 교회가 있는 장위 재개발 지구입니다. 다른 곳에서는 쉽게 볼 수 없는 풍경들을 한자리에 모았습니다. 그리고 네 장을 위에서부터 이어 보면, 재개발을 기다리는 옛 주택가에서 아파트가 들어서고, 다시 재건축을 기다리기까지 한 도시가 나고 자라고 다시 태어나는 시간, 말하자면 도시의 생애가 펼쳐집니다.', A + '2-1.mp3'],
+    ['안쪽 공간에서는 드론으로 촬영한 영상 한 편이 상영됩니다. 화면 속에서 골목과 주거지, 그리고 도시를 둘러싼 자연이 하나로 이어지는 모습을 따라가 보세요. 땅 위를 걸을 때는 미처 보지 못했던 동네의 생김새와, 서로 맞닿은 풍경의 결이 눈에 들어오기 시작합니다.', A + '2-2.mp3'],
+    ['멀리서 바라본 이 풍경을 기억해 두시면, 다음 공간에서 만날 사람들의 이야기가 어디에서 펼쳐지는지 더 잘 그려질 것입니다.', A + '2-3.mp3']],
+    extras: [{ h: '평소에는 보기 어려운 성북', lines: ['성북구는 군사 시설이 밀집한 지역이어서 드론 촬영이 쉽게 허가되지 않습니다. 이 영상은 이번 전시를 위해 관할 군사 기관으로부터 정식 촬영 허가를 받아 담아낸 성북의 모습입니다.', '자리에 편하게 앉아 영상을 끝까지 감상해 주세요.'] }] },
+  { title: '풍경에 담긴 사람들의 이야기', paras: [
+    ['긴 복도를 따라 이어지는 두 번째 공간에서는 성북의 다양한 모습을 담은 사진과, 주민들의 경험을 담은 네 편의 인터뷰 영상을 함께 선보입니다.', A + '3-1.mp3'],
+    ['같은 동네에 머물러도 저마다 기억하는 성북은 다를 것이라고 저희들은 생각했습니다. 그래서 작가들의 시선뿐 아니라, 실제로 성북에서 살아온 20대부터 50대까지의 주민들을 만나 이야기를 들었습니다. 어떻게 성북에 살게 되었는지, 지금 이곳에서 어떻게 살아가고 있는지, 새로 이사 온 이웃에게 어떤 말을 건네고 싶은지 물었습니다.', A + '3-2.mp3'],
+    ['그리고 마지막으로 ‘성북의 얼굴’은 무엇인지, 성북 하면 가장 먼저 떠오르는 풍경과 장소를 여쭈었습니다. 이 공간의 사진들은 그 대답 속 풍경을 담은 것입니다.', A + '3-3.mp3'],
+    ['사진과 목소리를 나란히 따라가다 보면, 하나의 동네에 서로 다른 시간과 삶이 겹겹이 쌓여 있다는 것을 발견하실 수 있습니다.', A + '3-4.mp3']],
+    extras: [
+      { h: '1 · 입구 나무', lines: ['성북구가 어떤 풍경을 담고 있는지 먼저 보여 드립니다.', '성북구를 떠올렸을 때, 연상되는 성북구의 다양한 풍경 모습을 언덕 위에서 담아보았습니다.'] },
+      { h: '2 · 액자', lines: ['이 구역의 중심 작품으로, 네 가지 주제로 나뉘어 있습니다.', '"성북구에 이런 곳도 있었어?" 라는 물음을 가지고 보셔도 좋지만, 네가지 주제에 맞춰 어떤 사진끼리 한 묶음일지, 왜 이 순서로 놓였을지 상상하며 보시는 것도 추천드립니다.'] },
+      { h: '3 · TV', lines: ['3분 길이의 인터뷰 영상이 두 편씩 재생됩니다.', '성북에서 살아가면서 쌓은 기억과 추억, 그리고 새로 온 청년들에게 건네는 메시지를 담았습니다. 전체 영상은 마지막 공간에서도 보실 수 있습니다.'] },
+      { h: '4 · 출구 나무', lines: ['인터뷰에 참여해 주신 동네 가게들을 만나 보세요.', '인터뷰에 참여한 가게는 실제 작가들이 N년간 단골로 이용하는 가게로 맛이 아주 훌륭하니 전시를 보신 후 방문해보시는 것도 좋을 것 같습니다.'] }] },
+  { title: '일상의 풍경에 머무는 시간', paras: [
+    ['마지막 공간에서는 성북의 거리와 골목을 가까이 마주합니다. 활기찬 도심과 골목, 재개발 지역의 오래된 주택부터 자연과 어우러진 주거지까지, 다양한 풍경을 사진으로 만나실 수 있습니다.', A + '4-1.mp3'],
+    ['무심코 지나치던 골목과 오래된 건물, 계절과 함께 사라져 간 거리의 표정까지. 낯선 동네가 나의 동네가 되려면 작은 것에도 눈길을 주는 시간이 필요하다고 생각했습니다. 그래서 동네 곳곳에 잠시씩 머물며 찍은 사진 90점을 이 공간에 모았습니다.', A + '4-2.mp3'],
+    ['사진은 여섯 개의 판으로 나뉘어 있고, 판마다 하나의 큰 주제가 있고 왼쪽에서 오른쪽으로 스토리가 연결됩니다. 어떤 주제를 가지고 6개의 판을 순서대로 배치하였을 지 상상해보시며 관람하는 것을 추천드립니다. 또 가로줄과 세로줄마다 색감과 스토리를 상상하며 사진을 배치했으니, 색의 흐름과 작가의 배치 의도 스토리를 상상해보며 따라가 보는 것도 하나의 즐거움이 될 것입니다.', A + '4-3.mp3']],
+    extras: [{ h: '이렇게 보시길 권합니다', lines: ['1 · 왼쪽에서 오른쪽으로 천천히 사진을 눈에 담아 주세요.', '2 · 끝나는 지점에 놓인 가꾸가의 가구 설명을 읽어 보세요.', '3 · 마지막으로 평상에 앉아 사진들을 한 번 더 바라봐 주세요.'] }] },
+  { title: '소소평상', paras: [
+    ['성북구 곳곳에는 녹지와 공공 공간이 잘 조성되어 있지만, 사람들이 편하게 머무르고 서로 마주할 수 있도록 돕는 장치는 충분하지 않습니다. 가꾸가는 여러 사람이 둘러앉아 쉬고 이야기를 나누던 전통 가구, 평상에서 그 가능성을 찾았습니다.', A + '5-1.mp3'],
+    ['가구는 보통 혼자 쓰기 마련이지만, 가꾸가는 여러 사람이 함께 쓰는 가구를 만들고 싶었습니다. 누구나 자유롭게 앉아 이야기를 나누고 일상을 공유할 수 있다는 점에서, 평상은 성북에 좋은 쉼터를 만들기에 가장 알맞은 출발점이었습니다.', A + '5-2.mp3'],
+    ['소소평상은 전통 평상에서 출발한 모듈형 가구입니다. 평상 하부의 격자살과 칸을 그리드 구조체로 재해석하고, 중심 일부를 비워 사람과 식물이 함께 머무는 여백을 만들었습니다. 전통 평상은 상판이 묵직하게 채워져 있어 사람들이 바깥을 향해 걸터앉습니다. 소소평상은 거꾸로 가운데를 비워, 사람들이 안쪽을 향해 둘러앉아 서로 마주 볼 수 있도록 했습니다.', A + '5-3.mp3'],
+    ['이번 전시에서는 네 면을 분리해 실내에 놓고, 제작 과정과 지난 기록을 함께 선보입니다.', A + '5-4.mp3'],
+    ['평상에 앉아 사진과 영상, 책으로 성북을 천천히 돌아보세요. 골목 한쪽의 평상에 잠시 앉아 동네를 바라보듯, 오늘 만난 풍경들을 다시 떠올려 보시길 바랍니다. 전시 관람을 모두 마쳤다면, 출구에 배치된 관람 명부와 방명록을 작성 부탁드립니다. 방명록은 팀별로 준비되어 있으니 참고 부탁드립니다.', A + '5-5.mp3']],
+    extras: [
+      { h: '첫 번째 야외 전시 · 공원', lines: ['비워 둔 가운데에 식물을 심었습니다. 골목 틈새의 풀과 집 앞 화분처럼 성북의 정겨운 풍경을 떠올리게 하고, 지나가던 사람들이 식물 주위로 모여 자연스럽게 대화를 나누도록 했습니다.'] },
+      { h: '두 번째 야외 전시 · 정릉천 다리', lines: ['지나치기만 하던 다리에 모듈을 이어 벤치를 놓았고, 계단에는 상판을 따로 빼내 찻상이나 독서대로 쓸 수 있게 해 계단 자체가 좌석이 되도록 했습니다.'] }] },
+  { title: 'OFF THE RECORD', paras: [
+    ['마지막 장소에는 주제에 맞지 않아 남겨진 사진들과 엽서, 스티커가 위치하고 있습니다. 다른 사진들과의 연관성은 없지만 한장 한장 들여다보시면 매력 있는 부분들을 찾으실 수 있습니다. 왼쪽 아래 위치한 스티커는 무료로 제공중에 있으니 원하시는 스티커가 있다면 여러장 가져가주시면 감사하겠습니다.', A + '6-1.mp3'],
+    ['새로운 건물이 들어서고 오래된 주택이 사라지는 동안에도 사람들은 저마다의 자리에서 일상을 이어 갑니다. 분주한 도심과 재개발을 앞둔 주택가, 좁은 골목과 자연에 둘러싸인 주거지가 모두 성북의 현재입니다. 이번 전시는 장소를 사진으로 기록하는 동시에, 그곳에서 살아온 사람들의 목소리를 함께 담아 하나의 동네를 바라보는 다양한 시선을 전하고자 했습니다.', A + '6-2.mp3'],
+    ['오늘 만난 풍경 가운데 익숙한 곳이 있었다면, 그곳을 새롭게 바라보는 계기가 되었기를 바랍니다. 낯선 골목이 더 많았다면, 전시장을 나서는 길에 그중 한 곳을 직접 걸어 보셔도 좋겠습니다.', A + '6-3.mp3'],
+    ['관람해 주셔서 감사합니다.', A + '6-4.mp3']],
+    extras: [
+      { h: '주최 · Shootingmythings', lines: ['일상 속 소중한 순간을 사진과 영상, 글로 담아내는 크리에이티브 미디어 팀입니다. 건축을 공부한 사진작가와 건축가, 카페를 운영하는 사진작가, 영상 PD까지 서로 다른 분야의 네 구성원이 평범한 일상에서 저마다의 아름다움을 발견하고 기록합니다.', '총괄 강태훈 · 사진 장인호, 강태훈 · 영상 손근희, 강태훈 · 기획·마케팅 홍건희'] },
+      { h: '협력 · 가꾸가', lines: ['가구를 디자인하고 제작하는 데 관심 있는 세 명의 건축학도가 모인 팀입니다. 가구가 머물고 스쳐 가는 공공 공간으로 시선을 넓혀, 가구를 통해 공간과 일상을 가꾸어 나가고자 합니다.', '디자인 서대원, 연유빈, 염우인 · 매니징 서대원 · 마케팅 연유빈 · 디렉팅 염우인'] },
+      { h: '후원', lines: ['서울청년센터 성북 · LECTUS'] }] }
+];
+
+const ZONES = ['', 'A', 'B', 'C', 'C', ''];
+const TAB_LABEL = ['입구', 'A', 'B', 'C', '가구', '출구'];
+const ZONE_LABEL = ['입구', 'A 구역', 'B 구역', 'C 구역', 'C 구역 · 가구', '출구'];
+
+class Component extends DCLogic {
+  state = { s: 0, p: 0, playing: false, frac: 0, rate: 1, coach: (() => { try { return !localStorage.getItem('smt-docent-coach'); } catch (e) { return true; } })() };
+  audioRef = React.createRef();
+  barRef = React.createRef(); prevRef = React.createRef(); playRef = React.createRef(); nextRef = React.createRef(); rateRef = React.createRef();
+  measureCoach = () => {
+    const g = r => { const e = r.current; if (!e) return null; const b = e.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height }; };
+    const W = window.innerWidth, pv = g(this.prevRef), pl = g(this.playRef), nx = g(this.nextRef), rt = g(this.rateRef);
+    if (!pv || !pl || !nx || !rt) return;
+    const bar = this.barRef.current ? this.barRef.current.getBoundingClientRect().top : pv.y - 60;
+    const tip = (b, t, mode) => {
+      const ring = { rl: (b.x - 4) + 'px', rt: (b.y - 4) + 'px', rw: (b.w + 8) + 'px', rh: (b.h + 8) + 'px' };
+      if (mode === 'left') return { ...ring, t, lx: (b.x - 10) + 'px', ly: (b.y + b.h / 2) + 'px', tf: 'translate(-100%,-50%)', al: 'center', am: '0', fd: 'row', rot: '-90deg', sa: 'block', pd: '0', bg: 'transparent', fc: '#ffffff' };
+      return { ...ring, t, fd: 'row', rot: '0deg', sa: 'none', am: '0', al: 'center', pd: '7px 12px', bg: '#ffffff', fc: '#141414',
+        lx: (b.x + b.w / 2) + 'px', ly: (b.y + b.h / 2) + 'px', tf: 'translate(-50%,-50%)' };
+      const cx = b.x + b.w / 2, a = cx < W * 0.3 ? 'start' : (cx > W * 0.7 ? 'end' : 'center');
+      return { ...ring, t, fd: 'column', rot: '0deg', lx: (a === 'start' ? b.x : a === 'end' ? b.x + b.w : cx) + 'px', ly: (bar - 10) + 'px',
+        tf: a === 'start' ? 'translate(0,-100%)' : a === 'end' ? 'translate(-100%,-100%)' : 'translate(-50%,-100%)',
+        al: a === 'start' ? 'flex-start' : a === 'end' ? 'flex-end' : 'center',
+        am: a === 'start' ? '0 0 0 ' + (b.w / 2 - 6) + 'px' : a === 'end' ? '0 ' + (b.w / 2 - 6) + 'px 0 0' : '0' };
+    };
+    const tips = [tip(pv, '이전 공간'), tip(pl, '듣기 · 멈추기'), tip(nx, '다음 공간'), tip(rt, '속도')];
+    this.setState({ coachTips: tips });
+  };
+  componentDidMount() {
+    requestAnimationFrame(() => requestAnimationFrame(this.measureCoach));
+    window.addEventListener('resize', this.measureCoach);
+    this.readHash = () => { const n = parseInt((location.hash || '').replace('#', ''), 10); if (n >= 1 && n <= SECTIONS.length) this.goto(n - 1, false); };
+    this.readHash();
+    window.addEventListener('hashchange', this.readHash);
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.readHash); }
+  goto(i, push = true) {
+    const a = this.audioRef.current; if (a) { a.pause(); a.removeAttribute('src'); a.load(); }
+    this.setState({ s: i, p: 0, playing: false, frac: 0 });
+    if (push && location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+    window.scrollTo(0, 0);
+  }
+  playAt(p) {
+    const sec = SECTIONS[this.state.s]; const url = sec.paras[p] && sec.paras[p][1]; const a = this.audioRef.current;
+    if (!url || !a) return;
+    this.setState({ p, frac: 0 });
+    if (a.getAttribute('src') !== url) a.src = url;
+    a.currentTime = 0; a.playbackRate = this.state.rate; a.play().catch(() => {});
+  }
+  renderVals() {
+    const { s, p, playing, frac } = this.state; const sec = SECTIONS[s];
+    const hasAudio = sec.paras.some(x => x[1]); const started = playing || frac > 0 || p > 0;
+    const prev = SECTIONS[s - 1], next = SECTIONS[s + 1];
+    return {
+      audioRef: this.audioRef,
+      coach: this.state.coach,
+      coachTips: this.state.coachTips || [],
+      barRef: this.barRef, prevRef: this.prevRef, playRef: this.playRef, nextRef: this.nextRef, rateRef: this.rateRef,
+      closeCoach: () => { try { localStorage.setItem('smt-docent-coach', '1'); } catch (e) {} this.setState({ coach: false }); },
+      tabs: SECTIONS.map((_, i) => ({ n: i + 1, zl: TAB_LABEL[i], done: i < s, notDone: i >= s,
+        fg: i === s ? '#141414' : (i < s ? '#707070' : '#b4b4b4'), zw: i === s ? 700 : 500,
+        x: (i / (SECTIONS.length - 1) * 100) + '%', dot: i <= s ? '#141414' : '#cfcfcf',
+        go: () => this.goto(i) })),
+      mk: (() => { const m = this.props.marker ?? '카메라'; return { walk: m === '걷는 사람', camera: m === '카메라', pin: m === '지도 핀', house: m === '집', dot: m === '점' }; })(),
+      lineW: (s / (SECTIONS.length - 1) * 100) + '%',
+      sec: { n: s + 1, title: sec.title, zone: ZONE_LABEL[s], tab: TAB_LABEL[s] },
+      hasAudio, noAudio: !hasAudio, playing, paused: !playing,
+      playLabel: playing ? '일시정지' : (started ? '이어 듣기' : '음성으로 듣기'),
+      paraLabel: hasAudio ? (p + 1) + ' / ' + sec.paras.length : '음성 준비 중',
+      progress: Math.round(((p + frac) / sec.paras.length) * 1000) / 10 + '%',
+      paras: sec.paras.map((x, i) => ({ t: x[0], color: started && hasAudio ? (i === p ? '#141414' : '#b0b0b0') : '#262626', cursor: x[1] ? 'pointer' : 'default', play: () => this.playAt(i) })),
+      extras: sec.extras || [],
+      toggle: () => { const a = this.audioRef.current; if (!a) return; if (playing) a.pause(); else if (a.getAttribute('src')) a.play().catch(() => {}); else this.playAt(p); },
+      onEnded: () => { if (p + 1 < sec.paras.length && sec.paras[p + 1][1]) this.playAt(p + 1); else this.setState({ playing: false, frac: 1 }); },
+      onTime: (e) => { const a = e.target; if (a.duration) this.setState({ frac: a.currentTime / a.duration }); },
+      onPlayEv: () => this.setState({ playing: true }), onPauseEv: () => this.setState({ playing: false }),
+      noPrev: !prev, prevOpacity: prev ? 1 : 0.35, goPrev: () => { if (prev) this.goto(s - 1); },
+      playBg: hasAudio ? '#141414' : '#d0d0d0',
+      rateLabel: this.state.rate + '배속',
+      rateShort: (this.state.rate === 1 ? '1.0' : this.state.rate) + '×',
+      cycleRate: () => { const R = [1, 1.25, 1.5, 0.75]; const r = R[(R.indexOf(this.state.rate) + 1) % R.length]; this.setState({ rate: r }); const a = this.audioRef.current; if (a) a.playbackRate = r; },
+      nextLabel: '다음', nextOpacity: next ? 1 : 0.35, goNext: () => { if (next) this.goto(s + 1); }
+    };
+  }
+}
+</script>
+</body>
+</html>
