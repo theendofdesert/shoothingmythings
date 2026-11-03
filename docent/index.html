@@ -124,13 +124,13 @@ a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
     </div>
   </sc-if>
 
-  <div style="height:64px;flex:none;"></div>
+  <div style="height:80px;flex:none;"></div>
   <div ref="{{ barRef }}" style="position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -1px 0 #ececec;">
     <div style="height:2px;background:#f0f0f0;"><div style="height:100%;width:{{ progress }};background:#ff6b70;transition:width .3s linear;"></div></div>
     <div style="max-width:440px;margin:0 auto;padding:0 12px env(safe-area-inset-bottom);">
-      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;height:40px;">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;height:60px;">
         <div style="justify-self:start;display:flex;align-items:center;"><button ref="{{ prevRef }}" onClick="{{ goPrev }}" disabled="{{ noPrev }}" style="height:36px;padding:0 12px 0 8px;font-size:12px;border:0;border-radius:0;background:transparent;color:#141414;font:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ prevOpacity }};display:flex;align-items:center;gap:4px;white-space:nowrap;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span>이전</span></button></div>
-        <div style="margin:-14px 0 -2px;height:48px;border-radius:9999px;background:{{ playBg }};color:#ffffff;display:flex;align-items:center;box-shadow:0 4px 12px rgba(20,20,20,0.16);">
+        <div style="height:48px;border-radius:9999px;background:{{ playBg }};color:#ffffff;display:flex;align-items:center;box-shadow:0 4px 12px rgba(20,20,20,0.16);">
           <button ref="{{ playRef }}" onClick="{{ toggle }}" disabled="{{ noAudio }}" aria-label="{{ playLabel }}" style="width:58px;height:48px;border:0;background:none;padding:0 0 0 4px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
             <sc-if value="{{ playing }}" hint-placeholder-val="{{ false }}">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><rect x="6" y="5" width="4" height="14" rx="1.2"></rect><rect x="14" y="5" width="4" height="14" rx="1.2"></rect></svg>
