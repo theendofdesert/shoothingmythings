@@ -98,7 +98,7 @@
 <p>가꾸가 — 디자인 서대원 연유빈 염우인 · 매니징 서대원 · 마케팅 연유빈 · 디렉팅 염우인</p>
 <h2>관람 안내</h2>
 <p>평일 08:00 – 20:00 · 주말 08:00 – 21:00 · 무인운영 08:00 ~ 12:00, 19:00 ~ 20:00</p>
-<p>특수 일정: 11/07 (토) 네트워킹 세션 진행으로 일반 관람 18:30 종료 · 11/08 (일) 전시 철거일로 모든 관람 14:00 종료</p>
+<p>특수 일정: 11/07 (토) 19:00 – 20:30 애프터 파티 진행(신청 없이 누구나, 마실거리 무료) · 파티 중에도 관람 가능 · 11/08 (일) 전시 철거일로 모든 관람 14:00 종료</p>
 <p>진입로 1: 대로변 기준, 퍼센트 카페 좌측 입구로 들어와 계단을 1층 올라오시면 됩니다. 진입로 2: 하이오 커피 우측 교회 입구로 들어와 계단을 1층 내려오시면 됩니다.</p>
 </article>
 </noscript>
@@ -122,13 +122,13 @@ input,textarea,button{font-family:inherit;}
   <nav data-topnav="" style="position:fixed;top:0;left:50%;transform:translate(-50%,-100%);width:100%;max-width:480px;z-index:40;background:rgba(255,255,255,0.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 -1px 0 #ececec;transition:transform .35s cubic-bezier(.22,1,.36,1);text-align:center;">
     <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:46px;">
       <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
-        <button onClick="{{ n.go }}" style="position:relative;border:0;background:none;padding:0;font-size:13px;font-weight:{{ n.weight }};color:{{ n.color }};cursor:pointer;word-break:keep-all;"><sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span data-badge="" style="position:absolute;left:50%;top:4px;transform:translateX(-50%);font-size:9px;font-weight:700;line-height:1;letter-spacing:0.02em;color:#e5484d;white-space:nowrap;animation:recruitBlink 1.2s ease-in-out infinite;">모집중</span></sc-if>{{ n.label }}<span data-navbar="{{ $index }}" style="position:absolute;left:0;right:0;bottom:0;height:3px;background:#ff6b70;transform-origin:left center;transform:scaleX(0);"></span></button>
+        <button onClick="{{ n.go }}" style="position:relative;border:0;background:none;padding:0;font-size:13px;font-weight:{{ n.weight }};color:{{ n.color }};cursor:pointer;word-break:keep-all;"><sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span data-badge="" style="position:absolute;left:50%;top:4px;transform:translateX(-50%);font-size:9px;font-weight:700;line-height:1;letter-spacing:0.02em;color:#e5484d;white-space:nowrap;animation:recruitBlink 1.2s ease-in-out infinite;">After Party</span></sc-if>{{ n.label }}<span data-navbar="{{ $index }}" style="position:absolute;left:0;right:0;bottom:0;height:3px;background:#ff6b70;transform-origin:left center;transform:scaleX(0);"></span></button>
       </sc-for>
     </div>
     <sc-if value="{{ true }}" hint-placeholder-val="{{ true }}">
       <div style="position:relative;overflow:hidden;display:flex;align-items:center;height:38px;background:#141414;">
         <span data-shine="" style="position:absolute;top:0;bottom:0;left:0;width:24%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.28),rgba(255,255,255,0));pointer-events:none;animation:bannerShine 2.6s ease-in-out infinite;"></span>
-        <button onClick="{{ dOpen }}" style="position:relative;flex:1;min-width:0;height:38px;border:0;background:none;padding:0 16px;display:flex;align-items:center;gap:8px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;word-break:keep-all;white-space:nowrap;overflow:hidden;"><span style="color:#ff8a8d;">11.07 (토)</span><span>네트워킹 세션 참가자 모집</span><span data-more="" style="margin-left:auto;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:9999px;background:#e5484d;color:#ffffff;font-size:12px;font-weight:700;animation:moreGlow 1.6s ease-out infinite;">자세히 ›</span></button>
+        <button onClick="{{ dOpen }}" style="position:relative;flex:1;min-width:0;height:38px;border:0;background:none;padding:0 16px;display:flex;align-items:center;gap:8px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;word-break:keep-all;white-space:nowrap;overflow:hidden;"><span style="color:#ff8a8d;">11.07 (토) 19:00</span><span>After Party</span><span data-more="" style="margin-left:auto;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:9999px;background:#e5484d;color:#ffffff;font-size:12px;font-weight:700;animation:moreGlow 1.6s ease-out infinite;">자세히 ›</span></button>
         
       </div>
     </sc-if>
@@ -339,7 +339,7 @@ input,textarea,button{font-family:inherit;}
         </div>
         <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:14px;background:#fdeeee;font-size:13px;line-height:1.55;color:#262626;word-break:keep-all;text-align:left;">
           <span style="font-weight:700;color:#d23c41;">특수 일정</span>
-          <div style="display:flex;flex-direction:column;gap:1px;letter-spacing:-0.02em;"><span style="font-weight:600;">11/07 (토)</span><span>네트워킹 세션 진행으로 일반 관람은 18:30에 종료됩니다.</span></div>
+          <div style="display:flex;flex-direction:column;gap:1px;letter-spacing:-0.02em;"><span style="font-weight:600;">11/07 (토)</span><span>19:00부터 애프터 파티가 진행됩니다. 파티 중에도 자유롭게 관람하실 수 있습니다. 다만, 관람객이 많아 집중에 어려움이 있을 수 있는 점 양해 부탁드립니다.</span></div>
           <div style="display:flex;flex-direction:column;gap:1px;letter-spacing:-0.02em;"><span style="font-weight:600;">11/08 (일)</span><span>전시 철거일로 모든 관람이 14:00에 종료됩니다.</span></div>
         </div>
       </div>
@@ -383,61 +383,40 @@ input,textarea,button{font-family:inherit;}
         <div data-inv="top" style="position:absolute;inset:0;z-index:2;transform:translateY(30%);">
           <div style="position:absolute;left:0;right:0;top:calc(-100% + 3px);height:100%;background:#fefefe;"></div>
           <img src="assets/layers/07-torn-bottom.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
-          <div style="position:absolute;left:0;right:0;top:6.5%;text-align:center;font-size:clamp(22px, 7.4vw, 32px);font-weight:300;letter-spacing:-0.03em;line-height:1.2;color:#141414;white-space:nowrap;">Networking Session</div>
+          <div style="position:absolute;left:0;right:0;top:6.5%;text-align:center;font-size:clamp(22px, 7.4vw, 32px);font-weight:300;letter-spacing:-0.03em;line-height:1.2;color:#141414;white-space:nowrap;">After Party</div>
         </div>
         <div data-inv="bot" style="position:absolute;inset:0;z-index:1;transform:translateY(-41%);">
           <div style="position:absolute;left:0;right:0;top:calc(100% - 3px);height:100%;background:#fefefe;"></div>
           <img src="assets/layers/11-torn-top.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;">
           <div style="position:absolute;left:0;right:0;top:94.5%;text-align:center;font-size:clamp(11px, 3.2vw, 14px);font-weight:400;color:#141414;white-space:nowrap;font-variant-numeric:tabular-nums;">2026.11.07 19:00</div>
         </div>
-        <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">네트워킹 세션 안내</h2>
+        <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;">애프터 파티 안내</h2>
         
         <div data-inv="info" style="position:absolute;left:7%;right:7%;top:19%;bottom:16%;z-index:3;display:flex;flex-direction:column;gap:14px;opacity:0;pointer-events:none;">
           <div style="flex:1;min-height:0;display:grid;">
-          <div data-inv="introI" style="grid-area:1/1;align-self:center;"><p style="margin:0;font-size:16px;font-weight:400;line-height:1.75;color:#141414;text-align:center;word-break:keep-all;text-wrap:pretty;">성북으로 새롭게 이사 온 분들을 초대합니다. 아직은 낯선 이 동네에서, 먼저 자리 잡은 이웃들이 아껴 둔 장소와 이야기를 나누며 서로를 알아가는 네트워킹 세션을 준비했습니다. 낯선 동네가 나의 동네가 되는 첫걸음을 함께해 주세요.</p></div>
+          <div data-inv="introI" style="grid-area:1/1;align-self:center;"><p style="margin:0;font-size:16px;font-weight:400;line-height:1.75;color:#141414;text-align:center;word-break:keep-all;text-wrap:pretty;">「나의 동네, 낯선 동네」 마지막 주말 저녁, 전시장을 편하게 열어 둡니다. 정해진 순서 없이 음료 한 잔과 함께 사진을 둘러보고, 같은 동네에 사는 사람들과 이야기를 나눠 보세요.</p></div>
           <div data-inv="infoA" style="grid-area:1/1;align-self:center;display:flex;flex-direction:column;gap:14px;">
         <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:8px;font-size:13px;line-height:1.45;">
-          <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 21:00</span>
+          <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 20:30</span>
           <span style="color:#707070;">장소</span><span>전시장 (성북구 동소문로 186, 2층)</span>
-          <span style="color:#707070;">대상</span><span>성북구에 관심이 있는 2·30대 청년</span>
-          <span style="color:#707070;">정원</span><span>선착순 30명</span>
-          <span style="color:#707070;">보증금</span><span>10,000원 <b style="font-weight:700;color:#e5484d;">(참석 확인 후 전액 환불)</b></span>
-          <span style="color:#707070;">신청 마감</span><span>11.05. (목) 23:59 · 입금 기준 선착순</span>
-          <span style="color:#707070;">참고사항</span><span>행사에서는 간단한 핑거푸드와 마실거리가 준비됩니다.</span>
+          <span style="color:#707070;">대상</span><span>성북에 관심 있는 누구나</span>
+          <span style="color:#707070;">참가비</span><span>무료 · 신청 없이 방문</span>
+          <span style="color:#707070;">참고사항</span><span>마실거리 무료 제공, 외부 음료 반입 가능</span>
         </div>
-        <ul style="margin:0;padding:10px 0 0 14px;display:flex;flex-direction:column;gap:4px;font-size:11.5px;line-height:1.5;color:#707070;word-break:keep-all;box-shadow:inset 0 1px 0 #e0e0e0;">
-          <li>네트워킹 세션은 전시와 별개로 운영되며, 네트워킹 세션 진행 간 전시 관람은 제한됩니다.</li>
-          <li>네트워킹 세션 참여를 원하지 않으신 분들은 해당 시간 외의 시간에 관람 부탁드립니다.</li>
-        </ul>
+        <div style="display:flex;gap:8px;padding:10px 12px;border-radius:12px;background:#ffeef0;font-size:12px;line-height:1.5;color:#262626;word-break:keep-all;"><span style="flex:none;font-weight:700;color:#d23c41;">변경</span><span>네트워킹 세션이 애프터 파티로 변경되었습니다.<br>기존 네트워킹 세션 신청자분들의 보증금은 전액 환불됩니다.</span></div>
         
       </div>
 
       <div data-inv="infoB" style="grid-area:1/1;align-self:center;display:flex;flex-direction:column;gap:12px;opacity:0;pointer-events:none;">
-            <h3 style="margin:0;font-size:18px;font-weight:650;letter-spacing:-0.02em;color:#141414;">세션 안내</h3>
-            <p style="margin:0;font-size:14px;font-weight:400;line-height:1.7;color:#262626;">본 행사는 성북구에 관심 있는 청년들이 서로 생각하는 아름다운 성북구의 장소를 교류하며, 관심사나 취미를 함께 교류하고 더 나아가 커뮤니티를 만들어가는 것을 목표로 합니다.</p>
-            <p style="margin:0;font-size:14px;font-weight:400;line-height:1.7;color:#262626;">행사 당일 주최 측 팀원들이 주도하여 단체 관람을 진행한 후 참가자분들이 교류를 이어갈 수 있도록 다양한 행사와 이벤트를 진행할 예정입니다.</p>
+            <h3 style="margin:0;font-size:18px;font-weight:650;letter-spacing:-0.02em;color:#141414;">애프터 파티 안내</h3>
+            <p style="margin:0;font-size:14px;font-weight:400;line-height:1.7;color:#262626;">전시 작품을 넘어 사람들이 교류하고, 성북에서의 또 다른 삶을 이어 가기를 바라는 마음으로 애프터 파티를 엽니다.</p>
+            <p style="margin:0;font-size:14px;font-weight:400;line-height:1.7;color:#262626;">미션이나 정해진 순서는 없습니다. 운영 시간 중 편하신 때에 들러 음료와 함께 전시를 즐기고, 작가진과도 자유롭게 이야기 나눠 보세요.</p>
           </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px;padding-top:12px;box-shadow:inset 0 1px 0 #e0e0e0;">
-          <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
-          <span style="font-size:14px;font-weight:600;">{{ seatLabel }}</span>
-          <span style="font-size:12px;color:#707070;">{{ seatSub }}</span>
-        </div>
-          <sc-if value="{{ pShowForm }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;justify-content:center;gap:8px;">
           <button onClick="{{ dOpen }}" style="height:36px;padding:0 16px;border:0;border-radius:9999px;background:#ff6b70;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">자세히 보기</button>
-          <button onClick="{{ pOpen }}" style="height:36px;padding:0 18px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">신청하기</button>
         </div>
-      </sc-if>
-      <sc-if value="{{ pDone }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <span style="font-size:14px;font-weight:600;">신청이 접수되었습니다</span>
-          <button onClick="{{ pOpen }}" style="height:44px;padding:0 20px;border:0;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">접수 안내 보기</button>
-        </div>
-      </sc-if>
-      <sc-if value="{{ pClosed }}" hint-placeholder-val="{{ false }}">
-        <div style="padding:20px;border-radius:16px;background:#ffffff;font-size:14px;line-height:1.6;color:#262626;text-align:center;">{{ pClosedMsg }}</div>
-      </sc-if>
           </div>
         </div>
       </div>
@@ -584,7 +563,7 @@ input,textarea,button{font-family:inherit;}
       <div style="position:fixed;inset:0;z-index:60;background:#ffffff;overflow-y:auto;-webkit-overflow-scrolling:touch;">
         <div style="max-width:480px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;">
           <div style="position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px 12px 24px;background:#ffffff;box-shadow:inset 0 -1px 0 #f0f0f0;">
-            <span style="font-size:15px;font-weight:600;">네트워킹 세션 안내</span>
+            <span style="font-size:15px;font-weight:600;">애프터 파티 안내</span>
             <button onClick="{{ dClose }}" aria-label="닫기" style="width:44px;height:44px;border:0;border-radius:9999px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;cursor:pointer;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
             </button>
@@ -593,93 +572,35 @@ input,textarea,button{font-family:inherit;}
           <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#141414;">
             <img src="assets/works/n-cover.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,20,20,0.15) 40%, rgba(20,20,20,0.55) 100%);"></div>
-            <div style="position:absolute;left:24px;right:24px;top:24px;display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);"><span>Networking Session</span><span>참가자 모집</span></div>
-            <p style="position:absolute;left:24px;right:24px;bottom:28px;margin:0;font-size:28px;font-weight:400;line-height:1.35;letter-spacing:-0.04em;color:#ffffff;word-break:keep-all;">성북에 온 지 꽤 되었는데,<br>아직 밥 한 끼 같이 할<br>친구가 없다면</p>
+            <div style="position:absolute;left:24px;right:24px;top:24px;display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);"><span>After Party</span><span>신청 없이 방문</span></div>
+            <p style="position:absolute;left:24px;right:24px;bottom:28px;margin:0;font-size:28px;font-weight:400;line-height:1.35;letter-spacing:-0.04em;color:#ffffff;word-break:keep-all;">전시가 끝난 저녁<br>음료 한 잔과 함께 다같이 놀아요.</p>
           </div>
 
           <div style="padding:32px 24px 0;display:flex;flex-direction:column;gap:14px;">
             <p style="margin:0;font-size:20px;font-weight:600;line-height:1.45;letter-spacing:-0.03em;word-break:keep-all;">낯선 동네가 나의 동네가 되려면,<br>결국 이웃이 필요합니다.</p>
-            <p style="margin:0;font-size:15px;line-height:1.75;color:#707070;text-align:justify;word-break:keep-all;">「나의 동네, 낯선 동네」는 성북을 고향으로 두지 않은 청년들이 바라본 성북을 담은 전시입니다. 작품을 넘어 이곳에서 사람들이 교류하고 관계를 맺으며, 성북에서의 또 다른 삶을 이어 가기를 바라는 마음으로 네트워킹 세션을 준비했습니다.</p>
+            <p style="margin:0;font-size:15px;line-height:1.75;color:#707070;text-align:justify;word-break:keep-all;">전시 작품을 넘어 사람들이 교류하고, 성북에서의 또 다른 삶을 이어 가기를 바라는 마음으로 애프터 파티를 엽니다. 미션이나 정해진 순서 없이, 운영 시간 중 편하신 때 들러 음료와 함께 전시를 즐기고 작가진과도 자유롭게 이야기 나눠 보세요.</p>
+            <div style="display:flex;gap:8px;padding:12px 14px;border-radius:14px;background:#ffeef0;font-size:13px;line-height:1.55;color:#262626;word-break:keep-all;"><span style="flex:none;font-weight:700;color:#d23c41;">변경</span><span>11월 7일 네트워킹 세션은 주최팀 내부 사정으로 애프터 파티로 변경되었습니다. 신청자분들의 보증금은 전액 환불됩니다.</span></div>
           </div>
-
-          <div style="padding:44px 24px 0;display:flex;flex-direction:column;gap:18px;">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <h3 style="margin:0;font-size:20px;font-weight:600;line-height:1.45;letter-spacing:-0.03em;word-break:keep-all;">네트워킹이 처음이어도 자연스럽게</h3>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-              <div style="display:grid;grid-template-columns:40% minmax(0,1fr);gap:16px;align-items:center;">
-                <div style="position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;"><img src="assets/works/n-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:49% 50%;transform:scale(1.4);transform-origin:49% 50%;"><span style="position:absolute;left:10px;top:6px;font-size:20px;font-weight:300;color:#ffffff;">01</span></div>
-                <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:16px;font-weight:600;">컬러 커넥션</span><span style="font-size:14px;line-height:1.6;color:#262626;word-break:keep-all;">다른 색 스티커를 가진 분과 질문을 나누고 스티커를 교환해요.</span></div>
-              </div>
-              <div style="display:grid;grid-template-columns:40% minmax(0,1fr);gap:16px;align-items:center;">
-                <div style="position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;"><img src="assets/works/n-secret.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;"><span style="position:absolute;left:10px;top:6px;font-size:20px;font-weight:300;color:#ffffff;">02</span></div>
-                <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:16px;font-weight:600;">시크릿 개별 미션</span><span style="font-size:14px;line-height:1.6;color:#262626;word-break:keep-all;">여섯 색을 모두 모으면 비밀 미션 카드를 받을 수 있어요.</span></div>
-              </div>
-              <div style="display:grid;grid-template-columns:40% minmax(0,1fr);gap:16px;align-items:center;">
-                <div style="position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;"><img src="assets/works/n-team.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 50%;"><span style="position:absolute;left:10px;top:6px;font-size:20px;font-weight:300;color:#ffffff;">03</span></div>
-                <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:16px;font-weight:600;">팀 미션</span><span style="font-size:14px;line-height:1.6;color:#262626;word-break:keep-all;">현장에서 배정된 팀과 함께 성북 이야기를 나누며 미션을 풀어요.</span></div>
-              </div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:16px;background:#f3f3f3;font-size:13px;line-height:1.6;color:#262626;word-break:keep-all;">
-              <span>· 스태프와 작가진이 전 과정에서 자연스러운 대화를 도와요.</span>
-              <span>· 팀 배정은 시크릿 개별 미션이 끝난 뒤 현장에서 진행해요.</span>
-              <span>· 시크릿 개별 미션과 팀 미션마다 소정의 경품이 있어요.</span>
-            </div>
-          </div>
-
-          <div style="padding:44px 24px 0;display:flex;flex-direction:column;gap:18px;">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <h3 style="margin:0;font-size:20px;font-weight:600;line-height:1.45;letter-spacing:-0.03em;word-break:keep-all;">먼저 말 걸기 어려워도 괜찮아요</h3>
-              <p style="margin:0;font-size:14px;line-height:1.7;color:#262626;text-align:justify;word-break:keep-all;">네트워킹이 처음이거나 먼저 말을 걸기 어려운 분도 괜찮습니다. 팔찌 색으로 지금의 대화 상태를 알려 주세요.</p>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:16px;background:#f3f3f3;"><span style="flex:none;width:32px;height:32px;border-radius:9999px;box-sizing:border-box;border:7px solid oklch(0.6 0.19 27);"></span><div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:15px;font-weight:600;">빨강 · 대화할 준비 완료</span><span style="font-size:13px;color:#707070;">제가 먼저 말 걸게요</span></div></div>
-              <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:16px;background:#f3f3f3;"><span style="flex:none;width:32px;height:32px;border-radius:9999px;box-sizing:border-box;border:7px solid oklch(0.62 0.14 150);"></span><div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:15px;font-weight:600;">초록 · 먼저 말 걸어 주세요</span><span style="font-size:13px;color:#707070;">대화 초대는 언제나 환영</span></div></div>
-              <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:16px;background:#f3f3f3;"><span style="flex:none;width:32px;height:32px;border-radius:9999px;box-sizing:border-box;border:7px solid oklch(0.84 0.16 88);"></span><div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:15px;font-weight:600;">노랑 · 잠시 쉬는 중</span><span style="font-size:13px;color:#707070;">지금은 관람하거나 쉴래요</span></div></div>
-            </div>
-            <span style="font-size:12px;color:#707070;">팔찌 색은 언제든 카운터에서 바꿀 수 있습니다.</span>
-          </div>
-
-          <div style="margin-top:44px;padding:36px 24px 32px;background:#f3f3f3;display:flex;flex-direction:column;gap:14px;">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <h3 style="margin:0;font-size:20px;font-weight:600;line-height:1.45;letter-spacing:-0.03em;word-break:keep-all;">행사 일정</h3>
-            </div>
-            <div style="display:flex;flex-direction:column;">
-              <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:14px 0;box-shadow:inset 0 1px 0 #dcdcdc;align-items:baseline;"><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;">18:30</span><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:15px;font-weight:600;">등록</span><span style="font-size:13px;color:#707070;">명찰 작성 · 팔찌 색 고르기 · 전시 개별 관람</span></div></div>
-              <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:14px 0;box-shadow:inset 0 1px 0 #dcdcdc;align-items:baseline;"><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;">19:00</span><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:15px;font-weight:600;">오프닝 · 전시 소개</span><span style="font-size:13px;color:#707070;">참여 작가와 작품 소개 · 진행 방식 안내</span></div></div>
-              <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:14px 0;box-shadow:inset 0 1px 0 #dcdcdc;align-items:baseline;"><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;">19:20</span><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:15px;font-weight:600;">자유 네트워킹</span><span style="font-size:13px;color:#707070;">컬러 커넥션 · 시크릿 개별 미션</span></div></div>
-              <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:14px 0;box-shadow:inset 0 1px 0 #dcdcdc;align-items:baseline;"><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;">20:20</span><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:15px;font-weight:600;">팀 네트워킹</span><span style="font-size:13px;color:#707070;">팀별 미션</span></div></div>
-              <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:14px 0;box-shadow:inset 0 1px 0 #dcdcdc, inset 0 -1px 0 #dcdcdc;align-items:baseline;"><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;">21:00</span><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:15px;font-weight:600;">시상 · 단체 사진</span><span style="font-size:13px;color:#707070;">종료 후 자유롭게 2차 · 추천 장소 안내 예정</span></div></div>
-            </div>
-          </div>
-
-          <div style="padding:44px 24px 0;display:flex;flex-direction:column;gap:14px;">
-            <h3 style="margin:0;font-size:20px;font-weight:600;line-height:1.45;letter-spacing:-0.03em;word-break:keep-all;">신청 안내</h3>
+          <div style="padding:40px 24px 0;display:flex;flex-direction:column;gap:14px;">
+            <h3 style="margin:0;font-size:20px;font-weight:600;line-height:1.45;letter-spacing:-0.03em;">행사 안내</h3>
             <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.5;">
-              <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 21:00</span>
+              <span style="color:#707070;">일시</span><span>11.07. (토) 19:00 – 20:30</span>
               <span style="color:#707070;">장소</span><span>전시장 (성북구 동소문로 186, 2층)</span>
-              <span style="color:#707070;">대상</span><span>성북구에 관심이 있는 2·30대 청년</span>
-              <span style="color:#707070;">정원</span><span>선착순 30명</span>
-              <span style="color:#707070;">보증금</span><span>10,000원 <b style="font-weight:700;color:#e5484d;">(참석 확인 후 전액 환불)</b></span>
-              <span style="color:#707070;">신청 마감</span><span>11.05. (목) 23:59 · 입금 기준 선착순</span>
-              <span style="color:#707070;">참고사항</span><span>맥주와 핑거푸드가 준비됩니다.</span>
+              <span style="color:#707070;">대상</span><span>성북에 관심 있는 누구나</span>
+              <span style="color:#707070;">참가비</span><span>무료 · 신청 없이 방문</span>
+              <span style="color:#707070;">참고사항</span><span>마실거리 무료 제공, 외부 음료 반입 가능</span>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:16px;background:#f3f3f3;font-size:13px;line-height:1.6;color:#262626;word-break:keep-all;">
-              <span style="font-weight:600;">유의사항</span>
-              <span>– 네트워킹 세션은 전시와 별개로 운영되며, 네트워킹 세션 진행 간 전시 관람은 제한됩니다.</span>
-              <span>– 네트워킹 세션 참여를 원하지 않으신 분들은 해당 시간 외의 시간에 관람 부탁드립니다.</span>
-              <span>– 본 행사는 과도한 음주를 지양하며, 건전하고 안전한 네트워킹 문화를 지향합니다.</span>
+              <span>– 과도한 음주를 지양하며, 건강하고 안전한 분위기를 지향합니다.</span>
+              <span>– 준비된 음료가 모두 소진될 경우 추가 음료는 제공되지 않습니다. 인근 마트나 편의점 이용을 부탁드립니다.</span>
+              <span>– 별도 안주가 필요하신 분들은 피자, 순살치킨 등 부스러기가 나오지 않는 선에서 개별적으로 배달하셔도 무관합니다.</span>
+              <span>– 공식 행사는 20시 30분에 모두 종료되며, 다 같이 청소를 진행합니다.</span>
             </div>
           </div>
 
           <div style="position:sticky;bottom:0;margin-top:32px;padding:12px 24px calc(12px + env(safe-area-inset-bottom));background:#ffffff;box-shadow:inset 0 1px 0 #f0f0f0;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-            <div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:14px;font-weight:600;">{{ seatLabel }}</span><span style="font-size:12px;color:#707070;">{{ seatSub }}</span></div>
-            <sc-if value="{{ pShowForm }}" hint-placeholder-val="{{ true }}">
-              <button onClick="{{ dApply }}" style="height:52px;padding:0 32px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font-size:16px;font-weight:600;cursor:pointer;">신청하기</button>
-            </sc-if>
-            <sc-if value="{{ pDone }}" hint-placeholder-val="{{ false }}">
-              <button onClick="{{ dApply }}" style="height:48px;padding:0 22px;border:0;border-radius:9999px;background:#f3f3f3;color:#141414;font-size:14px;font-weight:600;cursor:pointer;">접수 안내 보기</button>
-            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:14px;font-weight:600;">신청 없이 누구나</span><span style="font-size:12px;color:#707070;">11.07. (토) 19:00 – 20:30</span></div>
+            <button onClick="{{ dClose }}" style="height:36px;padding:0 16px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">전시 소개 보기</button>
           </div>
         </div>
       </div>
