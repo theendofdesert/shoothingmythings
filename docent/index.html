@@ -60,10 +60,10 @@ a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
     </div>
   </div>
 
-  <div style="padding:18px 20px 0;display:flex;flex-direction:column;gap:22px;opacity:{{ fadeOpacity }};transform:translateX({{ fadeShift }});transition:{{ fadeTrans }};will-change:opacity,transform;">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-      <span style="font-size:12px;font-weight:600;color:#8a8a8a;letter-spacing:-0.01em;">「나의 동네, 낯선 동네」</span>
-      <a href="/" style="display:flex;align-items:center;gap:2px;font-size:12px;font-weight:600;color:#707070;">전시 소개 <span style="font-size:14px;">›</span></a>
+  <div lang="{{ lang }}" style="padding:18px 20px 0;display:flex;flex-direction:column;gap:22px;opacity:{{ fadeOpacity }};transform:translateX({{ fadeShift }});transition:{{ fadeTrans }};will-change:opacity,transform;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+      <span style="min-width:0;font-size:12px;font-weight:600;color:#8a8a8a;letter-spacing:-0.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ ui.exh }}</span>
+      <a href="/" style="justify-self:end;display:flex;align-items:center;gap:2px;font-size:12px;font-weight:600;color:#707070;white-space:nowrap;">{{ ui.about }} <span style="font-size:14px;">›</span></a>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:22px;box-shadow:inset 0 -1px 0 #ececec;">
       <div style="display:flex;flex-direction:column;gap:10px;min-width:0;">
@@ -73,12 +73,18 @@ a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
     </div>
 
     <sc-if value="{{ noAudio }}" hint-placeholder-val="{{ false }}">
-      <div style="padding:16px 18px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.55;color:#4a4a4a;">음성 안내를 준비하고 있습니다. 아래 글을 천천히 읽어 주세요.</div>
+      <div style="padding:16px 18px;border-radius:16px;background:#f3f3f3;font-size:14px;line-height:1.55;color:#4a4a4a;">{{ ui.noAudio }}</div>
+    </sc-if>
+    <sc-if value="{{ enNote }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:#f3f3f3;font-size:13.5px;line-height:1.55;color:#4a4a4a;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#707070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>
+        <span>{{ ui.note }}</span>
+      </div>
     </sc-if>
 
     <div style="display:flex;flex-direction:column;gap:18px;">
       <sc-for list="{{ paras }}" as="p" hint-placeholder-count="4">
-        <p onClick="{{ p.play }}" style="margin:0;font-size:17px;line-height:1.8;letter-spacing:-0.015em;color:{{ p.color }};text-align:justify;word-break:keep-all;cursor:{{ p.cursor }};transition:color .3s;">{{ p.t }}</p>
+        <p onClick="{{ p.play }}" style="margin:0;font-size:17px;line-height:1.8;letter-spacing:-0.015em;color:{{ p.color }};text-align:justify;word-break:{{ p.wb }};hyphens:{{ p.hy }};-webkit-hyphens:{{ p.hy }};cursor:{{ p.cursor }};transition:color .3s;">{{ p.t }}</p>
         <sc-if value="{{ p.rule }}" hint-placeholder-val="{{ false }}"><div style="height:1px;margin:6px 0;background:#e3e3e3;"></div></sc-if>
       </sc-for>
     </div>
@@ -102,17 +108,17 @@ a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
       <div style="position:relative;max-width:480px;height:100%;margin:0 auto;">
         <div style="position:absolute;left:20px;right:20px;top:100px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
           <svg width="18" height="26" viewBox="0 0 18 26" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 25V2M2 9l7-7 7 7"></path></svg>
-          <span style="font-size:16px;font-weight:700;letter-spacing:-0.02em;">지금 있는 공간</span>
-          <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.8);word-break:keep-all;">입구부터 출구까지 관람 순서입니다.<br>이름을 누르면 그 공간으로 바로 넘어가요.</span>
+          <span style="font-size:16px;font-weight:700;letter-spacing:-0.02em;">{{ co.t1 }}</span>
+          <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.8);word-break:keep-all;">{{ co.a1 }}<br>{{ co.b1 }}</span>
         </div>
         <div style="position:absolute;left:20px;right:20px;top:44%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
           <span style="width:44px;height:44px;border-radius:9999px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;border-radius:9999px;background:#ffffff;"></span></span>
-          <span style="font-size:16px;font-weight:700;letter-spacing:-0.02em;">문단을 누르면</span>
-          <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.8);word-break:keep-all;">그 문단부터 다시 들려드려요.<br>지금 읽는 문단은 진하게 표시됩니다.</span>
+          <span style="font-size:16px;font-weight:700;letter-spacing:-0.02em;">{{ co.t2 }}</span>
+          <span style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.8);word-break:keep-all;">{{ co.a2 }}<br>{{ co.b2 }}</span>
         </div>
 
         <div style="position:absolute;left:0;right:0;top:58%;display:flex;justify-content:center;">
-          <span style="height:40px;padding:0 20px;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:700;display:flex;align-items:center;">화면을 누르면 시작합니다</span>
+          <span style="height:40px;padding:0 20px;border-radius:9999px;background:#ffffff;color:#141414;font-size:14px;font-weight:700;display:flex;align-items:center;">{{ co.start }}</span>
         </div>
       </div>
       <sc-for list="{{ coachTips }}" as="c" hint-placeholder-count="0">
@@ -125,12 +131,17 @@ a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
     </div>
   </sc-if>
 
-  <div style="height:80px;flex:none;"></div>
+  <div style="height:124px;flex:none;"></div>
   <div ref="{{ barRef }}" style="position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -1px 0 #ececec;">
+    <div role="group" aria-label="Language" style="position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);display:flex;height:30px;padding:3px;box-sizing:border-box;border-radius:9999px;background:rgba(239,239,239,0.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 4px 14px rgba(20,20,20,0.12);">
+        <button onClick="{{ setKo }}" aria-pressed="{{ isKo }}" style="height:24px;padding:0 9px;border:0;border-radius:9999px;background:{{ koBg }};color:{{ koFg }};box-shadow:{{ koSh }};font:inherit;font-size:11.5px;font-weight:700;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s;">한글</button>
+        <button onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="height:24px;padding:0 9px;border:0;border-radius:9999px;background:{{ enBg }};color:{{ enFg }};box-shadow:{{ enSh }};font:inherit;font-size:11.5px;font-weight:700;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s;">EN</button>
+        <button onClick="{{ setJa }}" aria-pressed="{{ isJa }}" style="height:24px;padding:0 9px;border:0;border-radius:9999px;background:{{ jaBg }};color:{{ jaFg }};box-shadow:{{ jaSh }};font:inherit;font-size:11.5px;font-weight:700;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s;">日本語</button>
+      </div>
     <div style="height:2px;background:#f0f0f0;"><div style="height:100%;width:{{ progress }};background:#ff6b70;transition:width .3s linear;"></div></div>
     <div style="max-width:440px;margin:0 auto;padding:0 12px env(safe-area-inset-bottom);">
       <div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;height:60px;">
-        <div style="justify-self:start;display:flex;align-items:center;"><button ref="{{ prevRef }}" onClick="{{ goPrev }}" disabled="{{ noPrev }}" style="height:36px;padding:0 12px 0 8px;font-size:12px;border:0;border-radius:0;background:transparent;color:#141414;font:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ prevOpacity }};display:flex;align-items:center;gap:4px;white-space:nowrap;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span>이전</span></button></div>
+        <div style="justify-self:start;display:flex;align-items:center;"><button ref="{{ prevRef }}" onClick="{{ goPrev }}" disabled="{{ noPrev }}" style="height:36px;padding:0 12px 0 8px;font-size:12px;border:0;border-radius:0;background:transparent;color:#141414;font:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ prevOpacity }};display:flex;align-items:center;gap:4px;white-space:nowrap;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span>{{ ui.prev }}</span></button></div>
         <div style="height:48px;border-radius:9999px;background:{{ playBg }};color:#ffffff;display:flex;align-items:center;box-shadow:0 4px 12px rgba(20,20,20,0.16);">
           <button ref="{{ playRef }}" onClick="{{ toggle }}" disabled="{{ noAudio }}" aria-label="{{ playLabel }}" style="width:58px;height:48px;border:0;background:none;padding:0 0 0 4px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
             <sc-if value="{{ playing }}" hint-placeholder-val="{{ false }}">
@@ -141,7 +152,7 @@ a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
           </sc-if>
           </button>
           <span style="width:1px;height:20px;background:rgba(255,255,255,0.28);"></span>
-          <button ref="{{ rateRef }}" onClick="{{ cycleRate }}" aria-label="재생 속도 바꾸기" style="height:48px;padding:0 18px 0 14px;border:0;background:none;color:#ffffff;font:inherit;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;">{{ rateShort }}</button>
+          <button ref="{{ rateRef }}" onClick="{{ cycleRate }}" aria-label="{{ ui.rateAria }}" style="height:48px;padding:0 18px 0 14px;border:0;background:none;color:#ffffff;font:inherit;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;">{{ rateShort }}</button>
         </div>
         <div style="justify-self:end;display:flex;align-items:center;"><button ref="{{ nextRef }}" onClick="{{ goNext }}" style="opacity:{{ nextOpacity }};height:36px;padding:0 8px 0 12px;font-size:12px;border:0;border-radius:0;background:transparent;color:#141414;font:inherit;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;flex:none;"><span>{{ nextLabel }}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button></div>
         
@@ -205,12 +216,130 @@ const SECTIONS = [
       { h: '후원', lines: ['서울청년센터 성북 · LECTUS'] }] }
 ];
 
+
+const EN = [
+  { title: "Welcome to the Exhibition", paras: [
+    "Welcome to 「My Neighborhood, Unfamiliar Neighborhood」, an urban culture photography exhibition of Seongbuk-gu. Please follow the guides placed in each space and take your time looking around at your own pace.",
+    "This exhibition is organized by Shootingmythings, a creative media team that captures precious everyday moments through photography, video, and writing, in collaboration with Gakkuga, a team of three architecture students who design and build furniture. Alongside the photographs, you can also enjoy video works and furniture.",
+    "First, please listen to the introduction in front of the large photo wall facing the entrance. Then check the self-guided viewing notes at the information desk and pick up a leaflet. The photos and postcards on the table to your left will be introduced after you finish the tour, so please follow the arrows on the walls and floor and view the exhibition in order.",
+    "Named for its place north of Hanyangdoseong, the old city wall of Seoul, Seongbuk is home to winding alleys of old houses, buildings that hold the passage of time, and newly built 'new towns', all side by side. People born and raised here, people staying for a while for school or work, people who found a new home and settled down — their different lives cross paths and shape a landscape that belongs only to Seongbuk.",
+    "This exhibition began from the perspective of those who do not call Seongbuk their hometown. We, the team behind it, also came from different places — Busan, Gwangju, Uijeongbu — for school and work, and settled in Seongbuk. The Seongbuk we first met was, without a doubt, an unfamiliar neighborhood.",
+    "Ten years, five years, three years. Each of us has spent a different length of time here, but we share one thing: the small scenes we passed every day have quietly become a familiar and warm part of our daily lives. Alleys we walked past without a thought, old buildings, the changing face of the streets with each season. Over about six months, we turned the moments where our eyes lingered into these works.",
+    "How much time does it take for an unfamiliar neighborhood to become your own? Perhaps the change begins not with a special event, but with small moments — walking the same streets each day and glancing at familiar scenery.",
+    "We prepared this exhibition by looking again at everyday life in Seongbuk, where we live. For those who have just arrived, we hope it becomes a small step toward making an unfamiliar neighborhood your own. For those who have lived here long, we hope it is a time to discover the Seongbuk hidden just beyond the streets you always walk."],
+    extras: [{ h: "Viewing Order", lines: ["① Seongbuk at a Glance", "② Stories Within the Landscape", "③ Time Spent in Everyday Scenes"] }] },
+  { title: "Seongbuk at a Glance", paras: [
+    "In the first space, you look down on Seongbuk from the sky. The four photographs at the entrance capture scenes found only in Seongbuk. From the top: Jeongneung-gol, awaiting redevelopment; Daegwang Apartments, the only pentagonal apartment building in Korea; the area around Seokyeong University, where apartments crowd along the mountainside; and the Jangwi redevelopment district, where a church holds its ground amid ongoing redevelopment. We have gathered in one place scenes rarely seen elsewhere. Read the four photographs from top to bottom, and the life of a city unfolds — from old houses awaiting redevelopment, to apartments rising, to waiting once again for reconstruction: a city being born, growing, and being reborn.",
+    "In the inner space, a video filmed by drone is screened. Follow how the alleys, homes, and the nature surrounding the city connect into one on screen. You will begin to notice the shape of the neighborhood and the texture of landscapes touching one another — things you could not see while walking on the ground.",
+    "Keep this view from afar in mind, and you will better picture where the stories of the people you meet in the next space take place."],
+    extras: [{ h: "A Rarely Seen Seongbuk", lines: ["Seongbuk-gu has many military facilities, so drone filming is not easily permitted. This video was made for the exhibition with official filming permission from the relevant military authority.", "Please take a seat and enjoy the video to the end."] }] },
+  { title: "Stories Within the Landscape", paras: [
+    "The second space, along the long corridor, presents photographs of Seongbuk's many faces together with four interview videos sharing residents' experiences.",
+    "We believed that even people living in the same neighborhood each remember a different Seongbuk. So beyond our own view as artists, we met residents in their twenties to fifties who have actually lived in Seongbuk and listened to their stories. We asked how they came to live here, how they live here now, and what they would like to say to neighbors who have just moved in.",
+    "Finally, we asked what 'the face of Seongbuk' is — the scenery and places that first come to mind when they think of Seongbuk. The photographs in this space capture the scenes from those answers.",
+    "As you follow the photographs and voices side by side, you will discover that different times and lives are layered within a single neighborhood.",
+    "The wooden wall at the entrance first shows what kinds of scenery Seongbuk-gu holds. From the hilltops, we captured the many scenes that come to mind when one thinks of Seongbuk-gu.",
+    "The framed works that follow are the centerpiece of this space, divided into four themes. You may view them with the question, “There's a place like this in Seongbuk?” — but we also recommend imagining which photographs belong together, and why they were placed in this order.",
+    "The TVs play three-minute interview videos, two at a time. They hold memories built while living in Seongbuk, and messages for young people who have newly arrived. The full videos can also be seen in the last space.",
+    "On the wooden wall at the exit, you can see the neighborhood shops of the interviewees. The Shootingmythings artists have been regulars at these places for years, and the food is excellent — feel free to stop by after the exhibition."],
+    extras: [{ h: "Viewing Order", lines: ["① Entrance wooden wall · Seongbuk seen from the hills", "② Frames · Photographs in four themes", "③ TV · Resident interview videos", "④ Exit wooden wall · The interviewees' shops"] }] },
+  { title: "Time Spent in Everyday Scenes", paras: [
+    "In the last space, you meet Seongbuk's streets and alleys up close. From the lively downtown and alleys and the old houses of redevelopment areas to homes in harmony with nature, its many faces appear in photographs. You will notice that the view here is much closer than in the two previous spaces.",
+    "Alleys we passed without a thought, old buildings, and the faces of streets that faded with the seasons. We felt that for an unfamiliar neighborhood to become your own, you need time to notice even small things. So we gathered in this space 90 photographs taken while pausing in corners across the neighborhood.",
+    "The photographs are arranged on six large panels. Each panel has its own small theme, and together they connect into a larger story from left to right. We recommend imagining what themes guided the order of the six panels as you look. Each row and column was also arranged with color and story in mind, so following the flow of color and imagining the artists' intentions can be another pleasure."],
+    extras: [{ h: "How We Suggest Viewing", lines: ["① Take in the photographs slowly, from left to right.", "② Read the description of Gakkuga's furniture at the end.", "③ Finally, sit on the pyeongsang and look at the photographs once more."] }] },
+  { title: "Soso Pyeongsang", paras: [
+    "Soso Pyeongsang is furniture made by Gakkuga, a team of three architecture students. After two outdoor exhibitions, this is its third. You are welcome to sit on it — please make yourself comfortable and enjoy Gakkuga's photographs and book.",
+    "Seongbuk-gu has plenty of places to rest, such as parks and streams, but most of the furniture there stands alone or faces only one direction. So Gakkuga set out to make furniture where people could face each other, talk, and naturally gather.",
+    "Along the way, they turned to the pyeongsang, a traditional Korean platform where people sat around freely and shared their daily lives. Unlike a traditional pyeongsang, its center is left empty so that people can sit facing inward, toward one another. While deciding what should fill the empty center, they thought of the potted plants placed in front of houses and the plants that grow there naturally — one of the things that make Seongbuk's alleys feel so warm. So they filled the center with plants, so that people could face each other, talk, and create a space together, with plants as the medium.",
+    "On the left is a photograph of the first exhibition, held at Odong Mulbit Garden in Odong Park, with the modules combined into one platform. By placing Soso Pyeongsang in a park already well loved for rest, they hoped to add a new way of resting — not only gazing at the scenery alone, but facing one another, sharing plants, and connecting.",
+    "The photograph on the right shows the second exhibition, held at Cheongdeok Bridge over Jeongneungcheon Stream, a place people mostly pass through. Soso Pyeongsang is modular furniture that can be separated and combined; here, the modules were rearranged into benches on the bridge and tables on the stairs. This turned a bridge and stairs that people simply walked past into a place to sit, rest, and read.",
+    "The photographs in the center show how Soso Pyeongsang was made — cutting and washing the top materials, finishing the wood, and other steps of building the furniture by hand. You can find the full story, from planning and making to exhibiting, in the archive book on the table in the middle of the pyeongsang.",
+    "Feel free to sit on the furniture and enjoy the book and the exhibition. When you have finished viewing, please fill out the visitor log and guestbook to the right of the exit. The visitor log is used only to report attendance and will be discarded after the exhibition ends."],
+    extras: [
+      { h: "How the Photos Are Arranged", lines: ["Left |  First exhibition, Odong Park", "Center |  Making Soso Pyeongsang", "Right |  Second exhibition, Cheongdeok Bridge"] },
+      { h: "When You're Done", lines: ["Please fill out the visitor log and guestbook at the exit. There is a separate guestbook for each team."] }] },
+  { title: "OFF THE RECORD", paras: [
+    "This last spot holds photographs left out because they didn't fit the themes, along with postcards and stickers. They aren't connected to the other photographs, but look at them one by one and you'll find something charming in each. The stickers at the lower left are free — please take as many as you like.",
+    "While new buildings go up and old houses disappear, people carry on with their daily lives in their own places. The busy downtown, houses awaiting redevelopment, narrow alleys, and homes surrounded by nature are all the Seongbuk of today. This exhibition set out to record places in photographs while also capturing the voices of the people who have lived there, sharing the many ways of seeing a single neighborhood.",
+    "If any of today's scenes felt familiar, we hope they gave you a reason to see that place anew. If more of the alleys were unfamiliar, why not walk one of them yourself on your way out?",
+    "Thank you for visiting."],
+    extras: [
+      { h: "Organizer · Shootingmythings", lines: ["A creative media team capturing precious everyday moments through photography, video, and writing. Four members from different fields — a photographer who studied architecture, an architect, a photographer who runs a café, and a video producer — discover and record the beauty in ordinary days.", "Director Kang Taehoon · Photography Jang Inho, Kang Taehoon · Video Son Geunhee, Kang Taehoon · Planning & Marketing Hong Geonhui"] },
+      { h: "Partner · Gakkuga", lines: ["A team of three architecture students interested in designing and building furniture. Widening their view to the public spaces where furniture stays and people pass by, they aim to cultivate spaces and everyday life through furniture.", "Design Seo Daewon, Yeon Yubin, Yeom Wooin · Managing Seo Daewon · Marketing Yeon Yubin · Directing Yeom Wooin"] },
+      { h: "Sponsors", lines: ["Seoul Youth Center Seongbuk · LECTUS"] }] }
+];
+const TAB_LABEL_EN = ['Entrance', 'A', 'B', 'C', 'Furniture', 'Exit'];
+const JA = [
+  { title: "展覧会へようこそ", paras: [
+    "城北区都市文化写真展「わたしの町、見知らぬ町」へようこそ。各スペースに置かれた案内に沿って、ご自分のペースでゆっくりとご覧ください。",
+    "本展は、日常の大切な瞬間を写真や映像、文章で記録するクリエイティブメディアチーム Shootingmythings が主催し、家具のデザインと制作に関心を持つ3人の建築学生によるチーム「カックガ（Gakkuga）」の協力のもと開催されます。そのため、写真のほかに映像や家具もあわせてご覧いただけます。",
+    "まずは、会場正面の大きなフォトウォールの前で展示の説明をお聞きください。その後、インフォメーションで無人観覧の注意事項をご確認のうえ、リーフレットをお取りください。左側のテーブルに置かれた写真とポストカードは観覧後に改めてご案内しますので、壁と床に貼られた矢印に沿って順番にご覧いただけますと幸いです。",
+    "漢陽都城（ソウルの旧城郭）の北側に位置することからその名が付いた城北（ソンブク）には、曲がりくねった路地の古い住宅街、歳月を刻んだ建物、新しく造成されたニュータウンが並んでいます。ここで生まれ育った人、学業や仕事のためにしばらく暮らす人、新たな住まいを求めて定住した人。異なる暮らしが交差しながら、城北ならではの風景をつくり出しています。",
+    "本展は、城北を故郷としない人々のまなざしから始まりました。展示を準備した私たちも、釜山、光州、議政府など、それぞれ異なる場所から学校や仕事のために上京し、城北に住むようになりました。初めて出会った城北は、確かに見知らぬ町でした。",
+    "ここに暮らして10年、5年、3年。城北で過ごした時間はそれぞれ違いますが、毎日行き来する道で出会ったささやかな風景が、いつの間にか見慣れた、温かな日常の一部になったことは同じです。何気なく通り過ぎていた路地や古い建物、季節ごとに表情を変える街並みまで。私たちのまなざしが留まった瞬間を、約6か月の制作を通して作品にしました。",
+    "見知らぬ町が「わたしの町」になるまでに、どれほどの時間が必要でしょうか。もしかするとその変化は、特別な出来事ではなく、毎日同じ道を歩き、見慣れた風景に目を向ける小さな瞬間から始まるのかもしれません。",
+    "本展は、私たちが暮らす城北の日常を改めて見つめ直しながら準備しました。城北に来たばかりの方には見知らぬ町が「わたしの町」になる小さなきっかけに、長く暮らしてきた方にはいつもの道の外側に隠れていた城北の風景を新たに発見する時間になれば幸いです。"],
+    extras: [{ h: "観覧順序", lines: ["① ひと目で見る城北", "② 風景に込められた人々の物語", "③ 日常の風景にとどまる時間"] }] },
+  { title: "ひと目で見る城北", paras: [
+    "最初のスペースでは、城北を空から見下ろします。入口の4枚の写真には、城北でしか見られない風景を収めました。上から順に、再開発を待つ貞陵谷（チョンヌンゴル）、国内唯一の五角形のアパートである大光アパート、山すそに沿ってアパートが立ち並ぶ西京大学周辺、そして再開発が進む中でも教会がその場所を守り続ける長位（チャンウィ）再開発地区です。他ではなかなか見られない風景を一か所に集めました。そして4枚を上から順につなげて見ると、再開発を待つ古い住宅街からアパートが建ち、再び建て替えを待つまで――ひとつの都市が生まれ、育ち、生まれ変わる時間、いわば都市の一生が広がります。",
+    "奥のスペースでは、ドローンで撮影した映像が上映されます。画面の中で、路地と住宅地、そして街を囲む自然がひとつにつながっていく様子をたどってみてください。地上を歩いているときには気づかなかった町のかたちや、互いに接し合う風景の質感が見えてきます。",
+    "遠くから眺めたこの風景を覚えておくと、次のスペースで出会う人々の物語がどこで繰り広げられているのか、より思い描きやすくなるでしょう。"],
+    extras: [{ h: "ふだんは見られない城北", lines: ["城北区は軍事施設が集まる地域のため、ドローン撮影の許可は容易には下りません。この映像は本展のために、管轄の軍事機関から正式な撮影許可を得て撮影した城北の姿です。", "席にゆっくりお座りになって、映像を最後までお楽しみください。"] }] },
+  { title: "風景に込められた人々の物語", paras: [
+    "長い廊下に沿って続く2つ目のスペースでは、城北のさまざまな姿を収めた写真と、住民の経験を語る4本のインタビュー映像をあわせてご紹介します。",
+    "同じ町に暮らしていても、一人ひとりが記憶する城北は違うはずだと私たちは考えました。そこで作家たちの視点だけでなく、実際に城北で暮らしてきた20代から50代の住民に会い、話を聞きました。どのようにして城北に住むことになったのか、今ここでどのように暮らしているのか、新しく引っ越してきた隣人にどんな言葉をかけたいかを尋ねました。",
+    "そして最後に、「城北の顔」とは何か、城北と聞いて真っ先に思い浮かぶ風景や場所を伺いました。このスペースの写真は、その答えの中の風景を収めたものです。",
+    "写真と声を並べてたどっていくと、ひとつの町に異なる時間と暮らしが幾重にも重なっていることに気づかれるでしょう。",
+    "入口の木の壁では、城北区がどのような風景を抱いているのかをまずご紹介します。城北区を思い浮かべたときに連想されるさまざまな風景を、丘の上から撮影しました。",
+    "続く額装作品はこのスペースの中心となる作品で、4つのテーマに分かれています。「城北区にこんな場所もあったの？」という問いを持ってご覧いただくのもよいですが、どの写真同士がひとまとまりなのか、なぜこの順番に並べられたのかを想像しながらご覧になるのもおすすめです。",
+    "テレビでは、3分ほどのインタビュー映像が2本ずつ流れます。城北で暮らしながら積み重ねてきた記憶や思い出、そして新たにやって来た若者たちへのメッセージを収めました。映像の全編は最後のスペースでもご覧いただけます。",
+    "出口の木の壁では、インタビューにご協力いただいた町のお店の様子をご覧いただけます。Shootingmythings の作家たちが長年通う行きつけのお店ばかりで、味も確かですので、観覧後に立ち寄ってみてはいかがでしょうか。"],
+    extras: [{ h: "観覧順序", lines: ["① 入口の木の壁 · 丘の上から見た城北", "② 額装作品 · 4つのテーマの写真", "③ テレビ · 住民インタビュー映像", "④ 出口の木の壁 · インタビュー協力店の様子"] }] },
+  { title: "日常の風景にとどまる時間", paras: [
+    "最後のスペースでは、城北の街並みや路地を間近に見つめます。活気ある都心と路地、再開発地域の古い住宅から自然と調和した住宅地まで、さまざまな姿を写真でご覧いただけます。前の2つのスペースよりも、ぐっと近いまなざしであることがお分かりいただけるでしょう。",
+    "何気なく通り過ぎていた路地や古い建物、季節とともに消えていった街の表情まで。見知らぬ町が「わたしの町」になるには、小さなものにも目を向ける時間が必要だと考えました。そこで、町のあちこちでしばし足を止めて撮った写真90点をこのスペースに集めました。",
+    "写真は大きく6枚のパネルに分かれています。パネルごとに小さなテーマがあり、左から右へ大きな流れの中でつながっています。どのようなテーマで6枚のパネルを順に配置したのかを想像しながらご覧になるのがおすすめです。また、横の列と縦の列ごとに色合いとストーリーを考えて写真を並べましたので、色の流れや作家の配置の意図を想像しながらたどってみるのも、ひとつの楽しみになるでしょう。"],
+    extras: [{ h: "こんなふうにご覧ください", lines: ["① 左から右へ、ゆっくりと写真を目に収めてください。", "② 終わりの地点に置かれた、カックガの家具の説明を読んでみてください。", "③ 最後に平床（ピョンサン）に座って、写真をもう一度眺めてください。"] }] },
+  { title: "ソソピョンサン（小小平床）", paras: [
+    "ソソピョンサンは、3人の建築学生によるチーム「カックガ」が制作した家具です。2回の屋外展示を経て、本展で3回目の展示を行うことになりました。実際に座ることができる家具ですので、気軽に腰掛けて、カックガの写真や本をご覧いただければ幸いです。",
+    "城北区には公園や川辺など憩いの場がよく整備されていますが、ほとんどの家具は独立して置かれているか、一方向を向くように配置されています。そこでカックガは、人々が向かい合って言葉を交わし、自然と集まれる家具をつくろうと考えました。",
+    "その過程で、人々が自由に囲んで座り、日々の暮らしを分かち合ってきた伝統家具「平床（ピョンサン）」に注目しました。従来の平床とは異なり中央を空けることで、人々が内側を向いて互いに向かい合って座れるようにしました。空けた中心を何で満たすかを考える中で、城北の路地の温かな風景をつくる要素のひとつが、家の前に置かれた植木鉢や自然に育つ植物だと思い至りました。そこでその要素である植栽で中心を満たし、人々が植物を介して向かい合い、言葉を交わしながら、ともに空間をつくっていけるよう企画しました。",
+    "左は1回目の展示の写真です。1回目の展示は、平床を合体させた形で梧桐（オドン）公園の「梧桐光の庭」で行いました。すでに憩いの場としてよく利用されている公園にソソピョンサンを設置し、ひとりで風景を眺めて休むだけでなく、人々が向かい合い、植栽を分け合いながら交流できる新しい憩いのかたちを加えようとしました。",
+    "右は2回目の展示の写真です。2回目の展示は、人々が主に行き来する場所である貞陵川（チョンヌンチョン）の清徳橋で行いました。ソソピョンサンはモジュールを分離・結合できる家具で、ここではモジュールを組み替えて、橋の上にはベンチを、階段にはテーブルを配置しました。これにより、ただ通り過ぎるだけだった橋と階段が、人々が座って休んだり本を読んだりしながら過ごせる場所になりました。",
+    "中央に展示された写真では、ソソピョンサンの制作過程をご覧いただけます。天板の材料を切って洗ったり、木材を仕上げ加工したりと、自分たちの手で家具をつくった過程が収められています。企画から制作、展示までのより詳しい物語は、平床中央のテーブルに置かれたアーカイブブックでご覧いただけます。",
+    "家具にも自由に腰掛けて、本と展示をお楽しみください。観覧をすべて終えられたら、出口右側にある観覧者名簿と芳名録へのご記入をお願いいたします。観覧者名簿は参加人数の報告のためにのみ使用し、展示終了後にすべて破棄いたします。"],
+    extras: [
+      { h: "写真の配置", lines: ["左 |  1回目の展示、梧桐公園", "中央 |  ソソピョンサンの制作過程", "右 |  2回目の展示、貞陵川 清徳橋"] },
+      { h: "観覧を終えられたら", lines: ["出口にある観覧者名簿と芳名録にご記入ください。芳名録はチームごとにご用意しています。"] }] },
+  { title: "OFF THE RECORD", paras: [
+    "最後の場所には、テーマに合わず選ばれなかった写真と、ポストカード、ステッカーが置かれています。他の写真との関連はありませんが、一枚一枚のぞいてみると、それぞれの魅力が見つかるはずです。左下にあるステッカーは無料でお配りしていますので、気に入ったものがあれば何枚でもお持ち帰りください。",
+    "新しい建物が建ち、古い住宅が消えていく間にも、人々はそれぞれの場所で日常を続けています。にぎやかな都心と再開発を控えた住宅街、狭い路地と自然に囲まれた住宅地は、どれも今の城北です。本展は、場所を写真で記録すると同時に、そこで暮らしてきた人々の声をともに収め、ひとつの町を見つめるさまざまなまなざしをお伝えしようとしました。",
+    "今日出会った風景の中に見覚えのある場所があったなら、そこを新たに見つめるきっかけになっていれば幸いです。見知らぬ路地の方が多かったなら、会場を出る帰り道に、そのうちの一か所を実際に歩いてみてはいかがでしょうか。",
+    "ご来場いただき、ありがとうございました。"],
+    extras: [
+      { h: "主催 · Shootingmythings", lines: ["日常の大切な瞬間を写真や映像、文章で記録するクリエイティブメディアチームです。建築を学んだ写真家と建築家、カフェを営む写真家、映像PDまで、異なる分野の4人のメンバーが、何気ない日常の中にそれぞれの美しさを見つけ、記録しています。", "総括 カン・テフン · 写真 チャン・インホ、カン・テフン · 映像 ソン・グニ、カン・テフン · 企画・マーケティング ホン・ゴニ"] },
+      { h: "協力 · カックガ", lines: ["家具のデザインと制作に関心を持つ3人の建築学生によるチームです。家具がとどまり、行き交う公共空間へと視野を広げ、家具を通して空間と日常を育んでいこうとしています。", "デザイン ソ・デウォン、ヨン・ユビン、ヨム・ウイン · マネジメント ソ・デウォン · マーケティング ヨン・ユビン · ディレクション ヨム・ウイン"] },
+      { h: "後援", lines: ["ソウル青年センター城北 · LECTUS"] }] }
+];
+const TAB_LABEL_JA = ['入口', 'A', 'B', 'C', '家具', '出口'];
+const AUD = { en: [8, 3, 8, 3, 7, 4].map((n, s) => Array.from({ length: n }, (_, p) => '/docent/audio/en/' + (s + 1) + '-' + (p + 1) + '.mp3')), ja: null };
+
+const UI = {
+  ko: { exh: '「나의 동네, 낯선 동네」', about: '전시 소개', prev: '이전', next: '다음', rateAria: '재생 속도 바꾸기', noAudio: '음성 안내를 준비하고 있습니다. 아래 글을 천천히 읽어 주세요.', pause: '일시정지', resume: '이어 듣기', listen: '음성으로 듣기', tips: ['이전 공간', '듣기 · 멈추기', '다음 공간', '속도'],
+    note: '', co: { t1: '지금 있는 공간', a1: '입구부터 출구까지 관람 순서입니다.', b1: '이름을 누르면 그 공간으로 바로 넘어가요.', t2: '문단을 누르면', a2: '그 문단부터 다시 들려드려요.', b2: '지금 읽는 문단은 진하게 표시됩니다.', start: '화면을 누르면 시작합니다' } },
+  en: { exh: 'My Neighborhood, Unfamiliar Neighborhood', about: 'About', prev: 'Prev', next: 'Next', rateAria: 'Change playback speed', noAudio: 'The audio guide is being prepared. Please read the text below at your own pace.', pause: 'Pause', resume: 'Resume', listen: 'Listen', tips: ['Previous', 'Play · Pause', 'Next', 'Speed'],
+    note: 'This guide was translated with the help of AI, so some expressions may sound a little unnatural. Thank you for your understanding.', co: { t1: 'Where you are', a1: 'The viewing order, from entrance to exit.', b1: 'Tap a name to jump to that space.', t2: 'Tap a paragraph', a2: 'to listen from that point.', b2: 'The paragraph being read is highlighted.', start: 'Tap anywhere to begin' } },
+  ja: { exh: '「わたしの町、見知らぬ町」', about: '展示紹介', prev: '前へ', next: '次へ', rateAria: '再生速度を変更', noAudio: '音声ガイドを準備中です。下の文章をゆっくりお読みください。', pause: '一時停止', resume: '続きを聞く', listen: '音声で聞く', tips: ['前のスペース', '再生 · 停止', '次のスペース', '速度'], note: '本ガイドの文章はAIで翻訳しているため、不自然な表現が含まれる場合があります。あらかじめご了承ください。音声ガイドは韓国語で再生されます。',
+    co: { t1: '今いるスペース', a1: '入口から出口までの観覧順序です。', b1: '名前をタップするとそのスペースへ移動します。', t2: '段落をタップすると', a2: 'その段落から再生します。', b2: '再生中の段落は濃く表示されます。', start: '画面をタップして始める' } }
+};
+const initLang = () => { try { const q = new URLSearchParams(location.search).get('lang'); const ok = v => v === 'en' || v === 'ko' || v === 'ja'; if (ok(q)) return q; const s = localStorage.getItem('smt-docent-lang'); if (ok(s)) return s; const n = navigator.language || 'ko'; return /^ko/i.test(n) ? 'ko' : (/^ja/i.test(n) ? 'ja' : 'en'); } catch (e) { return 'ko'; } };
 const ZONES = ['', 'A', 'B', 'C', 'C', ''];
 const TAB_LABEL = ['입구', 'A', 'B', 'C', '가구', '출구'];
 const ZONE_LABEL = ['입구', 'A 구역', 'B 구역', 'C 구역', 'C 구역 · 가구', '출구'];
 
 class Component extends DCLogic {
-  state = { s: 0, p: 0, playing: false, frac: 0, rate: 1, coach: (() => { try { return !localStorage.getItem('smt-docent-coach'); } catch (e) { return true; } })() };
+  state = { lang: initLang(), s: 0, p: 0, playing: false, frac: 0, rate: 1, coach: (() => { try { return !localStorage.getItem('smt-docent-coach'); } catch (e) { return true; } })() };
   audioRef = React.createRef();
   barRef = React.createRef(); prevRef = React.createRef(); playRef = React.createRef(); nextRef = React.createRef(); rateRef = React.createRef();
   measureCoach = () => {
@@ -229,7 +358,7 @@ class Component extends DCLogic {
         al: a === 'start' ? 'flex-start' : a === 'end' ? 'flex-end' : 'center',
         am: a === 'start' ? '0 0 0 ' + (b.w / 2 - 6) + 'px' : a === 'end' ? '0 ' + (b.w / 2 - 6) + 'px 0 0' : '0' };
     };
-    const tips = [tip(pv, '이전 공간'), tip(pl, '듣기 · 멈추기'), tip(nx, '다음 공간'), tip(rt, '속도')];
+    const tips = [tip(pv, 0), tip(pl, 1), tip(nx, 2), tip(rt, 3)];
     this.setState({ coachTips: tips });
   };
   componentDidMount() {
@@ -254,14 +383,17 @@ class Component extends DCLogic {
     }, 220);
   }
   playAt(p) {
-    const sec = SECTIONS[this.state.s]; const url = sec.paras[p] && sec.paras[p][1]; const a = this.audioRef.current;
+    const sec = SECTIONS[this.state.s]; const la = AUD[this.state.lang]; const url = (la && la[this.state.s] && la[this.state.s][p]) || (sec.paras[p] && sec.paras[p][1]); const a = this.audioRef.current;
     if (!url || !a) return;
     this.setState({ p, frac: 0 });
     if (a.getAttribute('src') !== url) a.src = url;
     a.currentTime = 0; a.playbackRate = this.state.rate; a.play().catch(() => {});
   }
   renderVals() {
-    const { s, p, playing, frac } = this.state; const sec = SECTIONS[s];
+    const { s, p, playing, frac, lang } = this.state; const sec = SECTIONS[s]; const en = lang !== 'ko'; const L = UI[lang] || UI.ko; const esec = (lang === 'ja' ? JA : EN)[s]; const TL = lang === 'ja' ? TAB_LABEL_JA : (lang === 'en' ? TAB_LABEL_EN : TAB_LABEL);
+    const setLang = (l) => { try { localStorage.setItem('smt-docent-lang', l); const u = new URL(location.href); if (l !== 'ko') u.searchParams.set('lang', l); else u.searchParams.delete('lang'); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (e) {} const a = this.audioRef.current; if (a) { a.pause(); a.removeAttribute('src'); a.load(); } this.setState({ lang: l, p: 0, frac: 0, playing: false }); };
+    const segOn = { bg: '#ffffff', fg: '#141414', sh: '0 1px 3px rgba(0,0,0,0.12)' }, segOff = { bg: 'transparent', fg: '#8a8a8a', sh: 'none' };
+    const ko = lang === 'ko' ? segOn : segOff, eo = lang === 'en' ? segOn : segOff, jo = lang === 'ja' ? segOn : segOff;
     const hasAudio = sec.paras.some(x => x[1]); const started = playing || frac > 0 || p > 0;
     const prev = SECTIONS[s - 1], next = SECTIONS[s + 1];
     const fd = this.state.fade, dr = this.state.dir || 1;
@@ -270,24 +402,27 @@ class Component extends DCLogic {
     const fadeTrans = fd === 'pre' ? 'none' : (fd === 'out' ? 'opacity .22s ease, transform .22s ease' : 'opacity .38s ease, transform .38s cubic-bezier(.2,.7,.2,1)');
     return {
       fadeOpacity, fadeShift, fadeTrans,
+      lang, ui: L, co: L.co, enNote: en && !!L.note, isKo: lang === 'ko', isEn: lang === 'en', isJa: lang === 'ja',
+      setKo: () => setLang('ko'), setEn: () => setLang('en'), setJa: () => setLang('ja'),
+      koBg: ko.bg, koFg: ko.fg, koSh: ko.sh, enBg: eo.bg, enFg: eo.fg, enSh: eo.sh, jaBg: jo.bg, jaFg: jo.fg, jaSh: jo.sh,
       audioRef: this.audioRef,
       coach: this.state.coach,
-      coachTips: this.state.coachTips || [],
+      coachTips: (this.state.coachTips || []).map(c => ({ ...c, t: L.tips[c.t] })),
       barRef: this.barRef, prevRef: this.prevRef, playRef: this.playRef, nextRef: this.nextRef, rateRef: this.rateRef,
       closeCoach: () => { try { localStorage.setItem('smt-docent-coach', '1'); } catch (e) {} this.setState({ coach: false }); },
-      tabs: SECTIONS.map((_, i) => ({ n: i + 1, zl: TAB_LABEL[i], done: i < s, notDone: i >= s,
+      tabs: SECTIONS.map((_, i) => ({ n: i + 1, zl: TL[i], done: i < s, notDone: i >= s,
         fg: i === s ? '#141414' : (i < s ? '#707070' : '#b4b4b4'), zw: i === s ? 700 : 500,
         x: (i / (SECTIONS.length - 1) * 100) + '%', dot: i <= s ? '#141414' : '#cfcfcf',
         go: () => this.goto(i) })),
       mk: (() => { const m = this.props.marker ?? '카메라'; return { walk: m === '걷는 사람', camera: m === '카메라', pin: m === '지도 핀', house: m === '집', dot: m === '점' }; })(),
       lineW: (s / (SECTIONS.length - 1) * 100) + '%',
-      sec: { n: s + 1, title: sec.title, zone: ZONE_LABEL[s], tab: TAB_LABEL[s] },
+      sec: { n: s + 1, title: en ? esec.title : sec.title, zone: ZONE_LABEL[s], tab: TL[s] },
       hasAudio, noAudio: !hasAudio, playing, paused: !playing,
-      playLabel: playing ? '일시정지' : (started ? '이어 듣기' : '음성으로 듣기'),
+      playLabel: playing ? L.pause : (started ? L.resume : L.listen),
       paraLabel: hasAudio ? (p + 1) + ' / ' + sec.paras.length : '음성 준비 중',
       progress: Math.round(((p + frac) / sec.paras.length) * 1000) / 10 + '%',
-      paras: sec.paras.map((x, i) => ({ t: x[0], color: started && hasAudio ? (i === p ? '#141414' : '#b0b0b0') : '#262626', cursor: x[1] ? 'pointer' : 'default', rule: /^(가장 먼저 전시장 정면의|사진과 목소리를 나란히 따라가다)/.test(x[0]), play: () => this.playAt(i) })),
-      extras: sec.extras || [],
+      paras: sec.paras.map((x, i) => ({ t: en ? (esec.paras[i] || '') : x[0], wb: en ? 'normal' : (/^본 전시는 일상 속/.test(x[0]) ? 'break-all' : 'keep-all'), hy: lang === 'en' ? 'auto' : 'manual', color: started && hasAudio ? (i === p ? '#141414' : '#b0b0b0') : '#262626', cursor: x[1] ? 'pointer' : 'default', rule: /^(가장 먼저 전시장 정면의|사진과 목소리를 나란히 따라가다)/.test(x[0]), play: () => this.playAt(i) })),
+      extras: (en ? esec.extras : sec.extras) || [],
       toggle: () => { const a = this.audioRef.current; if (!a) return; if (playing) a.pause(); else if (a.getAttribute('src')) a.play().catch(() => {}); else this.playAt(p); },
       onEnded: () => { let q = p + 1; while (q < sec.paras.length && !sec.paras[q][1]) q++; if (q < sec.paras.length) this.playAt(q); else this.setState({ playing: false, frac: 1 }); },
       onTime: (e) => { const a = e.target; if (a.duration) this.setState({ frac: a.currentTime / a.duration }); },
@@ -297,7 +432,7 @@ class Component extends DCLogic {
       rateLabel: this.state.rate + '배속',
       rateShort: (this.state.rate === 1 ? '1.0' : this.state.rate) + '×',
       cycleRate: () => { const R = [1, 1.25, 1.5, 0.75]; const r = R[(R.indexOf(this.state.rate) + 1) % R.length]; this.setState({ rate: r }); const a = this.audioRef.current; if (a) a.playbackRate = r; },
-      nextLabel: '다음', nextOpacity: next ? 1 : 0.35, goNext: () => { if (next) this.goto(s + 1); }
+      nextLabel: L.next, nextOpacity: next ? 1 : 0.35, goNext: () => { if (next) this.goto(s + 1); }
     };
   }
 }

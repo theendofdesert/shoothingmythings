@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="나의 동네, 낯선 동네">
+<meta property="og:title" content="현장 도슨트 예약 · 「나의 동네, 낯선 동네」">
+<meta property="og:description" content="작가와 함께 걷는 현장 도슨트 · 평일 19:30 · 주말 14:00 – 17:00 · 무료">
+<meta property="og:url" content="https://www.shootingmythings.studio/reserve">
+<meta property="og:image" content="https://www.shootingmythings.studio/assets/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>현장 도슨트 예약 · 「나의 동네, 낯선 동네」</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+html,body{margin:0;background:#ffffff;}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;color:#141414;-webkit-font-smoothing:antialiased;}
+a{color:#141414;text-decoration:none;}a:hover{color:#707070;}
+input::placeholder,textarea::placeholder{color:#9a9a9a;}
+</style>
+</helmet>
+<div style="max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;">
+  <div style="position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px 12px 24px;background:#ffffff;box-shadow:inset 0 -1px 0 #f0f0f0;">
+    <span style="font-size:15px;font-weight:600;">현장 도슨트 예약</span>
+    <a href="/" aria-label="전시 소개로" style="height:36px;padding:0 14px;border-radius:9999px;background:#f3f3f3;display:flex;align-items:center;gap:2px;font-size:13px;font-weight:600;color:#141414;">전시 소개 <span style="font-size:15px;">›</span></a>
+  </div>
+
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+    <div style="padding:28px 24px 48px;display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <span style="font-size:12px;font-weight:600;color:#8a8a8a;">「나의 동네, 낯선 동네」 · 2026.11.01. – 11.30.</span>
+        <h1 style="margin:0;font-size:28px;font-weight:650;line-height:1.3;letter-spacing:-0.03em;word-break:keep-all;">작가와 함께 걷는<br>현장 도슨트</h1>
+        <p style="margin:0;font-size:15px;line-height:1.7;color:#4a4a4a;text-align:justify;word-break:keep-all;">전시는 전 기간 무인으로 운영됩니다. 작가가 직접 공간을 안내하는 현장 도슨트를 원하시면 아래에서 예약해 주세요.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px;padding:24px;border-radius:22px;background:#141414;color:#ffffff;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="flex:none;width:40px;height:40px;border-radius:9999px;background:#ffffff;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"></path><rect x="3" y="14" width="4" height="6" rx="1.5"></rect><rect x="17" y="14" width="4" height="6" rx="1.5"></rect></svg></span>
+          <span style="font-size:17px;font-weight:650;letter-spacing:-0.02em;line-height:1.4;word-break:keep-all;">먼저, 녹음된 음성 도슨트가<br>준비되어 있어요</span>
+        </div>
+        <p style="margin:0;font-size:14px;line-height:1.7;color:rgba(255,255,255,0.82);text-align:justify;word-break:keep-all;">작가의 목소리로 녹음한 공간별 설명을 언제든 들으실 수 있습니다. 전시장 곳곳의 QR을 찍거나 아래 버튼을 눌러 주세요. 한국어 · English · 日本語를 지원합니다.</p>
+        <a href="/docent" style="align-self:flex-start;height:44px;padding:0 20px;border-radius:9999px;background:#ffffff;color:#141414;display:flex;align-items:center;gap:4px;font-size:14px;font-weight:650;">음성 도슨트 듣기 <span style="font-size:16px;">›</span></a>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <span style="font-size:16px;font-weight:650;letter-spacing:-0.02em;">현장 도슨트 운영 시간</span>
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;font-size:14px;line-height:1.5;">
+          <span style="color:#707070;">평일</span><span>19:30</span>
+          <span style="color:#707070;">주말</span><span>14:00 – 17:00 · 30분 간격</span>
+          <span style="color:#707070;">비용</span><span>무료</span>
+        </div>
+        <span style="font-size:12.5px;line-height:1.6;color:#707070;word-break:keep-all;">예약 확정 여부는 입력하신 연락처로 따로 안내드립니다.</span>
+      </div>
+
+      <button onClick="{{ toForm }}" style="height:52px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font:inherit;font-size:16px;font-weight:650;cursor:pointer;">현장 도슨트 예약하기</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
+    <form onSubmit="{{ submit }}" style="padding:24px 24px 48px;display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
+          <h3 style="margin:0;font-size:20px;font-weight:650;letter-spacing:-0.02em;">날짜</h3>
+          <span style="font-size:12px;color:#8a8a8a;">2026년 11월</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;">
+          <span style="font-size:12px;font-weight:600;color:#d23c41;padding:4px 0;">일</span>
+          <span style="font-size:12px;font-weight:600;color:#8a8a8a;padding:4px 0;">월</span>
+          <span style="font-size:12px;font-weight:600;color:#8a8a8a;padding:4px 0;">화</span>
+          <span style="font-size:12px;font-weight:600;color:#8a8a8a;padding:4px 0;">수</span>
+          <span style="font-size:12px;font-weight:600;color:#8a8a8a;padding:4px 0;">목</span>
+          <span style="font-size:12px;font-weight:600;color:#8a8a8a;padding:4px 0;">금</span>
+          <span style="font-size:12px;font-weight:600;color:#8a8a8a;padding:4px 0;">토</span>
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="30">
+            <button type="button" onClick="{{ d.pick }}" disabled="{{ d.off }}" aria-pressed="{{ d.on }}" style="aspect-ratio:1/1;border:0;border-radius:12px;background:{{ d.bg }};color:{{ d.fg }};font:inherit;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;cursor:{{ d.cur }};">{{ d.n }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
+          <h3 style="margin:0;font-size:20px;font-weight:650;letter-spacing:-0.02em;">시간</h3>
+          <span style="font-size:12px;color:#8a8a8a;">{{ dateLabel }}</span>
+        </div>
+        <sc-if value="{{ noDate }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:16px;border-radius:14px;background:#f3f3f3;font-size:14px;color:#707070;">날짜를 먼저 골라 주세요.</div>
+        </sc-if>
+        <sc-if value="{{ hasDate }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;">
+            <sc-for list="{{ slots }}" as="t" hint-placeholder-count="4">
+              <button type="button" onClick="{{ t.pick }}" disabled="{{ t.off }}" aria-pressed="{{ t.on }}" style="height:44px;border:0;border-radius:12px;background:{{ t.bg }};color:{{ t.fg }};font:inherit;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;cursor:{{ t.cur }};">{{ t.t }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <h3 style="margin:0;font-size:20px;font-weight:650;letter-spacing:-0.02em;">예약자 정보</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <input value="{{ f.name }}" onChange="{{ on.name }}" maxlength="20" placeholder="성함" autocomplete="name" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font:inherit;font-size:16px;color:#141414;outline-color:#141414;">
+          <input value="{{ f.phone }}" onChange="{{ on.phone }}" maxlength="13" inputmode="tel" placeholder="연락처 (010-0000-0000)" autocomplete="tel" style="height:48px;padding:0 16px;border:0;border-radius:16px;background:#f0f0f0;font:inherit;font-size:16px;color:#141414;outline-color:#141414;">
+          <textarea value="{{ f.request }}" onChange="{{ on.request }}" maxlength="300" rows="3" placeholder="요청사항 (선택) · 예: 인원 3명, 천천히 설명 부탁드려요" style="padding:14px 16px;border:0;border-radius:16px;background:#f0f0f0;font:inherit;font-size:16px;line-height:1.5;color:#141414;outline-color:#141414;resize:vertical;"></textarea>
+          <textarea value="{{ f.etc }}" onChange="{{ on.etc }}" maxlength="300" rows="2" placeholder="기타 (선택)" style="padding:14px 16px;border:0;border-radius:16px;background:#f0f0f0;font:inherit;font-size:16px;line-height:1.5;color:#141414;outline-color:#141414;resize:vertical;"></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;flex-direction:column;gap:4px;padding:16px 18px;border-radius:16px;background:#f3f3f3;font-size:13px;line-height:1.6;color:#4a4a4a;word-break:keep-all;">
+          <span><b style="font-weight:600;color:#141414;">수집 항목</b> · 성함, 연락처, 요청사항</span>
+          <span><b style="font-weight:600;color:#141414;">이용 목적</b> · 현장 도슨트 예약 확인 및 안내 연락</span>
+          <span><b style="font-weight:600;color:#141414;">보유 기간</b> · 전시 종료 후 즉시 파기</span>
+        </div>
+        <label style="display:flex;gap:10px;align-items:center;padding:16px;border-radius:16px;box-shadow:inset 0 0 0 1px #e0e0e0;cursor:pointer;">
+          <input type="checkbox" checked="{{ f.agree }}" onChange="{{ on.agree }}" style="width:20px;height:20px;margin:0;flex:0 0 auto;accent-color:#141414;">
+          <span style="font-size:15px;font-weight:600;">[필수] 개인정보 수집·이용에 동의합니다</span>
+        </label>
+      </div>
+
+      <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:13px;color:#c0392b;">{{ err }}</div>
+      </sc-if>
+      <div style="display:flex;justify-content:center;gap:8px;">
+        <button type="button" onClick="{{ toIntro }}" style="height:52px;padding:0 24px;border:0;border-radius:9999px;background:#f3f3f3;color:#141414;font:inherit;font-size:15px;font-weight:600;cursor:pointer;">이전</button>
+        <button type="submit" style="flex:1;max-width:240px;height:52px;padding:0 28px;border:0;border-radius:9999px;background:#141414;color:#ffffff;font:inherit;font-size:16px;font-weight:650;cursor:pointer;opacity:{{ btnOpacity }};">{{ btnLabel }}</button>
+      </div>
+    </form>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:40px 24px 48px;display:flex;flex-direction:column;gap:24px;">
+      <div style="width:56px;height:56px;border-radius:9999px;background:#141414;display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <h2 style="margin:0;font-size:24px;font-weight:650;letter-spacing:-0.02em;">예약 신청이 접수되었습니다</h2>
+        <p style="margin:0;font-size:15px;line-height:1.7;color:#4a4a4a;word-break:keep-all;">확정 안내는 입력하신 연락처로 문자 드리겠습니다. 방문 전에 음성 도슨트를 미리 들어 보셔도 좋아요.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:72px minmax(0,1fr);row-gap:10px;padding:20px;border-radius:18px;background:#f3f3f3;font-size:14px;line-height:1.5;">
+        <span style="color:#707070;">일시</span><span style="font-weight:600;">{{ doneWhen }}</span>
+        <span style="color:#707070;">성함</span><span>{{ doneName }}</span>
+        <span style="color:#707070;">장소</span><span>성북구 동소문로 186, 2층</span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <a href="/docent" style="flex:1;height:48px;border-radius:9999px;background:#141414;color:#ffffff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;">음성 도슨트 듣기</a>
+        <a href="/" style="flex:1;height:48px;border-radius:9999px;background:#f3f3f3;color:#141414;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;">전시 소개</a>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step: 'intro', date: '', time: '', f: { name: '', phone: '', request: '', etc: '', agree: false }, status: 'idle', err: '', done: null };
+  WEEKDAY = ['19:30'];
+  WEEKEND = ['14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'];
+  componentDidMount() {
+    try { if (new URLSearchParams(location.search).has('form')) this.setState({ step: 'form' }); } catch (e) {}
+  }
+  nowKst() { const d = new Date(Date.now() + 9 * 3600e3); return { ymd: d.toISOString().slice(0, 10), min: d.getUTCHours() * 60 + d.getUTCMinutes() }; }
+  slotsFor(n) {
+    const dow = new Date(Date.UTC(2026, 10, n)).getUTCDay();
+    const list = dow === 0 || dow === 6 ? this.WEEKEND : this.WEEKDAY;
+    const ymd = `2026-11-${String(n).padStart(2, '0')}`, now = this.nowKst();
+    return list.map(t => { const [h, m] = t.split(':').map(Number); const past = ymd < now.ymd || (ymd === now.ymd && h * 60 + m <= now.min + 30); return { t, past }; });
+  }
+  go(step) { this.setState({ step, err: '' }); try { window.scrollTo(0, 0); } catch (e) {} }
+  renderVals() {
+    const s = this.state, f = s.f, self = this;
+    const sel = s.date ? Number(s.date.slice(8)) : 0;
+    const days = [];
+    for (let n = 1; n <= 30; n++) {
+      const dow = new Date(Date.UTC(2026, 10, n)).getUTCDay();
+      const off = this.slotsFor(n).every(x => x.past), on = sel === n, wk = dow === 0 || dow === 6;
+      days.push({ n, off, on, bg: on ? '#141414' : off ? 'transparent' : wk ? '#fdeeee' : '#f3f3f3', fg: on ? '#ffffff' : off ? '#cfcfcf' : '#141414', cur: off ? 'default' : 'pointer',
+        pick: () => { if (off) return; const ok = this.slotsFor(n).filter(x => !x.past); this.setState({ date: `2026-11-${String(n).padStart(2, '0')}`, time: ok.length === 1 ? ok[0].t : '', err: '' }); } });
+    }
+    const slots = sel ? this.slotsFor(sel).map(x => { const on = s.time === x.t; return { t: x.t, off: x.past, on, bg: on ? '#141414' : x.past ? '#fafafa' : '#f3f3f3', fg: on ? '#ffffff' : x.past ? '#cfcfcf' : '#141414', cur: x.past ? 'default' : 'pointer', pick: () => { if (!x.past) this.setState({ time: x.t, err: '' }); } }; }) : [];
+    const dname = sel ? ['일', '월', '화', '수', '목', '금', '토'][new Date(Date.UTC(2026, 10, sel)).getUTCDay()] : '';
+    const dateLabel = sel ? `11월 ${sel}일 (${dname})` : '';
+    const set = (k, v) => this.setState({ f: { ...this.state.f, [k]: v }, err: '' });
+    const fmt = v => { const d = v.replace(/\D/g, '').slice(0, 11); return d.length < 4 ? d : d.length < 8 ? `${d.slice(0, 3)}-${d.slice(3)}` : `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`; };
+    const check = () => {
+      if (!s.date) return '날짜를 골라 주세요.';
+      if (!s.time) return '시간을 골라 주세요.';
+      if (!f.name.trim()) return '성함을 입력해 주세요.';
+      if (f.phone.replace(/\D/g, '').length < 10) return '연락처를 확인해 주세요.';
+      if (!f.agree) return '개인정보 수집·이용에 동의해 주세요.';
+      return '';
+    };
+    const ready = !check();
+    return {
+      isIntro: s.step === 'intro', isForm: s.step === 'form', isDone: s.step === 'done',
+      toForm: () => this.go('form'), toIntro: () => this.go('intro'),
+      days, slots, noDate: !sel, hasDate: !!sel, dateLabel,
+      f, err: s.err,
+      on: {
+        name: e => set('name', e.target.value), phone: e => set('phone', fmt(e.target.value)),
+        request: e => set('request', e.target.value), etc: e => set('etc', e.target.value), agree: e => set('agree', e.target.checked),
+      },
+      btnOpacity: ready && s.status !== 'sending' ? 1 : 0.35,
+      btnLabel: s.status === 'sending' ? '접수 중' : '예약 신청',
+      doneWhen: s.done ? s.done.when : '', doneName: s.done ? s.done.name : '',
+      submit: e => {
+        e.preventDefault();
+        if (s.status === 'sending') return;
+        const er = check(); if (er) { this.setState({ err: er }); return; }
+        this.setState({ status: 'sending', err: '' });
+        const body = { date: s.date, time: s.time, name: f.name.trim(), phone: f.phone, request: f.request.trim(), etc: f.etc.trim(), agree: f.agree };
+        const when = `${dateLabel} ${s.time}`;
+        fetch('/api/docent', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+          .then(r => r.json().then(d => ({ ok: r.ok, d }), () => ({ ok: false, d: {} })))
+          .then(({ ok, d }) => {
+            if (ok && d.ok) { self.setState({ status: 'idle', step: 'done', done: { when, name: body.name } }); try { window.scrollTo(0, 0); } catch (e) {} return; }
+            self.setState({ status: 'idle', err: d.error === 'dup' ? '같은 연락처로 같은 시간에 이미 신청되어 있습니다.' : `잠시 후 다시 시도해 주세요. (${d.error || 'network'})` });
+          })
+          .catch(() => self.setState({ status: 'idle', err: '잠시 후 다시 시도해 주세요.' }));
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
