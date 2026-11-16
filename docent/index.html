@@ -8,6 +8,42 @@
 <meta property="og:title" content="도슨트 · 「나의 동네, 낯선 동네」">
 <meta property="og:description" content="성북구 도시 문화 사진전 「나의 동네, 낯선 동네」 공간별 음성 안내">
 <meta property="og:url" content="https://www.shootingmythings.studio/docent">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1649075689961249');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1649075689961249&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Meta Pixel 방문 의사 이벤트: 지도 버튼 클릭 = FindLocation, 도슨트 예약 완료 = Schedule -->
+<script>
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest&&e.target.closest('a[href]');
+    if(a&&/map\.(kakao|naver)\.com/.test(a.href||'')&&window.fbq) fbq('track','FindLocation');
+  },true);
+  var of=window.fetch; if(!of) return;
+  window.fetch=function(u,o){
+    var p=of.apply(this,arguments);
+    try{
+      var url=typeof u==='string'?u:(u&&u.url)||'';
+      var m=(o&&o.method)||(u&&u.method)||'GET';
+      if(/\/api\/docent/.test(url)&&/post/i.test(m)) p.then(function(r){ if(r&&r.ok&&window.fbq) fbq('track','Schedule'); },function(){});
+    }catch(_){}
+    return p;
+  };
+})();
+</script>
 </head>
 <body>
 <x-dc>
